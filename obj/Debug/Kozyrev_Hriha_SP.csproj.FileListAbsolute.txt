@@ -39,3 +39,43 @@ D:\new_desktop\sharp\Kozyrev_Hriha_SP\obj\Debug\Kozyrev_Hriha_SP.csproj.CoreComp
 D:\new_desktop\sharp\Kozyrev_Hriha_SP\obj\Debug\Kozyrev_Hriha_SP.csproj.CopyComplete
 D:\new_desktop\sharp\Kozyrev_Hriha_SP\obj\Debug\Kozyrev_Hriha_SP.exe
 D:\new_desktop\sharp\Kozyrev_Hriha_SP\obj\Debug\Kozyrev_Hriha_SP.pdb
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\Kozyrev_Hriha_SP.exe.config
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\Kozyrev_Hriha_SP.exe
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\Kozyrev_Hriha_SP.pdb
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Buffers.dll
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Memory.dll
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Text.Json.dll
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.ValueTuple.dll
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Buffers.xml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Memory.xml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Text.Json.xml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\bin\Debug\System.ValueTuple.xml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\Kozyrev_Hriha_SP.csproj.AssemblyReference.cache
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\CustomControls\BindablePasswordBox.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\MainWindow.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\Views\LoginView.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\App.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\Kozyrev_Hriha_SP_MarkupCompile.cache
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\Kozyrev_Hriha_SP_MarkupCompile.lref
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\CustomControls\BindablePasswordBox.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\MainWindow.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\Views\LoginView.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\Kozyrev_Hriha_SP.g.resources
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\Kozyrev_Hriha_SP.Properties.Resources.resources
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\Kozyrev_Hriha_SP.csproj.GenerateResource.cache
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\Kozyrev_Hriha_SP.csproj.CoreCompileInputs.cache
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\Kozyrev_Hriha_SP.csproj.CopyComplete
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\Kozyrev_Hriha_SP.exe
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\obj\Debug\Kozyrev_Hriha_SP.pdb
