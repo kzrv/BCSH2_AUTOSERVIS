@@ -10,14 +10,23 @@ namespace Kozyrev_Hriha_SP.CustomControls
 {
     public class AppDBContext : DbContext
     {
+
        // public DbSet<Zakaznik> Zakaznik { get; set; }
-        public DbSet<Users> Users { get; set; }
-       // public DbSet<CountTest> CountTest { get; set; }
+        public DbSet<USERS> USERS { get; set; }
+
+         public DbSet<CountTest> CountTest { get; set; }
+
+        public AppDBContext()
+        {
+            Database.SetInitializer<AppDBContext>(null);
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            //base.OnModelCreating(modelBuilder);
             modelBuilder.HasDefaultSchema("ST67034");
         }
+
+        
     }
 }

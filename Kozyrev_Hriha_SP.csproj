@@ -116,7 +116,7 @@
     <Compile Include="Models\CountTest.cs" />
     <Compile Include="Models\Sluzba.cs" />
     <Compile Include="Models\Ukol.cs" />
-    <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\USERS.cs" />
     <Compile Include="Models\Vozidlo.cs" />
     <Compile Include="Models\Zakaznik.cs" />
     <Compile Include="Models\Znacka.cs" />

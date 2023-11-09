@@ -23,12 +23,13 @@ namespace WpfApp1.Views
     {
         public LoginView()
         {
-            Database.SetInitializer<AppDBContext>(new DropCreateDatabaseIfModelChanges<AppDBContext>());
+            // Database.SetInitializer<AppDBContext>(new DropCreateDatabaseIfModelChanges<AppDBContext>());
+            
             InitializeComponent();
             using(var dbContext = new AppDBContext())
             {
-                var zakazniky = dbContext.Users.ToList();
-                zakazniky.ForEach(m => Console.WriteLine(m.usr_Name));
+                var zakazniky = dbContext.CountTest.ToList();
+                zakazniky.ForEach(m => Console.WriteLine(m.Name));
             }
         }
 
