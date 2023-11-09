@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Kozyrev_Hriha_SP.CustomControls;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +23,13 @@ namespace WpfApp1.Views
     {
         public LoginView()
         {
+            Database.SetInitializer<AppDBContext>(new DropCreateDatabaseIfModelChanges<AppDBContext>());
             InitializeComponent();
+            using(var dbContext = new AppDBContext())
+            {
+                var zakazniky = dbContext.Users.ToList();
+                zakazniky.ForEach(m => Console.WriteLine(m.usr_Name));
+            }
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

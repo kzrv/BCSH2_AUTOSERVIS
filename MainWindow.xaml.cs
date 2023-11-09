@@ -14,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp1.DataAccess;
 
 namespace Kozyrev_Hriha_SP
 {
@@ -32,8 +31,6 @@ namespace Kozyrev_Hriha_SP
 
 
 
-            OracleDatabaseService db = new OracleDatabaseService();
-            db.OpenConnection();
             //OracleCommand cmd = new OracleCommand();
             //cmd.Connection = db.;
             //cmd.CommandText = "select name from counttest where id = 100";
@@ -41,13 +38,7 @@ namespace Kozyrev_Hriha_SP
             //OracleDataReader dr = cmd.ExecuteReader();
             //dr.Read();
             //lbl_info.Content = dr.GetString(0);
-            string query = "select name from counttest where id = 100";
-            DataTable userTable = db.ExecuteQuery(query);
-
-            DataRow row = userTable.Rows[0];
-            var columnValue = row["name"];
-            lbl_info.Content = columnValue;
-            db.CloseConnection();
+           
 
         }
 

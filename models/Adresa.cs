@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace Kozyrev_Hriha_SP.Models
         private string mesto;
         private string cisloPopisne;
         private string cisloBytu;
-
+        [Key]
         public int ID_ADRESA
         {
             get { return idAdresa; }
