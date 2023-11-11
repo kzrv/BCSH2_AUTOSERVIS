@@ -1,4 +1,5 @@
-﻿using Oracle.ManagedDataAccess.Client;
+﻿using Kozyrev_Hriha_SP.ViewModels;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,25 +23,23 @@ namespace Kozyrev_Hriha_SP
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(NavigationVM navigation)
         {
             InitializeComponent();
+            DataContext = navigation;
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
-
-
-            //OracleCommand cmd = new OracleCommand();
-            //cmd.Connection = db.;
-            //cmd.CommandText = "select name from counttest where id = 100";
-            //cmd.CommandType = CommandType.Text;
-            //OracleDataReader dr = cmd.ExecuteReader();
-            //dr.Read();
-            //lbl_info.Content = dr.GetString(0);
-           
-
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
 
+        private void CloseApp_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm ="clr-namespace:Kozyrev_Hriha_SP.ViewModels"
+                    xmlns:views ="clr-namespace:Kozyrev_Hriha_SP.Views">
+
+    <DataTemplate DataType="{x:Type vm:HomeVM}">
+        <views:Home/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:CustomerVM}">
+        <views:Customer/>
+    </DataTemplate>
+
+
+</ResourceDictionary>

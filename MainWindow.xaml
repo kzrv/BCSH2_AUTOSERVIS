@@ -4,11 +4,111 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kozyrev_Hriha_SP"
+        xmlns:vm="clr-namespace:Kozyrev_Hriha_SP.ViewModels"
+        xmlns:Menu="clr-namespace:Kozyrev_Hriha_SP.Utils"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="850"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent" MouseDown="Window_MouseDown">
+
+
+
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="285,124,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <Label x:Name="lbl_info" Content="Label" HorizontalAlignment="Left" Margin="287,199,0,0" VerticalAlignment="Top"/>
+        <Border Background="#212529"
+                CornerRadius="20"/>
+
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="228"/>
+                <ColumnDefinition Width="622"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid HorizontalAlignment="Left"
+                  Width="228">
+
+                <Border Background="#272B2F"
+                        CornerRadius="20,0,0,20"/>
+
+                <StackPanel Height="400"
+                            Width="228">
+
+                    <!--// Home // -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding HomeCommand}"
+                              IsChecked="True">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/home.png"
+                                   Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Home"
+                                       Style="{StaticResource Text_Style}"/>
+
+
+                        </Grid>
+
+
+                    </Menu:Btn>
+                    <!--// Login // -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                    Command="{Binding LoginCommand}"
+                    IsChecked="True">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/user.png"
+                                   Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Login"
+                                       Style="{StaticResource Text_Style}"/>
+
+
+                        </Grid>
+
+
+                    </Menu:Btn>
+
+                    <!--// Customers // -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding CustomerCommand}"
+                              IsChecked="True">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/users-alt.png"
+                                   Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Customer"
+                                       Style="{StaticResource Text_Style}"/>
+
+
+                        </Grid>
+
+
+                    </Menu:Btn>
+
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+
+                <ContentControl x:Name="Pages"
+                                Content="{Binding CurrentView}"/>
+
+            </Grid>
+
+        </Grid>
+
+        <Button x:Name="CloseApp"
+                Style="{StaticResource ExitApp}" Click="CloseApp_Click"/>
 
     </Grid>
 </Window>

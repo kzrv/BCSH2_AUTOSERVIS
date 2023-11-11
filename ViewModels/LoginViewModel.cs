@@ -1,9 +1,11 @@
 ﻿using Kozyrev_Hriha_SP.CustomControls;
+using Kozyrev_Hriha_SP.DataAccess;
 using Kozyrev_Hriha_SP.Models;
 using Kozyrev_Hriha_SP.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +19,10 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private SecureString _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
+
+        private readonly DbService DbService;
+
+
 
         public string UserName
         {
@@ -76,27 +82,25 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public ICommand LoginCommand { get; }
         public ICommand ShowPasswordCommand { get; }
 
-        public LoginViewModel()
+        public LoginViewModel(DbService dbService)
         {
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
+            DbService = dbService;
         }
 
-        private void ExecuteLoginCommand(object obj)
+        private void ExecuteLoginCommand(object obj) //Добавить 
         {
             using (var db = new AppDBContext())
             {
-                var userList = db.UserData.ToList();
-                UserData userFirst = userList.Where(u => u.Email == _userName).First();
-                if (userFirst != null)
+                bool log = DbService.CheckCredentials(new NetworkCredential(UserName, Password));
+                if (!log)
                 {
-                    Console.WriteLine("Naslo");
+                    ErrorMessage = "* Invalid username or password";
                 }
                 else
                 {
-
-                    Console.WriteLine("ne");
+                    ErrorMessage = "* SUCES";
                 }
-
             }
         }
 
@@ -105,10 +109,15 @@ namespace Kozyrev_Hriha_SP.ViewModels
             bool validData;
             if (string.IsNullOrWhiteSpace(UserName) || UserName.Length < 3 ||
                 Password == null || Password.Length < 3)
+            {
                 validData = false;
+            }
+
             else
+            {
                 validData = true;
-            Console.WriteLine("da");
+            }
+
             return validData;
         }
     }

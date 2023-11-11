@@ -178,3 +178,15 @@ C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_H
 C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.csproj.CopyComplete
 C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.exe
 C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.pdb
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Styles\Button.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Styles\Image.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Styles\Page.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Styles\Text.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Views\Customer.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Views\Home.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\App.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Utils\DataTemplate.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Views\Customer.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Views\Home.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Views\Login.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Views\Login.baml

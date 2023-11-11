@@ -26,16 +26,7 @@ namespace Kozyrev_Hriha_SP.Views
         private LoginViewModel LoginViewModel;
         public LoginView()
         {
-            // Database.SetInitializer<AppDBContext>(new DropCreateDatabaseIfModelChanges<AppDBContext>());
-
             InitializeComponent();
-            //using(var dbContext = new AppDBContext())
-            //{
-
-            //    var zakazniky = dbContext.Zamestnanec.Include(u => u.UserData).ToList();
-            //    zakazniky.ForEach(m => Console.WriteLine(m.UserData.Email));
-            //}
-            LoginViewModel = new LoginViewModel();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
