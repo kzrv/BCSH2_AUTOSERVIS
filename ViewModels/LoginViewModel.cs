@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Kozyrev_Hriha_SP.CustomControls;
+using Kozyrev_Hriha_SP.Models;
+using Kozyrev_Hriha_SP.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
@@ -6,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace WpfApp1.ViewModels
+namespace Kozyrev_Hriha_SP.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
@@ -80,19 +83,32 @@ namespace WpfApp1.ViewModels
 
         private void ExecuteLoginCommand(object obj)
         {
-            throw new NotImplementedException();
+            using (var db = new AppDBContext())
+            {
+                var userList = db.UserData.ToList();
+                UserData userFirst = userList.Where(u => u.Email == _userName).First();
+                if (userFirst != null)
+                {
+                    Console.WriteLine("Naslo");
+                }
+                else
+                {
+
+                    Console.WriteLine("ne");
+                }
+
+            }
         }
 
         private bool CanExecuteLoginCommand(object obj)
         {
             bool validData;
-
             if (string.IsNullOrWhiteSpace(UserName) || UserName.Length < 3 ||
                 Password == null || Password.Length < 3)
                 validData = false;
             else
                 validData = true;
-
+            Console.WriteLine("da");
             return validData;
         }
     }

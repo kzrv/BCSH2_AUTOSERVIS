@@ -14,25 +14,28 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Kozyrev_Hriha_SP.ViewModels;
 
-namespace WpfApp1.Views
+namespace Kozyrev_Hriha_SP.Views
 {
     /// <summary>
     /// Interaction logic for LoginView.xaml
     /// </summary>
     public partial class LoginView : Window
     {
+        private LoginViewModel LoginViewModel;
         public LoginView()
         {
             // Database.SetInitializer<AppDBContext>(new DropCreateDatabaseIfModelChanges<AppDBContext>());
-            
+
             InitializeComponent();
-            using(var dbContext = new AppDBContext())
-            {
- 
-                var zakazniky = dbContext.Zamestnanec.Include(u => u.UserData).ToList();
-                zakazniky.ForEach(m => Console.WriteLine(m.UserData.Email));
-            }
+            //using(var dbContext = new AppDBContext())
+            //{
+
+            //    var zakazniky = dbContext.Zamestnanec.Include(u => u.UserData).ToList();
+            //    zakazniky.ForEach(m => Console.WriteLine(m.UserData.Email));
+            //}
+            LoginViewModel = new LoginViewModel();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -53,6 +56,5 @@ namespace WpfApp1.Views
             Application.Current.Shutdown();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e) { }
     }
 }

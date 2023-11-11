@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace WpfApp1.ViewModels
+namespace Kozyrev_Hriha_SP.ViewModels
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {

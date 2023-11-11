@@ -122,6 +122,7 @@
     <Compile Include="Models\Zakaznik.cs" />
     <Compile Include="Models\Zamestnanec.cs" />
     <Compile Include="Models\Znacka.cs" />
+    <Compile Include="Utils\PasswordEncryptor.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelCommand.cs" />

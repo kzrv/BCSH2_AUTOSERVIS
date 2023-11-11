@@ -19,7 +19,7 @@ namespace Kozyrev_Hriha_SP.Models
         private string password;
         private int binaryContentIdContent;
 
-        [Column("ID_USER"),Key]
+        [Column("ID_USER"), Key]
 
         public int UserId
         {
@@ -36,7 +36,7 @@ namespace Kozyrev_Hriha_SP.Models
 
         [Required]
         [StringLength(50)]
-       
+        [Index(IsUnique = true)]
         public string Email
         {
             get { return email; }
@@ -94,6 +94,6 @@ namespace Kozyrev_Hriha_SP.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        
+
     }
 }
