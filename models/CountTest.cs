@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Kozyrev_Hriha_SP.Models
 {
     [Table("COUNTTEST")]
-    public class CountTest
+    public class CountTest //TODO
     {
         [Key]
         [Column("ID")]

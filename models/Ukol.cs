@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Kozyrev_Hriha_SP.Models
 {
-    public class Ukol : INotifyPropertyChanged
+    public class Ukol : INotifyPropertyChanged //TODO
     {
         private int idUkol;
         private string nazevUkol;

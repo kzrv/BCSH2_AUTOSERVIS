@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Kozyrev_Hriha_SP.Models
 {
-    public class Sluzba : INotifyPropertyChanged
+    public class Sluzba : INotifyPropertyChanged //TODO
     {
         private int idSluzba;
         private string nazevSluzba;

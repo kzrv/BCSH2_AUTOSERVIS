@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,8 +29,9 @@ namespace WpfApp1.Views
             InitializeComponent();
             using(var dbContext = new AppDBContext())
             {
-                var zakazniky = dbContext.CountTest.ToList();
-                zakazniky.ForEach(m => Console.WriteLine(m.Name));
+ 
+                var zakazniky = dbContext.Zamestnanec.Include(u => u.UserData).ToList();
+                zakazniky.ForEach(m => Console.WriteLine(m.UserData.Email));
             }
         }
 

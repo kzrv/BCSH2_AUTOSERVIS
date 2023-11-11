@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Kozyrev_Hriha_SP.Models
 {
-    public class Autoservis : INotifyPropertyChanged
+    public class Autoservis : INotifyPropertyChanged //TODO
     {
         private int idServis;
         private string nazevServisu;

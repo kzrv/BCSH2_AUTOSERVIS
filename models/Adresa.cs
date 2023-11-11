@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Kozyrev_Hriha_SP.Models
 {
-    public class Adresa : INotifyPropertyChanged
+    [Table("ADRESY")]
+    public class Adresa : INotifyPropertyChanged 
     {
         private int idAdresa;
         private string ulice;
@@ -17,65 +19,67 @@ namespace Kozyrev_Hriha_SP.Models
         private string cisloPopisne;
         private string cisloBytu;
         [Key]
-        public int ID_ADRESA
+        [Column("ID_ADRESA")]
+        public int IdAdresa
         {
             get { return idAdresa; }
             set
             {
                 idAdresa = value;
-                OnPropertyChanged(nameof(ID_ADRESA));
+                OnPropertyChanged(nameof(IdAdresa));
             }
         }
 
-        public string ULICE
+        public string Ulice
         {
             get { return ulice; }
             set
             {
                 ulice = value;
-                OnPropertyChanged(nameof(ULICE));
+                OnPropertyChanged(nameof(Ulice));
             }
         }
 
-        public string PSC
+        public string Psc
         {
             get { return psc; }
             set
             {
                 psc = value;
-                OnPropertyChanged(nameof(PSC));
+                OnPropertyChanged(nameof(Psc));
             }
         }
 
-        public string MESTO
+        public string Mesto
         {
             get { return mesto; }
             set
             {
                 mesto = value;
-                OnPropertyChanged(nameof(MESTO));
+                OnPropertyChanged(nameof(Mesto));
             }
         }
-
-        public string CISLO_POPISNE
+        [Column("CISLO_POPISNE")]
+        public string CisloPopisne
         {
             get { return cisloPopisne; }
             set
             {
                 cisloPopisne = value;
-                OnPropertyChanged(nameof(CISLO_POPISNE));
+                OnPropertyChanged(nameof(CisloPopisne));
             }
         }
-
-        public string CISLO_BYTU
+        [Column("CISLO_BYTU")]
+        public string CisloBytu
         {
             get { return cisloBytu; }
             set
             {
                 cisloBytu = value;
-                OnPropertyChanged(nameof(CISLO_BYTU));
+                OnPropertyChanged(nameof(CisloBytu));
             }
         }
+        public List<Zakaznik> zakazniks { get; set; } = new List<Zakaznik>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 

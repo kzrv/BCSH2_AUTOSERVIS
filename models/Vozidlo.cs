@@ -8,8 +8,8 @@ namespace Kozyrev_Hriha_SP.Models
 {
     using System.ComponentModel;
 
-    public class Vozidlo : INotifyPropertyChanged
-    {
+    public class Vozidlo : INotifyPropertyChanged //TODO
+    { 
         private int idVozidlo;
         private string vin;
         private string spz;
