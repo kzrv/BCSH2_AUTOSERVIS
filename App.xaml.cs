@@ -4,11 +4,6 @@ using Kozyrev_Hriha_SP.ViewModels;
 using Kozyrev_Hriha_SP.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Kozyrev_Hriha_SP
@@ -22,14 +17,12 @@ namespace Kozyrev_Hriha_SP
         private void ConfigureServices(IServiceCollection services)
         {
             // Регистрация сервисов
-            //services.AddTransient<IDbService, DbService>();
             services.AddTransient<DbService>();
-            services.AddTransient<LoginViewModel>();
-            services.AddTransient<Login>();
+            services.AddSingleton<LoginViewModel>();
+            services.AddSingleton<Login>();
             services.AddTransient<AppDBContext>();
-            services.AddTransient<MainWindow>();
-            services.AddTransient<NavigationVM>();
-            services.AddTransient<NavigationVM>(provider =>
+            services.AddSingleton<MainWindow>();
+            services.AddSingleton<NavigationVM>(provider =>
                 new NavigationVM(provider.GetRequiredService<IServiceProvider>(), provider.GetRequiredService<LoginViewModel>()));
 
 
@@ -40,10 +33,6 @@ namespace Kozyrev_Hriha_SP
             ConfigureServices(serviceCollection);
             ServiceProvider = serviceCollection.BuildServiceProvider();
 
-
-            //var loginViewModel = ServiceProvider.GetRequiredService<LoginViewModel>();
-            //var loginView = new LoginView(loginViewModel);
-            //loginView.Show();
             var navigate = ServiceProvider.GetRequiredService<NavigationVM>();
             var main = new MainWindow(navigate);
             main.Show();

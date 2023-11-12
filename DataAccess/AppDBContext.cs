@@ -30,13 +30,7 @@ namespace Kozyrev_Hriha_SP.CustomControls
             modelBuilder.Conventions.Add(new UppercaseColumnAndTableNamesConvention());
             modelBuilder.HasDefaultSchema("ST67034");
  
-            Database.Log = Console.WriteLine;
-            //modelBuilder.Entity<Zakaznik>()
-            //    .HasRequired(u => u.UserData) // или HasRequired, если Zakaznik всегда должен существовать
-            //    .WithOptional();
-                
-            
-
+            //Database.Log = Console.WriteLine;
 
         }
 

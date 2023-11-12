@@ -20,11 +20,23 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private string _errorMessage;
         private bool _isViewVisible = true;
         private bool isAuthorized;
+        private UserData _userData;
 
         private readonly DbService DbService;
+        public event EventHandler IsAuthorizedChanged;
 
-
-
+        public UserData User
+        {
+            get
+            {
+                return _userData;
+            }
+            set
+            {
+                _userData = value;
+                OnPropertyChanged(nameof(User));
+            }
+        }
         public string UserName
         {
             get
@@ -89,6 +101,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 {
                     isAuthorized = value;
                     OnPropertyChanged(nameof(IsAuthorized));
+                    IsAuthorizedChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -104,18 +117,23 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private void ExecuteLoginCommand(object obj) //Добавить 
         {
-            using (var db = new AppDBContext())
+            Task.Run(() =>
             {
-                bool log = DbService.CheckCredentials(new NetworkCredential(UserName, Password));
-                if (!log)
+                using (var db = new AppDBContext())
                 {
-                    ErrorMessage = "* Invalid username or password";
+                    UserData user = DbService.CheckCredentials(new NetworkCredential(UserName, Password));
+                    if (user == null)
+                    {
+                        ErrorMessage = "* Invalid username or password";
+                    }
+                    else
+                    {
+                        IsAuthorized = true;
+                        User = user;
+                        ErrorMessage = "";
+                    }
                 }
-                else
-                {
-                    IsAuthorized = true;
-                }
-            }
+            });
         }
 
         private bool CanExecuteLoginCommand(object obj)

@@ -11,22 +11,21 @@ namespace Kozyrev_Hriha_SP.DataAccess
 {
     public class DbService
     {
-        public AppDBContext AppDBContext;
+        private readonly AppDBContext AppDBContext;
 
         public DbService(AppDBContext appDBContext)
         {
             AppDBContext = appDBContext;
         }
 
-        public bool CheckCredentials(NetworkCredential cred)
+        public UserData CheckCredentials(NetworkCredential cred)
         {
-            var userList = AppDBContext.UserData.ToList();
-            UserData userFirst = userList.Where(u => u.Email == cred.UserName).First();
-            if (userFirst != null && cred.Password == userFirst.Password)
+            UserData user = AppDBContext.UserData.FirstOrDefault(u => u.Email == cred.UserName);
+            if (user != null && cred.Password == user.Password)
             {
-                return true;
+                return user;
             }
-            return false;
+            return null;
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using Kozyrev_Hriha_SP.Views;
+﻿using Kozyrev_Hriha_SP.Models;
+using Kozyrev_Hriha_SP.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,20 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private readonly IServiceProvider ServiceProvider;
         private bool isAuthorized;
         private LoginViewModel _loginViewModel;
+        private UserData _authorizedUser;
+
+        public UserData AuthorizedUser
+        {
+            get
+            {
+                return _authorizedUser;
+            }
+            set
+            {
+                _authorizedUser = value;
+                OnPropertyChanged(nameof(AuthorizedUser));
+            }
+        }
 
         public bool IsAuthorized
         {
@@ -37,6 +52,20 @@ namespace Kozyrev_Hriha_SP.ViewModels
             LoginCommand = new ViewModelCommand(Login);
             CurrentView = new HomeVM();
             _loginViewModel = loginView;
+            _loginViewModel.IsAuthorizedChanged += OnLoginViewModelIsAuthorizedChanged;
+        }
+        private void OnLoginViewModelIsAuthorizedChanged(object sender, EventArgs e)
+        {
+            IsAuthorized = _loginViewModel.IsAuthorized;
+            if (isAuthorized)
+            {
+                AuthorizedUser = _loginViewModel.User;
+                if (_loginViewModel != null)
+                {
+                    _loginViewModel.IsAuthorizedChanged -= OnLoginViewModelIsAuthorizedChanged;
+                }
+
+            }
         }
 
         public object CurrentView
