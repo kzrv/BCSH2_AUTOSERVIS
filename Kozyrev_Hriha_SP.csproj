@@ -228,15 +228,19 @@
     <Resource Include="Resources\Images\user-logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\home_page.png" />
     <Resource Include="Resources\Images\shutdown_def.png" />
     <Resource Include="Resources\Images\shutdown_mo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\home.png" />
     <Resource Include="Resources\Images\logout.png" />
     <Resource Include="Resources\Images\user.png" />
     <Resource Include="Resources\Images\users-alt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\home_page.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.Text.Json.6.0.1\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.1\build\System.Text.Json.targets')" />

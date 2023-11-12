@@ -13,14 +13,30 @@ namespace Kozyrev_Hriha_SP.ViewModels
     {
         private object _currentView;
         private readonly IServiceProvider ServiceProvider;
+        private bool isAuthorized;
+        private LoginViewModel _loginViewModel;
 
-        public NavigationVM(IServiceProvider serviceProvider)
+        public bool IsAuthorized
+        {
+            get { return isAuthorized; }
+            set
+            {
+                if (isAuthorized != value)
+                {
+                    isAuthorized = value;
+                    OnPropertyChanged(nameof(IsAuthorized));
+                }
+            }
+        }
+
+        public NavigationVM(IServiceProvider serviceProvider, LoginViewModel loginView)
         {
             ServiceProvider = serviceProvider;
             HomeCommand = new ViewModelCommand(Home);
             CustomerCommand = new ViewModelCommand(Customer);
             LoginCommand = new ViewModelCommand(Login);
             CurrentView = new HomeVM();
+            _loginViewModel = loginView;
         }
 
         public object CurrentView
@@ -40,6 +56,6 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private void Login(object obj) => CurrentView = ServiceProvider.GetRequiredService<Login>();
 
-        
+
     }
 }

@@ -30,7 +30,7 @@ namespace Kozyrev_Hriha_SP
             services.AddTransient<MainWindow>();
             services.AddTransient<NavigationVM>();
             services.AddTransient<NavigationVM>(provider =>
-                new NavigationVM(provider.GetRequiredService<IServiceProvider>()));
+                new NavigationVM(provider.GetRequiredService<IServiceProvider>(), provider.GetRequiredService<LoginViewModel>()));
 
 
         }

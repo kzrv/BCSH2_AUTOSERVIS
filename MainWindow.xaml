@@ -13,6 +13,9 @@
         WindowStyle="None"
         Background="Transparent" MouseDown="Window_MouseDown">
 
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />
+    </Window.Resources>
 
 
     <Grid>
@@ -78,7 +81,8 @@
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding CustomerCommand}"
-                              IsChecked="True">
+                              IsChecked="True"
+                             Visibility="{Binding IsAuthorized, Converter={StaticResource VisibilityOfBool}}">
 
                         <Grid>
 

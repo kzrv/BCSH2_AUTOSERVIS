@@ -19,6 +19,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private SecureString _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
+        private bool isAuthorized;
 
         private readonly DbService DbService;
 
@@ -79,6 +80,19 @@ namespace Kozyrev_Hriha_SP.ViewModels
             }
         }
 
+        public bool IsAuthorized
+        {
+            get { return isAuthorized; }
+            set
+            {
+                if (isAuthorized != value)
+                {
+                    isAuthorized = value;
+                    OnPropertyChanged(nameof(IsAuthorized));
+                }
+            }
+        }
+
         public ICommand LoginCommand { get; }
         public ICommand ShowPasswordCommand { get; }
 
@@ -99,7 +113,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 }
                 else
                 {
-                    ErrorMessage = "* SUCES";
+                    IsAuthorized = true;
                 }
             }
         }
