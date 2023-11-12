@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kozyrev_Hriha_SP.ViewModels
 {
-    internal class HomeVM
+    public class HomeVM
     {
     }
 }

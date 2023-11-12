@@ -105,14 +105,12 @@ C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.csproj.A
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.csproj.SuggestedBindingRedirects.cache
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\CustomControls\BindablePasswordBox.g.cs
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\MainWindow.g.cs
-C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\LoginView.g.cs
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\App.g.cs
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP_MarkupCompile.cache
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP_MarkupCompile.lref
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\CustomControls\BindablePasswordBox.baml
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\MainWindow.baml
-C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\LoginView.baml
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.g.resources
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.Properties.Resources.resources
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.csproj.GenerateResource.cache
@@ -190,3 +188,15 @@ C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Views\Cus
 C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Views\Home.baml
 C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Views\Login.g.cs
 C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Views\Login.baml
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Styles\Button.baml
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Styles\Image.baml
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Styles\Page.baml
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Styles\Text.baml
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\Customer.g.cs
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\Home.g.cs
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\Login.g.cs
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\App.baml
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Utils\DataTemplate.baml
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\Customer.baml
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\Home.baml
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\Login.baml

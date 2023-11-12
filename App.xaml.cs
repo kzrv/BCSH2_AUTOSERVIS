@@ -25,10 +25,12 @@ namespace Kozyrev_Hriha_SP
             //services.AddTransient<IDbService, DbService>();
             services.AddTransient<DbService>();
             services.AddTransient<LoginViewModel>();
-            services.AddTransient<LoginView>();
+            services.AddTransient<Login>();
             services.AddTransient<AppDBContext>();
             services.AddTransient<MainWindow>();
             services.AddTransient<NavigationVM>();
+            services.AddTransient<NavigationVM>(provider =>
+                new NavigationVM(provider.GetRequiredService<IServiceProvider>()));
 
 
         }

@@ -1,4 +1,5 @@
 ﻿using Kozyrev_Hriha_SP.Views;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,16 @@ namespace Kozyrev_Hriha_SP.ViewModels
     public class NavigationVM : ViewModelBase
     {
         private object _currentView;
+        private readonly IServiceProvider ServiceProvider;
+
+        public NavigationVM(IServiceProvider serviceProvider)
+        {
+            ServiceProvider = serviceProvider;
+            HomeCommand = new ViewModelCommand(Home);
+            CustomerCommand = new ViewModelCommand(Customer);
+            LoginCommand = new ViewModelCommand(Login);
+            CurrentView = new HomeVM();
+        }
 
         public object CurrentView
         {
@@ -27,15 +38,8 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private void Customer(object obj) => CurrentView = new CustomerVM();
 
-        private void Login(object obj) => CurrentView = new Login();
+        private void Login(object obj) => CurrentView = ServiceProvider.GetRequiredService<Login>();
 
-        public NavigationVM()
-        {
-            HomeCommand = new ViewModelCommand(Home);
-            CustomerCommand = new ViewModelCommand(Customer);
-            LoginCommand = new ViewModelCommand(Login);
-
-            CurrentView = new HomeVM();
-        }
+        
     }
 }
