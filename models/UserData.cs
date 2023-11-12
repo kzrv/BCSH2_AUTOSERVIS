@@ -79,6 +79,7 @@ namespace Kozyrev_Hriha_SP.Models
                 }
             }
         }
+        [ForeignKey("BINARY_CONTENT_ID_CONTENT")]
 
 
         public virtual List<Zakaznik> Zakaznik { get; set; } = new List<Zakaznik>(1);

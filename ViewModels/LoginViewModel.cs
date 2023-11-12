@@ -18,12 +18,25 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private string _userName;
         private SecureString _password;
         private string _errorMessage;
-        private bool _isViewVisible = true;
         private bool isAuthorized;
         private UserData _userData;
 
         private readonly DbService DbService;
         public event EventHandler IsAuthorizedChanged;
+
+        private bool isLoggingIn;
+        public bool IsLoggingIn
+        {
+            get { return isLoggingIn; }
+            set
+            {
+                if (isLoggingIn != value)
+                {
+                    isLoggingIn = value;
+                    OnPropertyChanged(nameof(IsLoggingIn));
+                }
+            }
+        }
 
         public UserData User
         {
@@ -78,20 +91,6 @@ namespace Kozyrev_Hriha_SP.ViewModels
             }
         }
 
-        public bool IsViewVisible
-        {
-            get
-            {
-                return _isViewVisible;
-            }
-
-            set
-            {
-                _isViewVisible = value;
-                OnPropertyChanged(nameof(IsViewVisible));
-            }
-        }
-
         public bool IsAuthorized
         {
             get { return isAuthorized; }
@@ -115,25 +114,37 @@ namespace Kozyrev_Hriha_SP.ViewModels
             DbService = dbService;
         }
 
-        private void ExecuteLoginCommand(object obj) //Добавить 
+        private async void ExecuteLoginCommand(object obj)
         {
-            Task.Run(() =>
+            try
             {
+                IsLoggingIn = true;
+
                 using (var db = new AppDBContext())
                 {
-                    UserData user = DbService.CheckCredentials(new NetworkCredential(UserName, Password));
+                    UserData user = await Task.Run(() => DbService.CheckCredentials(new NetworkCredential(UserName, Password)));
+
                     if (user == null)
                     {
                         ErrorMessage = "* Invalid username or password";
                     }
                     else
                     {
-                        IsAuthorized = true;
                         User = user;
+                        IsAuthorized = true;
                         ErrorMessage = "";
                     }
                 }
-            });
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = "* An error occurred during login";
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                IsLoggingIn = false;
+            }
         }
 
         private bool CanExecuteLoginCommand(object obj)

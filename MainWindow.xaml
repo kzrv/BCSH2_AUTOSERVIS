@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Kozyrev_Hriha_SP"
         xmlns:vm="clr-namespace:Kozyrev_Hriha_SP.ViewModels"
         xmlns:Menu="clr-namespace:Kozyrev_Hriha_SP.Utils"
+        xmlns:conv ="clr-namespace:Kozyrev_Hriha_SP.Utils"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="850"
         AllowsTransparency="True"
@@ -14,8 +15,11 @@
         Background="Transparent" MouseDown="Window_MouseDown">
 
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />
+        <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <conv:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
     </Window.Resources>
+
+
 
 
     <Grid>
@@ -61,7 +65,8 @@
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                     Command="{Binding LoginCommand}"
-                    IsChecked="True">
+                    IsChecked="True"
+                    Visibility="{Binding IsAuthorized, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
 
                         <Grid>
 
@@ -82,7 +87,7 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding CustomerCommand}"
                               IsChecked="True"
-                             Visibility="{Binding IsAuthorized, Converter={StaticResource VisibilityOfBool}}">
+                             Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                         <Grid>
 
@@ -98,7 +103,39 @@
 
                     </Menu:Btn>
 
+
+
                 </StackPanel>
+                <!--// Current User // -->
+
+                <Menu:Btn Style="{StaticResource BtnStyle}"
+                          
+                          IsChecked="True"
+                          Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          VerticalAlignment="Bottom"
+                          Margin="0,0,0,10"
+                          >
+
+                    <Grid>
+
+                        <Image Source="Resources/Images/user.png"
+                               Style="{StaticResource Image_Style}"/>
+
+                        <TextBlock Text="{Binding UserName}"
+                               Style="{StaticResource Text_Style}"/>
+
+                        <Image Source="Resources/Images/logout.png"
+                        Style="{StaticResource Image_Style_Click}"
+                        HorizontalAlignment="Right"
+                        Margin="5" MouseLeftButtonDown="Image_MouseLeftButtonDown">
+
+                        </Image>
+
+
+                    </Grid>
+
+
+                </Menu:Btn>
 
             </Grid>
 

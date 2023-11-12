@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="Models\Adresa.cs" />
     <Compile Include="Models\Autoservis.cs" />
+    <Compile Include="Models\BinaryContent.cs" />
     <Compile Include="Models\CountTest.cs" />
     <Compile Include="Models\PageModel.cs" />
     <Compile Include="Models\Sluzba.cs" />
@@ -124,7 +125,9 @@
     <Compile Include="Models\Zakaznik.cs" />
     <Compile Include="Models\Zamestnanec.cs" />
     <Compile Include="Models\Znacka.cs" />
+    <Compile Include="Utils\BooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\Btn.cs" />
+    <Compile Include="Utils\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\PasswordEncryptor.cs" />
     <Compile Include="ViewModels\CustomerVM.cs" />
     <Compile Include="ViewModels\HomeVM.cs" />

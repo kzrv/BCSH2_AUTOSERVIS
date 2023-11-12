@@ -15,13 +15,14 @@ namespace Kozyrev_Hriha_SP.CustomControls
         public DbSet<Adresa> Adresa { get; set; }
         public DbSet<Zakaznik> Zakaznik { get; set; }
         public DbSet<UserData> UserData { get; set; }
-        public DbSet<Zamestnanec> Zamestnanec { get; set; } 
+        public DbSet<Zamestnanec> Zamestnanec { get; set; }
+        public DbSet<BinaryContent> BinaryContent { get; set; }
 
         public AppDBContext()
         {
 
             Database.SetInitializer<AppDBContext>(null);
-           // this.Configuration.LazyLoadingEnabled = true;
+            // this.Configuration.LazyLoadingEnabled = true;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -29,7 +30,7 @@ namespace Kozyrev_Hriha_SP.CustomControls
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Add(new UppercaseColumnAndTableNamesConvention());
             modelBuilder.HasDefaultSchema("ST67034");
- 
+
             //Database.Log = Console.WriteLine;
 
         }

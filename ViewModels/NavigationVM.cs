@@ -17,6 +17,13 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private bool isAuthorized;
         private LoginViewModel _loginViewModel;
         private UserData _authorizedUser;
+        private string _userName;
+
+        public string UserName
+        {
+            get { return _userName; }
+            set { _userName = value; OnPropertyChanged(nameof(UserName)); }
+        }
 
         public UserData AuthorizedUser
         {
@@ -59,7 +66,11 @@ namespace Kozyrev_Hriha_SP.ViewModels
             IsAuthorized = _loginViewModel.IsAuthorized;
             if (isAuthorized)
             {
+                CurrentView = new HomeVM();
                 AuthorizedUser = _loginViewModel.User;
+                UserName = AuthorizedUser.Zamestnanec.First().Prijmeni;
+                //test
+                //string fileName = AuthorizedUser.BinaryContentIdContent.
                 if (_loginViewModel != null)
                 {
                     _loginViewModel.IsAuthorizedChanged -= OnLoginViewModelIsAuthorizedChanged;
