@@ -2,6 +2,7 @@
 using Kozyrev_Hriha_SP.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -26,6 +27,12 @@ namespace Kozyrev_Hriha_SP.DataAccess
                 return user;
             }
             return null;
+        }
+
+        public void DeleteItemFromDatabase(Zakaznik item)
+        {
+            AppDBContext.Zakaznik.Remove(item);
+            AppDBContext.SaveChanges();
         }
     }
 

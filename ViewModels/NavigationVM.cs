@@ -1,12 +1,15 @@
 ﻿using Kozyrev_Hriha_SP.Models;
+using Kozyrev_Hriha_SP.Utils;
 using Kozyrev_Hriha_SP.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Kozyrev_Hriha_SP.ViewModels
 {
@@ -18,6 +21,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private LoginViewModel _loginViewModel;
         private UserData _authorizedUser;
         private string _userName;
+
 
         public string UserName
         {
@@ -37,6 +41,8 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 OnPropertyChanged(nameof(AuthorizedUser));
             }
         }
+
+
 
         public bool IsAuthorized
         {
@@ -69,8 +75,9 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 CurrentView = new HomeVM();
                 AuthorizedUser = _loginViewModel.User;
                 UserName = AuthorizedUser.Email;
-                //test
-                //string fileName = AuthorizedUser.BinaryContentIdContent.
+                //TODO
+                //Add image to AuthorizedUser
+
                 if (_loginViewModel != null)
                 {
                     _loginViewModel.IsAuthorizedChanged -= OnLoginViewModelIsAuthorizedChanged;
@@ -92,7 +99,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private void Home(object obj) => CurrentView = new HomeVM();
 
-        private void Customer(object obj) => CurrentView = new CustomerVM();
+        private void Customer(object obj) => CurrentView = ServiceProvider.GetRequiredService<Customer>();
 
         private void Login(object obj) => CurrentView = ServiceProvider.GetRequiredService<Login>();
 

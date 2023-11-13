@@ -36,7 +36,7 @@ namespace Kozyrev_Hriha_SP.Models
         }
 
         [Required]
-        [Column("BINARNI_OBSAH", TypeName = "BLOB")]
+        [Column("BINARNI_OBSAH")]
         public byte[] BinarniObsah
         {
             get { return binarniObsah; }
@@ -80,6 +80,7 @@ namespace Kozyrev_Hriha_SP.Models
         }
 
         [Required]
+        [Column("PRIPONA")]
         [StringLength(10)]
         public string Pripona
         {

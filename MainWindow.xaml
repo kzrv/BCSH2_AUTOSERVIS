@@ -17,6 +17,7 @@
     <Window.Resources>
         <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <conv:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
+        <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
     </Window.Resources>
 
 

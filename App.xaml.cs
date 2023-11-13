@@ -19,7 +19,9 @@ namespace Kozyrev_Hriha_SP
             // Регистрация сервисов
             services.AddTransient<DbService>();
             services.AddSingleton<LoginViewModel>();
+            services.AddSingleton<CustomerVM>();
             services.AddSingleton<Login>();
+            services.AddSingleton<Customer>();
             services.AddTransient<AppDBContext>();
             services.AddSingleton<MainWindow>();
             services.AddSingleton<NavigationVM>(provider =>

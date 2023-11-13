@@ -127,6 +127,7 @@
     <Compile Include="Models\Znacka.cs" />
     <Compile Include="Utils\BooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\Btn.cs" />
+    <Compile Include="Utils\ByteArrayToImageSourceConverter.cs" />
     <Compile Include="Utils\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\PasswordEncryptor.cs" />
     <Compile Include="ViewModels\CustomerVM.cs" />
