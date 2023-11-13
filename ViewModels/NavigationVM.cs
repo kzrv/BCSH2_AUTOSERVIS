@@ -68,7 +68,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 CurrentView = new HomeVM();
                 AuthorizedUser = _loginViewModel.User;
-                UserName = AuthorizedUser.Zamestnanec.First().Prijmeni;
+                UserName = AuthorizedUser.Email;
                 //test
                 //string fileName = AuthorizedUser.BinaryContentIdContent.
                 if (_loginViewModel != null)

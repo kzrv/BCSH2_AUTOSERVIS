@@ -79,15 +79,15 @@ namespace Kozyrev_Hriha_SP.Models
                 }
             }
         }
-        [ForeignKey("BINARY_CONTENT_ID_CONTENT")]
+ 
 
 
         public virtual List<Zakaznik> Zakaznik { get; set; } = new List<Zakaznik>(1);
         public virtual List<Zamestnanec> Zamestnanec { get; set; } = new List<Zamestnanec>(1);
 
-        // Добавьте свойства навигации, если есть связи с другими таблицами
-        //[ForeignKey("BinaryContentIdContent")]
-        //public virtual BinaryContent BinaryContent { get; set; }
+       
+       [ForeignKey("BinaryContentIdContent")]
+        public virtual BinaryContent BinaryContent { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
