@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using Kozyrev_Hriha_SP.CustomControls;
-using Kozyrev_Hriha_SP.DataAccess;
 using Kozyrev_Hriha_SP.Models;
+using Kozyrev_Hriha_SP.Repository;
+using Kozyrev_Hriha_SP.Repository.Interfaces;
 using Kozyrev_Hriha_SP.Views;
 
 namespace Kozyrev_Hriha_SP.ViewModels
@@ -23,7 +24,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private string _selectedAttribute;
         private ObservableCollection<Zakaznik> _filteredCustomers;
 
-        private readonly DbService DbService;
+        private readonly IZakaznikRepository zakaznikRepository;
 
         public ObservableCollection<Zakaznik> Zakaznici
         {
@@ -48,16 +49,12 @@ namespace Kozyrev_Hriha_SP.ViewModels
         // Other properties, commands, and methods
         public ICommand DeleteCommand { get; }
 
-        public CustomerVM(DbService dbService)
+        public CustomerVM(IZakaznikRepository zakaznikRep)
         {
+            this.zakaznikRepository = zakaznikRep;
             _pageModel = new PageModel();
-            using (var dbContext = new AppDBContext())
-            {
-                // Retrieve all customers from the database
-                Zakaznici = new ObservableCollection<Zakaznik>(dbContext.Zakaznik.ToList());
-            }
+            Zakaznici = new ObservableCollection<Zakaznik>(zakaznikRepository.GetAllZakaznici());
             DeleteCommand = new ViewModelCommand(DeleteItem, CanDeleteItem);
-            DbService = dbService;
         }
 
         private void DeleteItem(object parameter)
@@ -65,7 +62,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             if (SelectedZakaznik != null)
             {
                 Zakaznici.Remove(SelectedZakaznik);
-                DbService.DeleteItemFromDatabase(SelectedZakaznik);
+                //DbService.DeleteItemFromDatabase(SelectedZakaznik);
             }
         }
 

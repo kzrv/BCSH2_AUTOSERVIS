@@ -7,7 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
+
 
 namespace Kozyrev_Hriha_SP.Models
 {
@@ -36,7 +36,6 @@ namespace Kozyrev_Hriha_SP.Models
 
         [Required]
         [StringLength(50)]
-        [Index(IsUnique = true)]
         public string Email
         {
             get { return email; }
@@ -82,12 +81,12 @@ namespace Kozyrev_Hriha_SP.Models
  
 
 
-        public virtual List<Zakaznik> Zakaznik { get; set; } = new List<Zakaznik>(1);
-        public virtual List<Zamestnanec> Zamestnanec { get; set; } = new List<Zamestnanec>(1);
+       // public virtual List<Zakaznik> Zakaznik { get; set; } = new List<Zakaznik>(1);
+       // public virtual List<Zamestnanec> Zamestnanec { get; set; } = new List<Zamestnanec>(1);
 
        
-       [ForeignKey("BinaryContentIdContent")]
-        public virtual BinaryContent BinaryContent { get; set; }
+       //[ForeignKey("BinaryContentIdContent")]
+       // public virtual BinaryContent BinaryContent { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -1,9 +1,12 @@
 ﻿using Kozyrev_Hriha_SP.CustomControls;
-using Kozyrev_Hriha_SP.DataAccess;
+
+using Kozyrev_Hriha_SP.Repository;
+using Kozyrev_Hriha_SP.Repository.Interfaces;
 using Kozyrev_Hriha_SP.ViewModels;
 using Kozyrev_Hriha_SP.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Configuration;
 using System.Windows;
 
 namespace Kozyrev_Hriha_SP
@@ -16,13 +19,14 @@ namespace Kozyrev_Hriha_SP
         public IServiceProvider ServiceProvider { get; private set; }
         private void ConfigureServices(IServiceCollection services)
         {
-            // Регистрация сервисов
-            services.AddTransient<DbService>();
+            string connectionString = ConfigurationManager.ConnectionStrings["OracleDbContext"].ConnectionString;
+            services.AddSingleton<IUserDataRepository, UserDataRepository>(provider=>new UserDataRepository(connectionString));
+            services.AddSingleton<IZakaznikRepository, ZakaznikRepository>(provider => new ZakaznikRepository(connectionString));
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<CustomerVM>();
             services.AddSingleton<Login>();
             services.AddSingleton<Customer>();
-            services.AddTransient<AppDBContext>();
+           
             services.AddSingleton<MainWindow>();
             services.AddSingleton<NavigationVM>(provider =>
                 new NavigationVM(provider.GetRequiredService<IServiceProvider>(), provider.GetRequiredService<LoginViewModel>()));

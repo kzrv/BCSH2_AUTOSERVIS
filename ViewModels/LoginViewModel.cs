@@ -1,13 +1,9 @@
-﻿using Kozyrev_Hriha_SP.CustomControls;
-using Kozyrev_Hriha_SP.DataAccess;
+﻿
 using Kozyrev_Hriha_SP.Models;
-using Kozyrev_Hriha_SP.Utils;
+using Kozyrev_Hriha_SP.Repository;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Security;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -21,7 +17,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private bool isAuthorized;
         private UserData _userData;
 
-        private readonly DbService DbService;
+        private readonly IUserDataRepository userDataRepository;
         public event EventHandler IsAuthorizedChanged;
 
         private bool isLoggingIn;
@@ -108,10 +104,10 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public ICommand LoginCommand { get; }
         public ICommand ShowPasswordCommand { get; }
 
-        public LoginViewModel(DbService dbService)
+        public LoginViewModel(IUserDataRepository userData)
         {
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
-            DbService = dbService;
+            userDataRepository = userData;
         }
 
         private async void ExecuteLoginCommand(object obj)
@@ -120,21 +116,19 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 IsLoggingIn = true;
 
-                using (var db = new AppDBContext())
+                
+                UserData user = await Task.Run(() => userDataRepository.CheckCredentials(new NetworkCredential(UserName, Password)));
+                if (user == null)
                 {
-                    UserData user = await Task.Run(() => DbService.CheckCredentials(new NetworkCredential(UserName, Password)));
-
-                    if (user == null)
-                    {
-                        ErrorMessage = "* Invalid username or password";
-                    }
-                    else
-                    {
-                        User = user;
-                        IsAuthorized = true;
-                        ErrorMessage = "";
-                    }
+                    ErrorMessage = "* Invalid username or password";
                 }
+                else
+                {
+                    User = user;
+                    IsAuthorized = true;
+                    ErrorMessage = "";
+                    }
+                
             }
             catch (Exception ex)
             {

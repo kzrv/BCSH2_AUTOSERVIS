@@ -122,11 +122,6 @@ C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\bin\Debug\Microsoft.Extensions.Depe
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
-C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\EntityFramework.dll
-C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Oracle.ManagedDataAccess.EntityFramework.dll
-C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\EntityFramework.xml
-C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\bin\Debug\Kozyrev_Hriha_SP.exe.config
 C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\bin\Debug\Kozyrev_Hriha_SP.exe
 C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\bin\Debug\Kozyrev_Hriha_SP.pdb
@@ -198,3 +193,7 @@ C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Utils\DataTemplate.baml
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\Customer.baml
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\Home.baml
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\Login.baml
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Dapper.dll
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Dapper.xml
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\System.Configuration.ConfigurationManager.xml
