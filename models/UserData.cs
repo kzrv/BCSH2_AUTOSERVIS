@@ -80,14 +80,6 @@ namespace Kozyrev_Hriha_SP.Models
         }
  
 
-
-       // public virtual List<Zakaznik> Zakaznik { get; set; } = new List<Zakaznik>(1);
-       // public virtual List<Zamestnanec> Zamestnanec { get; set; } = new List<Zamestnanec>(1);
-
-       
-       //[ForeignKey("BinaryContentIdContent")]
-       // public virtual BinaryContent BinaryContent { get; set; }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

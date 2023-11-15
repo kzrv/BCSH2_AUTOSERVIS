@@ -154,7 +154,6 @@ namespace Kozyrev_Hriha_SP.Models
             }
         }
 
-        public virtual List<UserData> UserData { get; set; } = new List<UserData>(1);
 
     }
 }

@@ -3,10 +3,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 namespace Kozyrev_Hriha_SP.Models
 {
-    [Table("ZAKAZNICI")]
+    [Table("ZAKAZNIK")]
     public class Zakaznik : INotifyPropertyChanged
     {
        
@@ -18,8 +17,8 @@ namespace Kozyrev_Hriha_SP.Models
         private int idAdresa;
         private int idUser;
 
-        [Key]
-        [Column("ID_ZAKAZNIK")]
+        
+        [Column("ID_ZAKAZNIK"),Key]
         public int Id
         {
             get { return idZakaznik; }
@@ -69,7 +68,7 @@ namespace Kozyrev_Hriha_SP.Models
                 OnPropertyChanged(nameof(Poznamky));
             }
         }
-        [Column("ADRESY_ID_ADRESA")]
+        [Column("ID_ADRESA")]
         public int IdAdresa { get { return idAdresa; }
             set
             {
@@ -77,7 +76,7 @@ namespace Kozyrev_Hriha_SP.Models
                 OnPropertyChanged(nameof(IdAdresa));
             }
         }
-        [Column("USER_DATA_ID_USER")]
+        [Column("ID_USER")]
         public int IdUser
         {
             get { return idUser; }
@@ -87,11 +86,7 @@ namespace Kozyrev_Hriha_SP.Models
                 OnPropertyChanged(nameof(IdUser));
             }
         }
-        [ForeignKey("IdAdresa")]
-        public Adresa Adresa { get; set; }
-        [ForeignKey("IdUser")]
-        public virtual UserData UserData { get; set; }
-
+ 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)

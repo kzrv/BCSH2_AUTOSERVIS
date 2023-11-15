@@ -53,6 +53,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         {
             this.zakaznikRepository = zakaznikRep;
             _pageModel = new PageModel();
+            List<Zakaznik> z = zakaznikRepository.GetAllZakaznici();
             Zakaznici = new ObservableCollection<Zakaznik>(zakaznikRepository.GetAllZakaznici());
             DeleteCommand = new ViewModelCommand(DeleteItem, CanDeleteItem);
         }
@@ -61,13 +62,16 @@ namespace Kozyrev_Hriha_SP.ViewModels
         {
             if (SelectedZakaznik != null)
             {
+                zakaznikRepository.DeleteZakaznik(SelectedZakaznik.Id);
                 Zakaznici.Remove(SelectedZakaznik);
-                //DbService.DeleteItemFromDatabase(SelectedZakaznik);
+                
+                
             }
         }
 
         private bool CanDeleteItem(object parameter)
         {
+            
             return SelectedZakaznik != null;
         }
     }

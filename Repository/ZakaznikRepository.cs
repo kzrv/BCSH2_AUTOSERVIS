@@ -2,11 +2,8 @@
 using Kozyrev_Hriha_SP.Models;
 using Kozyrev_Hriha_SP.Repository.Interfaces;
 using Oracle.ManagedDataAccess.Client;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kozyrev_Hriha_SP.Repository
 {
@@ -22,7 +19,14 @@ namespace Kozyrev_Hriha_SP.Repository
         {
             using (var db = new OracleConnection(this.connection))
             {
-                return db.Query<Zakaznik>("SELECT * FROM ZAKAZNICI").ToList();
+                return db.Query<Zakaznik>("SELECT ID_ZAKAZNIK AS Id, JMENO, PRIJMENI, POZNAMKY, TEL_CISLO AS TelCislo, ID_ADRESA AS IdAdresa, ID_USER AS IdUser FROM ZAKAZNIK").ToList();
+            }
+        }
+        public void DeleteZakaznik(int id)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                db.Execute("DELETE FROM ZAKAZNIK WHERE ID_ZAKAZNIK = :Id", new { Id = id });
             }
         }
     }

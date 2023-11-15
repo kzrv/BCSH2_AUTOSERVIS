@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Kozyrev_Hriha_SP.Models
 {
-    [Table("ADRESY")]
+    [Table("ADRESA")]
     public class Adresa : INotifyPropertyChanged 
     {
         private int idAdresa;
@@ -79,7 +79,6 @@ namespace Kozyrev_Hriha_SP.Models
                 OnPropertyChanged(nameof(CisloBytu));
             }
         }
-        public List<Zakaznik> zakazniks { get; set; } = new List<Zakaznik>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 

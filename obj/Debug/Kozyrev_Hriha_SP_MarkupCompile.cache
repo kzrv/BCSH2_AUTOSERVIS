@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\App.xaml
-10-850514283
+10579790455
 
 361048501997
 301280956804
-CustomControls\BindablePasswordBox.xaml;MainWindow.xaml;Styles\Button.xaml;Styles\Image.xaml;Styles\Page.xaml;Styles\Text.xaml;Utils\DataTemplate.xaml;Views\Customer.xaml;Views\Home.xaml;Views\Login.xaml;
+CustomControls\BindablePasswordBox.xaml;MainWindow.xaml;Resources\Styles\Button.xaml;Resources\Styles\Image.xaml;Resources\Styles\Page.xaml;Resources\Styles\Text.xaml;Utils\DataTemplate.xaml;Views\Customer.xaml;Views\Home.xaml;Views\Login.xaml;
 
 False
 

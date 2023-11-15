@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Kozyrev_Hriha_SP.Models
 {
-    [Table("ZAMESTNANCI")]
+    [Table("ZAMESTNANEC")]
     public class Zamestnanec : INotifyPropertyChanged
     {
         private int idZamestnanec;
@@ -88,8 +88,7 @@ namespace Kozyrev_Hriha_SP.Models
             get => userDataIdUser;
             set => SetProperty(ref userDataIdUser, value);
         }
-        [ForeignKey("UserDataIdUser")]
-        public virtual UserData UserData { get; set; }
+        
         protected void SetProperty<T>(ref T backingField, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(backingField, value)) return;
