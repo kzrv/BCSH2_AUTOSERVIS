@@ -11,5 +11,6 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
     {
         List<Zakaznik> GetAllZakaznici();
         void DeleteZakaznik(int id);
+
     }
 }

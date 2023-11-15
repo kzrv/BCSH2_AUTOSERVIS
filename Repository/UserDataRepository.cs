@@ -17,9 +17,9 @@ namespace Kozyrev_Hriha_SP.Repository
 
         public UserData CheckCredentials(NetworkCredential cred)
         {
-            using(var db = new OracleConnection(this.connection))
+            using (var db = new OracleConnection(this.connection))
             {
-                return db.Query<UserData>("SELECT * FROM USER_DATA d WHERE d.Email = :email",new {email = cred.UserName}).FirstOrDefault();
+                return db.Query<UserData>("SELECT * FROM USER_DATA d WHERE d.Email = :email", new { email = cred.UserName }).FirstOrDefault();
             }
         }
     }

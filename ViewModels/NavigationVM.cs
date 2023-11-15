@@ -1,7 +1,10 @@
 ﻿using Kozyrev_Hriha_SP.Models;
+using Kozyrev_Hriha_SP.Repository;
+using Kozyrev_Hriha_SP.Repository.Interfaces;
 using Kozyrev_Hriha_SP.Utils;
 using Kozyrev_Hriha_SP.Views;
 using Microsoft.Extensions.DependencyInjection;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +24,20 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private LoginViewModel _loginViewModel;
         private UserData _authorizedUser;
         private string _userName;
+        private byte[] _binaryImageData; // Property to hold binary image data
+
+        private readonly IBinaryContentRepository binaryContentRepository;
+
+        public byte[] BinaryImageData
+        {
+            get => _binaryImageData;
+            set
+            {
+                _binaryImageData = value;
+                OnPropertyChanged(nameof(BinaryImageData));
+                OnPropertyChanged(nameof(ImageSource)); // Notify ImageSource property change
+            }
+        }
 
 
         public string UserName
@@ -57,32 +74,70 @@ namespace Kozyrev_Hriha_SP.ViewModels
             }
         }
 
-        public NavigationVM(IServiceProvider serviceProvider, LoginViewModel loginView)
+        public NavigationVM(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
             HomeCommand = new ViewModelCommand(Home);
             CustomerCommand = new ViewModelCommand(Customer);
             LoginCommand = new ViewModelCommand(Login);
             CurrentView = new HomeVM();
-            _loginViewModel = loginView;
-            _loginViewModel.IsAuthorizedChanged += OnLoginViewModelIsAuthorizedChanged;
+            _loginViewModel = serviceProvider.GetService<LoginViewModel>();
+            binaryContentRepository = serviceProvider.GetService<IBinaryContentRepository>();
+
+            _loginViewModel.AuthorizationChanged += OnAuthorizationChanged;
         }
-        private void OnLoginViewModelIsAuthorizedChanged(object sender, EventArgs e)
+        private void OnAuthorizationChanged(bool isAuthorized)
         {
+            Console.WriteLine("pog");
             IsAuthorized = _loginViewModel.IsAuthorized;
-            if (isAuthorized)
+
+            if (IsAuthorized)
             {
-                CurrentView = new HomeVM();
-                AuthorizedUser = _loginViewModel.User;
-                UserName = AuthorizedUser.Email;
-                //TODO
-                //Add image to AuthorizedUser
+                Console.WriteLine("Login");
+                HandleAuthorizedUser();
+            }
+            else
+            {
+                Console.WriteLine("Logout");
+                HandleUnauthorizedUser();
+            }
 
-                if (_loginViewModel != null)
+        }
+
+        private void HandleAuthorizedUser()
+        {
+            CurrentView = new HomeVM();
+            AuthorizedUser = _loginViewModel.User;
+            UserName = AuthorizedUser?.Email;
+
+            BinaryImageData = binaryContentRepository.GetBlobByEmail(AuthorizedUser?.Email);
+        }
+
+        private void HandleUnauthorizedUser()
+        {
+            CurrentView = new HomeVM();
+            AuthorizedUser = null;
+            UserName = null;
+            BinaryImageData = null;
+        }
+
+        public BitmapImage ImageSource
+        {
+            get
+            {
+                if (_binaryImageData == null || _binaryImageData.Length == 0)
+                    return null;
+
+                var image = new BitmapImage();
+                using (var mem = new System.IO.MemoryStream(_binaryImageData))
                 {
-                    _loginViewModel.IsAuthorizedChanged -= OnLoginViewModelIsAuthorizedChanged;
+                    mem.Position = 0;
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = mem;
+                    image.EndInit();
                 }
-
+                return image;
             }
         }
 
@@ -92,6 +147,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             set { _currentView = value; OnPropertyChanged(nameof(CurrentView)); }
         }
 
+        public ICommand LogoutCommand => _loginViewModel.LogoutCommand;
         public ICommand HomeCommand { get; set; }
         public ICommand CustomerCommand { get; set; }
 

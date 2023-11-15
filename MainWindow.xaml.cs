@@ -42,11 +42,6 @@ namespace Kozyrev_Hriha_SP
             Application.Current.Shutdown();
         }
 
-        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
         private void Btn_Checked(object sender, RoutedEventArgs e)
         {
 

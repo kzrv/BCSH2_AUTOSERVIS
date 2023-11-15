@@ -18,7 +18,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private UserData _userData;
 
         private readonly IUserDataRepository userDataRepository;
-        public event EventHandler IsAuthorizedChanged;
+        public event Action<bool> AuthorizationChanged;
 
         private bool isLoggingIn;
         public bool IsLoggingIn
@@ -96,17 +96,19 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 {
                     isAuthorized = value;
                     OnPropertyChanged(nameof(IsAuthorized));
-                    IsAuthorizedChanged?.Invoke(this, EventArgs.Empty);
+                    AuthorizationChanged?.Invoke(value); // Notify about the change
                 }
             }
         }
 
         public ICommand LoginCommand { get; }
+        public ICommand LogoutCommand { get; }
         public ICommand ShowPasswordCommand { get; }
 
         public LoginViewModel(IUserDataRepository userData)
         {
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
+            LogoutCommand = new ViewModelCommand(ExecuteLogoutCommand, CanExecuteLogoutCommand);
             userDataRepository = userData;
         }
 
@@ -116,7 +118,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 IsLoggingIn = true;
 
-                
+
                 UserData user = await Task.Run(() => userDataRepository.CheckCredentials(new NetworkCredential(UserName, Password)));
                 if (user == null)
                 {
@@ -127,8 +129,8 @@ namespace Kozyrev_Hriha_SP.ViewModels
                     User = user;
                     IsAuthorized = true;
                     ErrorMessage = "";
-                    }
-                
+                }
+
             }
             catch (Exception ex)
             {
@@ -156,6 +158,20 @@ namespace Kozyrev_Hriha_SP.ViewModels
             }
 
             return validData;
+        }
+
+        private void ExecuteLogoutCommand(object obj)
+        {
+            IsAuthorized = false;
+            User = null;
+            UserName = null;
+            Password.Clear(); //cant do it
+            //TODO: Clear Password box after logout
+        }
+
+        private bool CanExecuteLogoutCommand(object obj)
+        {
+            return IsAuthorized;
         }
     }
 }

@@ -20,16 +20,17 @@ namespace Kozyrev_Hriha_SP
         private void ConfigureServices(IServiceCollection services)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["OracleDbContext"].ConnectionString;
-            services.AddSingleton<IUserDataRepository, UserDataRepository>(provider=>new UserDataRepository(connectionString));
+            services.AddSingleton<IUserDataRepository, UserDataRepository>(provider => new UserDataRepository(connectionString));
             services.AddSingleton<IZakaznikRepository, ZakaznikRepository>(provider => new ZakaznikRepository(connectionString));
+            services.AddSingleton<IBinaryContentRepository, BinaryContentRepository>(provider => new BinaryContentRepository(connectionString));
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<CustomerVM>();
             services.AddSingleton<Login>();
             services.AddSingleton<Customer>();
-           
+
             services.AddSingleton<MainWindow>();
             services.AddSingleton<NavigationVM>(provider =>
-                new NavigationVM(provider.GetRequiredService<IServiceProvider>(), provider.GetRequiredService<LoginViewModel>()));
+                new NavigationVM(provider.GetRequiredService<IServiceProvider>()));
 
 
         }

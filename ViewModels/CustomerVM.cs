@@ -20,9 +20,6 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private readonly PageModel _pageModel;
         private ObservableCollection<Zakaznik> _zakaznici;
         private Zakaznik _selectedZakaznik;
-        private ObservableCollection<string> _uniqueAttributes;
-        private string _selectedAttribute;
-        private ObservableCollection<Zakaznik> _filteredCustomers;
 
         private readonly IZakaznikRepository zakaznikRepository;
 
@@ -64,14 +61,14 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 zakaznikRepository.DeleteZakaznik(SelectedZakaznik.Id);
                 Zakaznici.Remove(SelectedZakaznik);
-                
-                
+
+
             }
         }
 
         private bool CanDeleteItem(object parameter)
         {
-            
+
             return SelectedZakaznik != null;
         }
     }

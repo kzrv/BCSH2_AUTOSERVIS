@@ -119,18 +119,22 @@
 
                     <Grid>
 
-                        <Image Source="Resources/Images/user.png"
+                        <Image Source="{Binding ImageSource}"
                                Style="{StaticResource Image_Style}"/>
 
                         <TextBlock Text="{Binding UserName}"
                                Style="{StaticResource Text_Style}"/>
 
-                        <Image Source="Resources/Images/logout.png"
-                        Style="{StaticResource Image_Style_Click}"
-                        HorizontalAlignment="Right"
-                        Margin="5" MouseLeftButtonDown="Image_MouseLeftButtonDown">
 
-                        </Image>
+                        <Button Width="40" 
+                                Height="40"
+                                Background="Transparent" 
+                                Content="Out" 
+                                Command="{Binding LogoutCommand}" 
+                                HorizontalAlignment="Right"
+                                Margin="0,0,10,0"
+                                BorderBrush="Aqua"
+                                />
 
 
                     </Grid>
