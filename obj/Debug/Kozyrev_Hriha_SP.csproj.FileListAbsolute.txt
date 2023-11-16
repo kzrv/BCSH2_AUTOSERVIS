@@ -196,3 +196,22 @@ C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Resources
 C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Resources\Styles\Image.baml
 C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Resources\Styles\Page.baml
 C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\Resources\Styles\Text.baml
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Microsoft.Extensions.Logging.dll
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Microsoft.Extensions.Options.dll
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Microsoft.Extensions.Primitives.dll
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Serilog.dll
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Serilog.Extensions.Logging.dll
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Serilog.Sinks.Console.dll
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Serilog.Sinks.File.dll
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Microsoft.Extensions.Logging.xml
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Microsoft.Extensions.Options.xml
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Microsoft.Extensions.Primitives.xml
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Serilog.xml
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Serilog.Extensions.Logging.xml
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Serilog.Sinks.Console.xml
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Serilog.Sinks.File.pdb
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\Serilog.Sinks.File.xml
+C:\Users\kzrvv\source\repos\BCSH2_AUTOSERVIS\bin\Debug\System.Diagnostics.DiagnosticSource.xml

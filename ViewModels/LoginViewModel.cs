@@ -1,6 +1,8 @@
 ﻿
 using Kozyrev_Hriha_SP.Models;
 using Kozyrev_Hriha_SP.Repository;
+using Microsoft.Extensions.Logging;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Net;
 using System.Security;
@@ -16,6 +18,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private string _errorMessage;
         private bool isAuthorized;
         private UserData _userData;
+        private readonly ILogger<LoginViewModel> _logger;
 
         private readonly IUserDataRepository userDataRepository;
         public event Action<bool> AuthorizationChanged;
@@ -105,11 +108,12 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public ICommand LogoutCommand { get; }
         public ICommand ShowPasswordCommand { get; }
 
-        public LoginViewModel(IUserDataRepository userData)
+        public LoginViewModel(IUserDataRepository userData, ILogger<LoginViewModel> logger)
         {
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             LogoutCommand = new ViewModelCommand(ExecuteLogoutCommand, CanExecuteLogoutCommand);
             userDataRepository = userData;
+            _logger = logger;
         }
 
         private async void ExecuteLoginCommand(object obj)
@@ -132,10 +136,15 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 }
 
             }
+            catch (OracleException e)
+            {
+                ErrorMessage = "* Error connecting to server";
+                _logger.LogError(e.Message);
+            }
             catch (Exception ex)
             {
                 ErrorMessage = "* An error occurred during login";
-                Console.WriteLine(ex.Message);
+                _logger.LogError(ex.Message);
             }
             finally
             {

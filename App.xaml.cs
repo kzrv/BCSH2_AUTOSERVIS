@@ -5,6 +5,7 @@ using Kozyrev_Hriha_SP.Repository.Interfaces;
 using Kozyrev_Hriha_SP.ViewModels;
 using Kozyrev_Hriha_SP.Views;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using System;
 using System.Configuration;
 using System.Windows;
@@ -27,6 +28,8 @@ namespace Kozyrev_Hriha_SP
             services.AddSingleton<CustomerVM>();
             services.AddSingleton<Login>();
             services.AddSingleton<Customer>();
+            services.AddLogging(loggingBuilder =>
+                loggingBuilder.AddSerilog(dispose: true));
 
             services.AddSingleton<MainWindow>();
             services.AddSingleton<NavigationVM>(provider =>
@@ -39,6 +42,11 @@ namespace Kozyrev_Hriha_SP
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             ServiceProvider = serviceCollection.BuildServiceProvider();
+            Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.File("logs/autoService_log.txt", rollingInterval: RollingInterval.Day)
+            .WriteTo.Console()
+            .CreateLogger();
 
             var navigate = ServiceProvider.GetRequiredService<NavigationVM>();
             var main = new MainWindow(navigate);

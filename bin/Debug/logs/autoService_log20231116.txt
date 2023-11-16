@@ -1,0 +1,1 @@
+2023-11-16 19:16:52.639 +01:00 [ERR] ORA-12545: Network Transport: Unable to resolve connect hostname
