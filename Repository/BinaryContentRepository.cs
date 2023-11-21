@@ -19,12 +19,12 @@ namespace Kozyrev_Hriha_SP.Repository
             this.connection = connection;
         }
 
-        public byte[] GetBlobByEmail(string Email)
+        public byte[] GetBlobById(int id)
         {
             byte[] data = null;
             using (var db = new OracleConnection(this.connection))
             {
-                data = db.Query<byte[]>("SELECT BINARNI_OBSAH FROM BINARY_CONTENT b JOIN USER_DATA d USING(ID_CONTENT) WHERE d.EMAIL = :email", new { email = Email }).FirstOrDefault();
+                data = db.Query<byte[]>("SELECT BINARNI_OBSAH FROM BINARY_CONTENT WHERE ID_CONTENT = :Id", new { Id = id }).FirstOrDefault();
             }
             return data;
         }

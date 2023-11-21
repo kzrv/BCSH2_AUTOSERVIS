@@ -1,79 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Kozyrev_Hriha_SP.Models
 {
     using System.ComponentModel;
 
-    public class Vozidlo : INotifyPropertyChanged //TODO
+    public class Vozidlo : INotifyPropertyChanged 
     { 
         private int idVozidlo;
         private string vin;
         private string spz;
         private int rokVyroby;
         private string poznamky;
-        private int idZnacka;
+        private int idModel;
 
-        public int ID_VOZIDLO
+        public int IdVozidlo
         {
             get { return idVozidlo; }
             set
             {
                 idVozidlo = value;
-                OnPropertyChanged(nameof(ID_VOZIDLO));
+                OnPropertyChanged(nameof(IdVozidlo));
             }
         }
 
-        public string VIN
+        public string Vin
         {
             get { return vin; }
             set
             {
                 vin = value;
-                OnPropertyChanged(nameof(VIN));
+                OnPropertyChanged(nameof(Vin));
             }
         }
 
-        public string SPZ
+        public string Spz
         {
             get { return spz; }
             set
             {
                 spz = value;
-                OnPropertyChanged(nameof(SPZ));
+                OnPropertyChanged(nameof(Spz));
             }
         }
 
-        public int ROK_VYROBY
+        public int RokVyroby
         {
             get { return rokVyroby; }
             set
             {
                 rokVyroby = value;
-                OnPropertyChanged(nameof(ROK_VYROBY));
+                OnPropertyChanged(nameof(RokVyroby));
             }
         }
 
-        public string POZNAMKY
+        public string Poznamky
         {
             get { return poznamky; }
             set
             {
                 poznamky = value;
-                OnPropertyChanged(nameof(POZNAMKY));
+                OnPropertyChanged(nameof(Poznamky));
             }
         }
 
-        public int ID_ZNACKA
+        public int IdModel
         {
-            get { return idZnacka; }
+            get { return idModel; }
             set
             {
-                idZnacka = value;
-                OnPropertyChanged(nameof(ID_ZNACKA));
+                idModel = value;
+                OnPropertyChanged(nameof(IdModel));
             }
         }
 

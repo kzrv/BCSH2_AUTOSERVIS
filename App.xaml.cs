@@ -47,7 +47,7 @@ namespace Kozyrev_Hriha_SP
             .WriteTo.File("logs/autoService_log.txt", rollingInterval: RollingInterval.Day)
             .WriteTo.Console()
             .CreateLogger();
-
+            Serilog.Debugging.SelfLog.Enable(Console.Error);
             var navigate = ServiceProvider.GetRequiredService<NavigationVM>();
             var main = new MainWindow(navigate);
             main.Show();

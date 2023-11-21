@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kozyrev_Hriha_SP.Models
 {
@@ -11,37 +7,27 @@ namespace Kozyrev_Hriha_SP.Models
     {
         private int idZnacka;
         private string nazevZnacky;
-        private string typVozidla;
 
-        public int ID_ZNACKA
+        public int IdZnazka
         {
             get { return idZnacka; }
             set
             {
                 idZnacka = value;
-                OnPropertyChanged(nameof(ID_ZNACKA));
+                OnPropertyChanged(nameof(IdZnazka));
             }
         }
 
-        public string NAZEV_ZNACKY
+        public string NazevZnazky
         {
             get { return nazevZnacky; }
             set
             {
                 nazevZnacky = value;
-                OnPropertyChanged(nameof(NAZEV_ZNACKY));
+                OnPropertyChanged(nameof(NazevZnazky));
             }
         }
 
-        public string TYP_VOZIDLA
-        {
-            get { return typVozidla; }
-            set
-            {
-                typVozidla = value;
-                OnPropertyChanged(nameof(TYP_VOZIDLA));
-            }
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

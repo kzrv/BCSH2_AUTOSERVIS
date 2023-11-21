@@ -137,10 +137,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Adresa.cs" />
-    <Compile Include="Models\Autoservis.cs" />
     <Compile Include="Models\BinaryContent.cs" />
-    <Compile Include="Models\CountTest.cs" />
-    <Compile Include="Models\PageModel.cs" />
+    <Compile Include="Models\Enum\Role.cs" />
+    <Compile Include="Models\Prohlidka.cs" />
+    <Compile Include="Models\ProhSluz.cs" />
     <Compile Include="Models\Sluzba.cs" />
     <Compile Include="Models\Ukol.cs" />
     <Compile Include="Models\UserData.cs" />
@@ -148,6 +148,7 @@
     <Compile Include="Models\Zakaznik.cs" />
     <Compile Include="Models\Zamestnanec.cs" />
     <Compile Include="Models\Znacka.cs" />
+    <Compile Include="Objednavka.cs" />
     <Compile Include="Repository\BinaryContentRepository.cs" />
     <Compile Include="Repository\Interfaces\IBinaryContentRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserDataRepository.cs" />

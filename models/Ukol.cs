@@ -1,67 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kozyrev_Hriha_SP.Models
 {
-    public class Ukol : INotifyPropertyChanged //TODO
+    public class Ukol : INotifyPropertyChanged 
     {
         private int idUkol;
-        private string nazevUkol;
+        private string nazev;
         private string popis;
         private decimal cena;
         private int idSluzba;
 
-        public int ID_UKOL
+        public int IdUkol
         {
             get { return idUkol; }
             set
             {
                 idUkol = value;
-                OnPropertyChanged(nameof(ID_UKOL));
+                OnPropertyChanged(nameof(IdUkol));
             }
         }
 
-        public string NAZEV_UKOL
+        public string Nazev
         {
-            get { return nazevUkol; }
+            get { return nazev; }
             set
             {
-                nazevUkol = value;
-                OnPropertyChanged(nameof(NAZEV_UKOL));
+                nazev = value;
+                OnPropertyChanged(nameof(Nazev));
             }
         }
 
-        public string POPIS
+        public string Popis
         {
             get { return popis; }
             set
             {
                 popis = value;
-                OnPropertyChanged(nameof(POPIS));
+                OnPropertyChanged(nameof(Popis));
             }
         }
 
-        public decimal CENA
+        public decimal Cena
         {
             get { return cena; }
             set
             {
                 cena = value;
-                OnPropertyChanged(nameof(CENA));
+                OnPropertyChanged(nameof(Cena));
             }
         }
 
-        public int ID_SLUZBA
+        public int IdSluzba
         {
             get { return idSluzba; }
             set
             {
                 idSluzba = value;
-                OnPropertyChanged(nameof(ID_SLUZBA));
+                OnPropertyChanged(nameof(IdSluzba));
             }
         }
 

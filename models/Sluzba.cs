@@ -1,45 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Kozyrev_Hriha_SP.Models
 {
-    public class Sluzba : INotifyPropertyChanged //TODO
+    public class Sluzba : INotifyPropertyChanged 
     {
         private int idSluzba;
         private string nazevSluzba;
         private string popis;
 
-        public int ID_SLUZBA
+        public int IdSluzba
         {
             get { return idSluzba; }
             set
             {
                 idSluzba = value;
-                OnPropertyChanged(nameof(ID_SLUZBA));
+                OnPropertyChanged(nameof(IdSluzba));
             }
         }
 
-        public string NAZEV_SLUZBA
+        public string NazevSluzby
         {
             get { return nazevSluzba; }
             set
             {
                 nazevSluzba = value;
-                OnPropertyChanged(nameof(NAZEV_SLUZBA));
+                OnPropertyChanged(nameof(NazevSluzby));
             }
         }
 
-        public string POPIS
+        public string Popis
         {
             get { return popis; }
             set
             {
                 popis = value;
-                OnPropertyChanged(nameof(POPIS));
+                OnPropertyChanged(nameof(Popis));
             }
         }
 

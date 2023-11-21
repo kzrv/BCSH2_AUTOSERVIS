@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
+using Kozyrev_Hriha_SP.Models.Enum;
 
 namespace Kozyrev_Hriha_SP.Models
 {
-    [Table("USER_DATA")]
     public class UserData : INotifyPropertyChanged
     {
         private int userId;
         private string email;
-        private string password;
         private int binaryContentIdContent;
-
-        [Column("ID_USER"), Key]
+        private Role role;
 
         public int UserId
         {
@@ -33,9 +24,6 @@ namespace Kozyrev_Hriha_SP.Models
                 }
             }
         }
-
-        [Required]
-        [StringLength(50)]
         public string Email
         {
             get { return email; }
@@ -48,25 +36,7 @@ namespace Kozyrev_Hriha_SP.Models
                 }
             }
         }
-
-        [Required]
-        [StringLength(50)]
-        public string Password
-        {
-            get { return password; }
-            set
-            {
-                if (password != value)
-                {
-                    password = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        [Required]
-        [Column("BINARY_CONTENT_ID_CONTENT")]
-        public int BinaryContentIdContent
+        public int IdContent
         {
             get { return binaryContentIdContent; }
             set
@@ -78,7 +48,19 @@ namespace Kozyrev_Hriha_SP.Models
                 }
             }
         }
- 
+        public Role RoleUser
+        {
+            get { return role; }
+            set
+            {
+                if (role != value)
+                {
+                    role = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

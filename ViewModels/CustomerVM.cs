@@ -17,7 +17,6 @@ namespace Kozyrev_Hriha_SP.ViewModels
 {
     public class CustomerVM : ViewModelBase
     {
-        private readonly PageModel _pageModel;
         private ObservableCollection<Zakaznik> _zakaznici;
         private Zakaznik _selectedZakaznik;
 
@@ -49,7 +48,6 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public CustomerVM(IZakaznikRepository zakaznikRep)
         {
             this.zakaznikRepository = zakaznikRep;
-            _pageModel = new PageModel();
             List<Zakaznik> z = zakaznikRepository.GetAllZakaznici();
             Zakaznici = new ObservableCollection<Zakaznik>(zakaznikRepository.GetAllZakaznici());
             DeleteCommand = new ViewModelCommand(DeleteItem, CanDeleteItem);

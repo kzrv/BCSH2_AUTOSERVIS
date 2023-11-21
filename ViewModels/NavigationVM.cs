@@ -88,7 +88,6 @@ namespace Kozyrev_Hriha_SP.ViewModels
         }
         private void OnAuthorizationChanged(bool isAuthorized)
         {
-            Console.WriteLine("pog");
             IsAuthorized = _loginViewModel.IsAuthorized;
 
             if (IsAuthorized)
@@ -110,7 +109,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             AuthorizedUser = _loginViewModel.User;
             UserName = AuthorizedUser?.Email;
 
-            BinaryImageData = binaryContentRepository.GetBlobByEmail(AuthorizedUser?.Email);
+            BinaryImageData = binaryContentRepository.GetBlobById(AuthorizedUser.UserId);
         }
 
         private void HandleUnauthorizedUser()

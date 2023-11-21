@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Kozyrev_Hriha_SP.Models
 {
-    [Table("ADRESA")]
     public class Adresa : INotifyPropertyChanged 
     {
         private int idAdresa;
@@ -18,8 +12,7 @@ namespace Kozyrev_Hriha_SP.Models
         private string mesto;
         private string cisloPopisne;
         private string cisloBytu;
-        [Key]
-        [Column("ID_ADRESA")]
+
         public int IdAdresa
         {
             get { return idAdresa; }
@@ -59,7 +52,6 @@ namespace Kozyrev_Hriha_SP.Models
                 OnPropertyChanged(nameof(Mesto));
             }
         }
-        [Column("CISLO_POPISNE")]
         public string CisloPopisne
         {
             get { return cisloPopisne; }
@@ -69,7 +61,6 @@ namespace Kozyrev_Hriha_SP.Models
                 OnPropertyChanged(nameof(CisloPopisne));
             }
         }
-        [Column("CISLO_BYTU")]
         public string CisloBytu
         {
             get { return cisloBytu; }

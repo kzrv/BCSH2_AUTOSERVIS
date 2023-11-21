@@ -8,6 +8,6 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
 {
     public interface IBinaryContentRepository
     {
-        byte[] GetBlobByEmail(string email);
+        byte[] GetBlobById(int id);
     }
 }
