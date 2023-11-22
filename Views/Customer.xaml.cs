@@ -41,5 +41,10 @@ namespace Kozyrev_Hriha_SP.Views
         {
             // Handle delete button click
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

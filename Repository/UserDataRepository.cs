@@ -20,8 +20,8 @@ namespace Kozyrev_Hriha_SP.Repository
             this.connection = connection;
         }
 
-        public async Task<UserData> CheckCredentials(NetworkCredential cred)
-        {         
+        public UserData CheckCredentials(NetworkCredential cred)
+        {
             using (var db = new OracleConnection(this.connection))
             {
                 var p = new DynamicParameters();

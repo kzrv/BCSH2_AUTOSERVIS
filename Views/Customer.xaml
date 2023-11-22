@@ -38,8 +38,8 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,55,0,0" >
+    <DockPanel LastChildFill="True">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,55,0,0" DockPanel.Dock="Top">
             <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource ButtonStyle}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -63,10 +63,27 @@
             </Button>
 
         </StackPanel>
-        <Grid Width="500" Height="500" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+
+        <StackPanel DockPanel.Dock="Left"
+                    Orientation="Vertical" 
+                    Width="200" 
+                    Height="400"
+                    VerticalAlignment="Top"
+                    Background="White" 
+                    Margin="10">
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <TextBlock Text="Jméno:" FontWeight="Bold" Margin="10"/>
+                <TextBox Width="100" Height="25" Text="{Binding SelectedItem.Jmeno, ElementName=CustListView}"/>
+            </StackPanel>
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <TextBlock Text="Příjmení:" FontWeight="Bold" Margin="10"/>
+                <TextBox Width="100" Height="25" Text="{Binding SelectedItem.Prijmeni, ElementName=CustListView}"/>
+            </StackPanel>
+        </StackPanel>
+        <Grid Width="400" Height="300" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
 
             <Border BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="10" Background="#F0F0F0">
-                <ListView ItemsSource="{Binding Zakaznici}" Style="{StaticResource ListViewStyle}" SelectedItem="{Binding SelectedZakaznik, Mode=TwoWay}">
+                <ListView x:Name="CustListView" ItemsSource="{Binding Zakaznici}" Style="{StaticResource ListViewStyle}" SelectedItem="{Binding SelectedZakaznik, Mode=TwoWay}" SelectionMode="Single">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Jmeno" DisplayMemberBinding="{Binding Jmeno}" />
@@ -81,7 +98,7 @@
                     </ListView.ItemContainerStyle>
                 </ListView>
             </Border>
-
         </Grid>
-    </Grid>
+    </DockPanel>
+
 </UserControl>

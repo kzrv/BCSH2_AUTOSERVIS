@@ -92,12 +92,10 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
             if (IsAuthorized)
             {
-                Console.WriteLine("Login");
                 HandleAuthorizedUser();
             }
             else
             {
-                Console.WriteLine("Logout");
                 HandleUnauthorizedUser();
             }
 

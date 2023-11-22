@@ -40,7 +40,7 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="LayoutTransform">
                     <Setter.Value>
-                        <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                        <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
                     </Setter.Value>
                 </Setter>
             </Trigger>

@@ -43,7 +43,12 @@ namespace Kozyrev_Hriha_SP.ViewModels
         }
 
         // Other properties, commands, and methods
+
+        public ICommand AddCommand { get; }
+        public ICommand UpdateCommand { get; }
         public ICommand DeleteCommand { get; }
+
+
 
         public CustomerVM(IZakaznikRepository zakaznikRep)
         {
@@ -51,6 +56,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             List<Zakaznik> z = zakaznikRepository.GetAllZakaznici();
             Zakaznici = new ObservableCollection<Zakaznik>(zakaznikRepository.GetAllZakaznici());
             DeleteCommand = new ViewModelCommand(DeleteItem, CanDeleteItem);
+            UpdateCommand = new ViewModelCommand(UpdateItem, CanUpdateItem);
         }
 
         private void DeleteItem(object parameter)
@@ -59,12 +65,24 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 zakaznikRepository.DeleteZakaznik(SelectedZakaznik.Id);
                 Zakaznici.Remove(SelectedZakaznik);
-
-
             }
         }
 
         private bool CanDeleteItem(object parameter)
+        {
+
+            return SelectedZakaznik != null;
+        }
+
+        private void UpdateItem(object parameter)
+        {
+            if (SelectedZakaznik != null)
+            {
+                //TODO
+            }
+        }
+
+        private bool CanUpdateItem(object parameter)
         {
 
             return SelectedZakaznik != null;

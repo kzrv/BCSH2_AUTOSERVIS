@@ -40,8 +40,23 @@
                 <Border Background="#272B2F"
                         CornerRadius="20,0,0,20"/>
 
-                <StackPanel Height="400"
+                <StackPanel Height="600"
                             Width="228">
+                    <!--// Autoservis // -->
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                    IsEnabled="False"
+                    IsChecked="True"         
+                    VerticalAlignment="Top"
+                    Margin="0,0,0,20"
+                    >
+
+                        <Border BorderBrush="#FF000000" BorderThickness="1" CornerRadius="5" Margin="2">
+                            <TextBlock Text="AUTOSERVIS"
+                                  
+                             Style="{StaticResource Text_Style}"
+                             />
+                        </Border>
+                    </Menu:Btn>
 
                     <!--// Home // -->
 
@@ -126,15 +141,14 @@
                                Style="{StaticResource Text_Style}"/>
 
 
-                        <Button Width="40" 
-                                Height="40"
-                                Background="Transparent" 
-                                Content="Out" 
-                                Command="{Binding LogoutCommand}" 
-                                HorizontalAlignment="Right"
-                                Margin="0,0,10,0"
-                                BorderBrush="Aqua"
-                                />
+                        <Image Source="Resources\Images\logout.png"
+                               Style="{StaticResource Image_Style_Click}"
+                               HorizontalAlignment="Right"                              
+                               Margin="10">
+                            <Image.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding LogoutCommand}" CommandParameter="{Binding ElementName=MainWindow}" />
+                            </Image.InputBindings>
+                        </Image>
 
 
                     </Grid>

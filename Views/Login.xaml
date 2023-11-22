@@ -16,8 +16,8 @@
 
     <Border CornerRadius="12">
         <Border.Background>
-            <ImageBrush ImageSource="/Resources/Images/back-image.jpg"
-                     Stretch="None"/>
+            <ImageBrush ImageSource="/Resources/Images/login_background.jpg"
+                     Stretch="Fill"/>
         </Border.Background>
 
         <Border CornerRadius="10"                    
@@ -119,6 +119,27 @@
                             Margin="0,10,0,0"
                             TextWrapping="Wrap"/>
 
+                    <Grid VerticalAlignment="Center"
+                          Margin="5">
+                        <TextBlock Text="Nemate ucet?"
+                               Foreground="White"
+                               FontSize="14"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"                             
+                               Margin="0,0,0,0"/>
+                        <Button x:Name="btnRegistrace"
+                                Content="Registrace"
+                                Width="80"
+                                Height="20"
+                                BorderThickness="0"
+                                Background="Transparent" 
+                                Foreground="ForestGreen"
+                                Opacity="0.9"
+                                Margin="105,-4,25,4"
+                                FontWeight="Bold"
+                                FontSize="14"
+                               />
+                    </Grid>
                     <Button x:Name="btnLogin" 
                          Command="{Binding LoginCommand}"
                          BorderThickness="0"

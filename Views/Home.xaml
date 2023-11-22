@@ -4,25 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Kozyrev_Hriha_SP.Views"
+             xmlns:conv ="clr-namespace:Kozyrev_Hriha_SP.Utils"
              mc:Ignorable="d" 
              d:DesignHeight="600"
              d:DesignWidth="622">
+
+    <UserControl.Resources>
+        <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
     <Grid >
         <Border CornerRadius="0,20,20,0">
 
             <Border.Background>
-                <ImageBrush ImageSource="/Resources/Images/home_page.png" Stretch="Fill"/>
+                <ImageBrush ImageSource="/Resources/Images/home_page.jpg" Stretch="Fill"/>
             </Border.Background>
 
             <!-- Image as the first child -->
             <!-- TextBlock as the second child -->
-            <TextBlock Text="Log in to see more"
+            <!--
+            <TextBlock Style="{StaticResource Text_Style}"
+                       Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       Text="Log in to see more"
                        VerticalAlignment="Bottom"
                        HorizontalAlignment="Center"
                        Foreground="Aqua"                          
                        FontWeight="Bold"
                        FontSize="20"
                        Margin="15"    />
+            -->
 
         </Border>
     </Grid>

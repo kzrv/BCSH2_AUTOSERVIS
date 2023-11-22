@@ -10,6 +10,6 @@ namespace Kozyrev_Hriha_SP.Repository
 {
     public interface IUserDataRepository
     {
-        Task<UserData> CheckCredentials(NetworkCredential cred);
+        UserData CheckCredentials(NetworkCredential cred);
     }
 }
