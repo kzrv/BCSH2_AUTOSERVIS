@@ -3,6 +3,7 @@
 using Kozyrev_Hriha_SP.Repository;
 using Kozyrev_Hriha_SP.Repository.Interfaces;
 using Kozyrev_Hriha_SP.ViewModels;
+using Kozyrev_Hriha_SP.ViewModels.RegistrationViewModel;
 using Kozyrev_Hriha_SP.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -22,14 +23,21 @@ namespace Kozyrev_Hriha_SP
         {
             string connectionString = ConfigurationManager.ConnectionStrings["OracleDbContext"].ConnectionString;
             services.AddSingleton<IUserDataRepository, UserDataRepository>(provider => new UserDataRepository(connectionString));
-            services.AddSingleton<IZakaznikRepository, ZakaznikRepository>(provider => new ZakaznikRepository(connectionString));
+            
             services.AddSingleton<IBinaryContentRepository, BinaryContentRepository>(provider => new BinaryContentRepository(connectionString));
+            services.AddSingleton<IAdresaRepository, AdresaRepository>(provider => new AdresaRepository(connectionString));
+            services.AddSingleton<IZakaznikRepository, ZakaznikRepository>(provider =>
+            new ZakaznikRepository(connectionString, provider.GetRequiredService<IUserDataRepository>(), provider.GetRequiredService<IAdresaRepository>()));
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<CustomerVM>();
             services.AddSingleton<Login>();
             services.AddSingleton<Customer>();
+            services.AddSingleton<HomeVM>();
+            services.AddTransient<RegistrationControlVM>();
             services.AddLogging(loggingBuilder =>
                 loggingBuilder.AddSerilog(dispose: true));
+            services.AddTransient<RegistrationControl>();
+
 
             services.AddSingleton<MainWindow>();
             services.AddSingleton<NavigationVM>(provider =>

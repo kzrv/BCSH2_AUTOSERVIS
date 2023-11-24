@@ -97,6 +97,26 @@
 
 
                     </Menu:Btn>
+                    <!--// Registration // -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                    Command="{Binding RegCommand}"
+                    IsChecked="True"
+                    Visibility="{Binding IsAuthorized, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/user.png"
+                                   Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Registration"
+                                       Style="{StaticResource Text_Style}"/>
+
+
+                        </Grid>
+
+
+                    </Menu:Btn>
 
                     <!--// Customers // -->
 

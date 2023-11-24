@@ -2,6 +2,7 @@
 using Kozyrev_Hriha_SP.Repository;
 using Kozyrev_Hriha_SP.Repository.Interfaces;
 using Kozyrev_Hriha_SP.Utils;
+using Kozyrev_Hriha_SP.ViewModels.RegistrationViewModel;
 using Kozyrev_Hriha_SP.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Oracle.ManagedDataAccess.Client;
@@ -79,8 +80,10 @@ namespace Kozyrev_Hriha_SP.ViewModels
             ServiceProvider = serviceProvider;
             HomeCommand = new ViewModelCommand(Home);
             CustomerCommand = new ViewModelCommand(Customer);
-            LoginCommand = new ViewModelCommand(Login);
-            CurrentView = new HomeVM();
+            LoginCommand = new ViewModelCommand(Login);    
+            RegCommand = new ViewModelCommand(Reg);
+
+            CurrentView = HomePage;
             _loginViewModel = serviceProvider.GetService<LoginViewModel>();
             binaryContentRepository = serviceProvider.GetService<IBinaryContentRepository>();
 
@@ -103,7 +106,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private void HandleAuthorizedUser()
         {
-            CurrentView = new HomeVM();
+            CurrentView = HomePage;
             AuthorizedUser = _loginViewModel.User;
             UserName = AuthorizedUser?.Email;
 
@@ -112,7 +115,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private void HandleUnauthorizedUser()
         {
-            CurrentView = new HomeVM();
+            CurrentView = HomePage;
             AuthorizedUser = null;
             UserName = null;
             BinaryImageData = null;
@@ -143,18 +146,25 @@ namespace Kozyrev_Hriha_SP.ViewModels
             get { return _currentView; }
             set { _currentView = value; OnPropertyChanged(nameof(CurrentView)); }
         }
+        public void GoToLoginPage()
+        {
+            CurrentView = ServiceProvider.GetRequiredService<Login>();
+        }
+        public HomeVM HomePage { get { return ServiceProvider.GetRequiredService<HomeVM>(); } }
 
         public ICommand LogoutCommand => _loginViewModel.LogoutCommand;
         public ICommand HomeCommand { get; set; }
         public ICommand CustomerCommand { get; set; }
 
         public ICommand LoginCommand { get; set; }
+        public ICommand RegCommand { get; set; }
 
-        private void Home(object obj) => CurrentView = new HomeVM();
+        private void Home(object obj) => CurrentView = ServiceProvider.GetRequiredService<HomeVM>();
 
         private void Customer(object obj) => CurrentView = ServiceProvider.GetRequiredService<Customer>();
 
         private void Login(object obj) => CurrentView = ServiceProvider.GetRequiredService<Login>();
+        private void Reg(object obj) => CurrentView = ServiceProvider.GetRequiredService<RegistrationControl>();
 
 
     }

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\obj\Debug\
+D:\new_desktop\temCu\obj\Debug\
 Kozyrev_Hriha_SP
 none
 false
 DEBUG;TRACE
-C:\Users\PC-Max\Desktop\UPCE\С#2\Sem prace\BCSH2_AUTOSERVIS\App.xaml
-10579790455
+D:\new_desktop\temCu\App.xaml
+14-1315453419
 
-40-1952650482
-39-772923879
-CustomControls\BindablePasswordBox.xaml;MainWindow.xaml;Resources\Styles\Button.xaml;Resources\Styles\Image.xaml;Resources\Styles\Page.xaml;Resources\Styles\Text.xaml;Utils\DataTemplate.xaml;Views\Customer.xaml;Views\Home.xaml;Views\Login.xaml;
+51-1042700756
+421314272773
+CustomControls\BindablePasswordBox.xaml;MainWindow.xaml;Resources\Styles\Button.xaml;Resources\Styles\Image.xaml;Resources\Styles\Page.xaml;Resources\Styles\Text.xaml;Utils\DataTemplate.xaml;Views\Customer.xaml;Views\Home.xaml;Views\Login.xaml;Views\Registration.xaml;Views\RegistrationControl.xaml;Views\RegistrationSecond.xaml;Views\RegistrationThird.xaml;
 
 True
 

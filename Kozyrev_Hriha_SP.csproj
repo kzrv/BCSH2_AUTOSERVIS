@@ -41,6 +41,12 @@
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Dapper.2.1.21\lib\net461\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=2.1.4.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialDesignColors.2.1.4\lib\net462\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=4.9.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialDesignThemes.4.9.0\lib\net462\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -61,6 +67,9 @@
     </Reference>
     <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.21.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>packages\Oracle.ManagedDataAccess.21.12.0\lib\net462\Oracle.ManagedDataAccess.dll</HintPath>
@@ -148,8 +157,10 @@
     <Compile Include="Models\Zakaznik.cs" />
     <Compile Include="Models\Zamestnanec.cs" />
     <Compile Include="Models\Znacka.cs" />
-    <Compile Include="Objednavka.cs" />
+    <Compile Include="Models\Objednavka.cs" />
+    <Compile Include="Repository\AdresaRepository.cs" />
     <Compile Include="Repository\BinaryContentRepository.cs" />
+    <Compile Include="Repository\Interfaces\IAdresaRepository.cs" />
     <Compile Include="Repository\Interfaces\IBinaryContentRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserDataRepository.cs" />
     <Compile Include="Repository\Interfaces\IZakaznikRepository.cs" />
@@ -158,12 +169,17 @@
     <Compile Include="Utils\BooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\Btn.cs" />
     <Compile Include="Utils\ByteArrayToImageSourceConverter.cs" />
+    <Compile Include="Utils\Exceptions\UserIsAlreadyExistsException.cs" />
     <Compile Include="Utils\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\PasswordEncryptor.cs" />
     <Compile Include="ViewModels\CustomerVM.cs" />
     <Compile Include="ViewModels\HomeVM.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NavigationVM.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel\RegistrationControlVM.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel\RegistrationSecondVM.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel\RegistrationThirdVM.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel\RegistrationVM.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelCommand.cs" />
     <Compile Include="Views\Customer.xaml.cs">
@@ -174,6 +190,18 @@
     </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Registration.xaml.cs">
+      <DependentUpon>Registration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistrationControl.xaml.cs">
+      <DependentUpon>RegistrationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistrationSecond.xaml.cs">
+      <DependentUpon>RegistrationSecond.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistrationThird.xaml.cs">
+      <DependentUpon>RegistrationThird.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomControls\BindablePasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -218,6 +246,22 @@
     <Page Include="Views\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Registration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RegistrationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RegistrationSecond.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RegistrationThird.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +326,11 @@
   <ItemGroup>
     <Resource Include="Resources\Images\login_background.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\home-icon.png" />
+    <Resource Include="Resources\Images\reg-icon.png" />
+    <Resource Include="Resources\Images\tel-icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.Text.Json.6.0.1\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.1\build\System.Text.Json.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -289,5 +338,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\System.Text.Json.6.0.1\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Text.Json.6.0.1\build\System.Text.Json.targets'))" />
+    <Error Condition="!Exists('packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets'))" />
   </Target>
+  <Import Project="packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
 </Project>

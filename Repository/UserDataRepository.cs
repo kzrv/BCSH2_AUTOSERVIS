@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Kozyrev_Hriha_SP.Models;
 using Kozyrev_Hriha_SP.Models.Enum;
+using Kozyrev_Hriha_SP.Utils.Exceptions;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
@@ -20,7 +21,7 @@ namespace Kozyrev_Hriha_SP.Repository
             this.connection = connection;
         }
 
-        public UserData CheckCredentials(NetworkCredential cred)
+        public async Task<UserData> CheckCredentials(NetworkCredential cred)
         {
             using (var db = new OracleConnection(this.connection))
             {
@@ -44,6 +45,27 @@ namespace Kozyrev_Hriha_SP.Repository
                 }
 
                 return null;
+            }
+        }
+
+        public int RegisterNewUserData(NetworkCredential cred)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                var p = new DynamicParameters();
+                p.Add("p_email", cred.UserName, DbType.String);
+                p.Add("p_password", cred.Password, DbType.String);
+                p.Add("p_success", dbType: DbType.Boolean, direction: ParameterDirection.Output);
+                p.Add("p_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                db.Execute("register_new_user", p, commandType: CommandType.StoredProcedure);
+                UserData user = new UserData();
+                if (p.Get<bool>("p_success"))
+                {
+                    return p.Get<int>("p_id");
+                }
+
+                throw new UserIsAlreadyExistsException($"User with email: {cred.UserName} is already exists");
             }
         }
     }
