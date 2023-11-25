@@ -166,9 +166,15 @@
     <Compile Include="Repository\Interfaces\IZakaznikRepository.cs" />
     <Compile Include="Repository\UserDataRepository.cs" />
     <Compile Include="Repository\ZakaznikRepository.cs" />
+    <Compile Include="Utils\AddressData.xaml.cs">
+      <DependentUpon>AddressData.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\BooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\Btn.cs" />
     <Compile Include="Utils\ByteArrayToImageSourceConverter.cs" />
+    <Compile Include="Utils\CustomerData.xaml.cs">
+      <DependentUpon>CustomerData.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Exceptions\UserIsAlreadyExistsException.cs" />
     <Compile Include="Utils\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\PasswordEncryptor.cs" />
@@ -230,6 +236,14 @@
     <Page Include="Resources\Styles\Text.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Utils\AddressData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Utils\CustomerData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Utils\DataTemplate.xaml">
       <SubType>Designer</SubType>

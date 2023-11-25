@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Kozyrev_Hriha_SP.Views"
-             xmlns:viewModel ="clr-namespace:Kozyrev_Hriha_SP.ViewModels"         
+             xmlns:viewModel ="clr-namespace:Kozyrev_Hriha_SP.ViewModels"   
+             xmlns:util="clr-namespace:Kozyrev_Hriha_SP.Utils"
              mc:Ignorable="d" 
              d:DesignHeight="600"
              d:DesignWidth="622"
@@ -64,26 +65,29 @@
 
         </StackPanel>
 
-        <StackPanel DockPanel.Dock="Left"
+        <Border CornerRadius="10" BorderBrush="Black" BorderThickness="1" Width="210" Height="400" VerticalAlignment="Top" Margin="5">
+            <StackPanel DockPanel.Dock="Left"
                     Orientation="Vertical" 
                     Width="200" 
-                    Height="400"
+                    Height="380"
                     VerticalAlignment="Top"
-                    Background="White" 
+                    Background="Transparent" 
                     Margin="10">
-            <StackPanel Margin="5" Orientation="Horizontal">
-                <TextBlock Text="Jméno:" FontWeight="Bold" Margin="10"/>
-                <TextBox Width="100" Height="25" Text="{Binding SelectedItem.Jmeno, ElementName=CustListView}"/>
+                <util:CustomerData  Grid.Row="2" DataContext="{Binding SelectedZakaznik}" Margin="5" x:Name="customerData"/>
+                <util:AddressData Grid.Row="2" DataContext="{Binding Adresa}" Margin="5" x:Name="addressData"/>
+                <Button Width="50" Content="Clear" Command="{Binding ClearCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="10,0,0,0">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
-            <StackPanel Margin="5" Orientation="Horizontal">
-                <TextBlock Text="Příjmení:" FontWeight="Bold" Margin="10"/>
-                <TextBox Width="100" Height="25" Text="{Binding SelectedItem.Prijmeni, ElementName=CustListView}"/>
-            </StackPanel>
-        </StackPanel>
-        <Grid Width="400" Height="300" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
+        </Border>
+        <Grid Width="400" Height="350" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5">
 
             <Border BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="10" Background="#F0F0F0">
-                <ListView x:Name="CustListView" ItemsSource="{Binding Zakaznici}" Style="{StaticResource ListViewStyle}" SelectedItem="{Binding SelectedZakaznik, Mode=TwoWay}" SelectionMode="Single">
+                <ListView x:Name="CustListView" ItemsSource="{Binding Zakaznici}" Style="{StaticResource ListViewStyle}" SelectedItem="{Binding SelectedZakaznik, Mode=TwoWay}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Jmeno" DisplayMemberBinding="{Binding Jmeno}" />
