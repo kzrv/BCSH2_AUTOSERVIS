@@ -36,7 +36,6 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 _binaryImageData = value;
                 OnPropertyChanged(nameof(BinaryImageData));
-                OnPropertyChanged(nameof(ImageSource)); // Notify ImageSource property change
             }
         }
 
@@ -80,9 +79,9 @@ namespace Kozyrev_Hriha_SP.ViewModels
             ServiceProvider = serviceProvider;
             HomeCommand = new ViewModelCommand(Home);
             CustomerCommand = new ViewModelCommand(Customer);
-            LoginCommand = new ViewModelCommand(Login);    
+            LoginCommand = new ViewModelCommand(Login);
             RegCommand = new ViewModelCommand(Reg);
-
+            UserSettingsCommand = new ViewModelCommand(UserSettings);
             CurrentView = HomePage;
             _loginViewModel = serviceProvider.GetService<LoginViewModel>();
             binaryContentRepository = serviceProvider.GetService<IBinaryContentRepository>();
@@ -110,7 +109,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             AuthorizedUser = _loginViewModel.User;
             UserName = AuthorizedUser?.Email;
 
-            BinaryImageData = binaryContentRepository.GetBlobById(AuthorizedUser.UserId);
+            BinaryImageData = binaryContentRepository.GetBlobById(AuthorizedUser.IdContent);
         }
 
         private void HandleUnauthorizedUser()
@@ -119,26 +118,6 @@ namespace Kozyrev_Hriha_SP.ViewModels
             AuthorizedUser = null;
             UserName = null;
             BinaryImageData = null;
-        }
-
-        public BitmapImage ImageSource
-        {
-            get
-            {
-                if (_binaryImageData == null || _binaryImageData.Length == 0)
-                    return null;
-
-                var image = new BitmapImage();
-                using (var mem = new System.IO.MemoryStream(_binaryImageData))
-                {
-                    mem.Position = 0;
-                    image.BeginInit();
-                    image.CacheOption = BitmapCacheOption.OnLoad;
-                    image.StreamSource = mem;
-                    image.EndInit();
-                }
-                return image;
-            }
         }
 
         public object CurrentView
@@ -157,11 +136,15 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public ICommand CustomerCommand { get; set; }
 
         public ICommand LoginCommand { get; set; }
+
+        public ICommand UserSettingsCommand { get; set; }
         public ICommand RegCommand { get; set; }
 
         private void Home(object obj) => CurrentView = ServiceProvider.GetRequiredService<HomeVM>();
 
         private void Customer(object obj) => CurrentView = ServiceProvider.GetRequiredService<Customer>();
+
+        private void UserSettings(object obj) => CurrentView = ServiceProvider.GetRequiredService<UserSettings>();
 
         private void Login(object obj) => CurrentView = ServiceProvider.GetRequiredService<Login>();
         private void Reg(object obj) => CurrentView = ServiceProvider.GetRequiredService<RegistrationControl>();

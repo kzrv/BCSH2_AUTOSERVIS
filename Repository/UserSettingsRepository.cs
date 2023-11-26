@@ -10,23 +10,21 @@ using System.Threading.Tasks;
 
 namespace Kozyrev_Hriha_SP.Repository
 {
-    public class BinaryContentRepository : IBinaryContentRepository
+    public class UserSettingsRepository : IUserSettingsRepository
     {
         private readonly string connection;
 
-        public BinaryContentRepository(string connection)
+        public UserSettingsRepository(string connection)
         {
             this.connection = connection;
         }
 
-        public byte[] GetBlobById(int id)
+        public List<Zakaznik> GetZakaznikByUserId(int userId)
         {
-            byte[] data = null;
             using (var db = new OracleConnection(this.connection))
             {
-                data = db.Query<byte[]>("SELECT binarni_obsah As BinarniObsah FROM binary_content WHERE ID_CONTENT = :Id", new { Id = id }).FirstOrDefault();
+                return db.Query<Zakaznik>("SELECT jmeno, prijmeni, tel_cislo, poznamky FROM zakaznici where id_user = :Id", new { Id = userId }).ToList();
             }
-            return data;
         }
     }
 }

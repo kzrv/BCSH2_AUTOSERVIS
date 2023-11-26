@@ -42,9 +42,6 @@ namespace Kozyrev_Hriha_SP
             Application.Current.Shutdown();
         }
 
-        private void Btn_Checked(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }

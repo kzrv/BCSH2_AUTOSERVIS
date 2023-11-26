@@ -425,3 +425,5 @@ C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Kozyrev_Hriha_SP.csproj.
 C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Kozyrev_Hriha_SP.csproj.CopyComplete
 C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Kozyrev_Hriha_SP.exe
 C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Kozyrev_Hriha_SP.pdb
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\UserSettings.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\UserSettings.baml

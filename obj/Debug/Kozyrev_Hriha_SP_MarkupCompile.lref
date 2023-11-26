@@ -2,6 +2,8 @@
 FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\App.xaml;;
 FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\CustomControls\BindablePasswordBox.xaml;;
 FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\MainWindow.xaml;;
+FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\Utils\AddressData.xaml;;
+FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\Utils\CustomerData.xaml;;
 FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\Utils\DataTemplate.xaml;;
 FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\Views\Customer.xaml;;
 FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\Views\Home.xaml;;
@@ -10,6 +12,5 @@ FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\Views\Registration.xaml;;
 FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\Views\RegistrationControl.xaml;;
 FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\Views\RegistrationSecond.xaml;;
 FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\Views\RegistrationThird.xaml;;
-FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\Utils\AddressData.xaml;;
-FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\Utils\CustomerData.xaml;;
+FC:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\Views\UserSettings.xaml;;
 

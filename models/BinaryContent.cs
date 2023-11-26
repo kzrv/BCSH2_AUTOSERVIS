@@ -13,7 +13,7 @@ namespace Kozyrev_Hriha_SP.Models
         private string pripona;
         private DateTime datumNahrani;
         private DateTime datumZmeny;
-        private int zmenil;
+        private string zmenil;
         private string operace;
 
 
@@ -100,7 +100,7 @@ namespace Kozyrev_Hriha_SP.Models
             }
         }
 
-        public int Zmenil
+        public string Zmenil
         {
             get { return zmenil; }
             set

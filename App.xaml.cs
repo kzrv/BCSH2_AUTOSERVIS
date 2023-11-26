@@ -23,15 +23,19 @@ namespace Kozyrev_Hriha_SP
         {
             string connectionString = ConfigurationManager.ConnectionStrings["OracleDbContext"].ConnectionString;
             services.AddSingleton<IUserDataRepository, UserDataRepository>(provider => new UserDataRepository(connectionString));
-            
+
             services.AddSingleton<IBinaryContentRepository, BinaryContentRepository>(provider => new BinaryContentRepository(connectionString));
             services.AddSingleton<IAdresaRepository, AdresaRepository>(provider => new AdresaRepository(connectionString));
+            services.AddSingleton<IUserSettingsRepository, UserSettingsRepository>(provider => new UserSettingsRepository(connectionString));
             services.AddSingleton<IZakaznikRepository, ZakaznikRepository>(provider =>
             new ZakaznikRepository(connectionString, provider.GetRequiredService<IUserDataRepository>(), provider.GetRequiredService<IAdresaRepository>()));
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<CustomerVM>();
             services.AddSingleton<Login>();
             services.AddSingleton<Customer>();
+            services.AddSingleton<UserSettings>();
+            services.AddSingleton<UserSettingsVM>(provider =>
+                new UserSettingsVM(provider.GetRequiredService<IServiceProvider>()));
             services.AddSingleton<HomeVM>();
             services.AddTransient<RegistrationControlVM>();
             services.AddLogging(loggingBuilder =>

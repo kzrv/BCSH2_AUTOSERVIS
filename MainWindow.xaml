@@ -123,7 +123,7 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding CustomerCommand}"
                               IsChecked="True"
-                             Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+                              Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                         <Grid>
 
@@ -145,16 +145,16 @@
                 <!--// Current User // -->
 
                 <Menu:Btn Style="{StaticResource BtnStyle}"
-                          
+                          Command="{Binding UserSettingsCommand}"
                           IsChecked="True"
                           Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}"
                           VerticalAlignment="Bottom"
-                          Margin="0,0,0,10" Checked="Btn_Checked"
+                          Margin="0,0,0,10"
                           >
 
                     <Grid>
 
-                        <Image Source="{Binding ImageSource}"
+                        <Image Source="{Binding BinaryImageData, Converter={StaticResource ByteArrayToImageSourceConverter}}"
                                Style="{StaticResource Image_Style}"/>
 
                         <TextBlock Text="{Binding UserName}"

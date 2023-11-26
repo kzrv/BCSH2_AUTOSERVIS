@@ -2,6 +2,7 @@
 using Kozyrev_Hriha_SP.Models;
 using Kozyrev_Hriha_SP.Repository.Interfaces;
 using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -35,6 +36,13 @@ namespace Kozyrev_Hriha_SP.Repository
             using (var db = new OracleConnection(this.connection))
             {
                 return db.Query<Adresa>("SELECT id_adresa as IdAdresa, ulice, psc, mesto, cislo_popisne as CisloPopisne, cislo_bytu as CisloBytu FROM adresy where id_adresa = :Id", new { Id = id }).ToList();
+            }
+        }
+        public List<Zakaznik> GetZakaznikByUserId(int userId)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                return db.Query<Zakaznik>("SELECT id_zakaznik as Id, jmeno, prijmeni, tel_cislo as TelCislo, poznamky, id_adresa as IdAdresa, id_user as IdUser FROM zakaznici where id_user = :Id", new { Id = userId }).ToList();
             }
         }
         public void DeleteZakaznik(int id)
@@ -101,6 +109,59 @@ namespace Kozyrev_Hriha_SP.Repository
                 parameters.Add("IdZakaznik", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
                 await db.ExecuteAsync(sqlQuery, parameters);
+            }
+        }
+
+        public void UpdateUserData(Zakaznik zakaznik, Adresa adresa, UserData user, BinaryContent binaryContent, string newPass)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                UpdateZakaznik(zakaznik, adresa);
+                UpdateBinaryContent(binaryContent);
+
+                string salt = DateTime.Now.ToString("yyyyMMddHHmmssff"); // Create a new salt
+                string hashedPassword = GetHashedPassword(newPass, salt); // Get hashed password
+
+                var p = new DynamicParameters();
+                p.Add("p_id_user", user.UserId, DbType.Int32);
+                p.Add("p_email", user.Email, DbType.String);
+                p.Add("p_password", hashedPassword, DbType.String);
+                p.Add("p_salt", salt, DbType.String);
+                // Call the stored procedure using Dapper
+                db.Execute("UPDATE_USER_DATA", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void UpdateBinaryContent(BinaryContent binaryContent)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                var p = new DynamicParameters();
+                p.Add("p_id_content", binaryContent.IdContent, DbType.Int32);
+                p.Add("p_binarni_obsah", binaryContent.BinarniObsah, DbType.Binary);
+                p.Add("p_nazev_souboru", binaryContent.NazevSouboru, DbType.String);
+                p.Add("p_typ_souboru", binaryContent.TypSouboru, DbType.String);
+                p.Add("p_pripona_souboru", binaryContent.Pripona, DbType.String);
+                p.Add("p_datum_nahrani", binaryContent.DatumNahrani, DbType.Date);
+                p.Add("p_datum_zmeny", binaryContent.DatumZmeny, DbType.Date);
+                p.Add("p_zmenil", binaryContent.Zmenil, DbType.String);
+                p.Add("p_operace", binaryContent.Operace, DbType.String);
+
+                db.Execute("UPDATE_BINARY_CONTENT", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        private string GetHashedPassword(string password, string salt)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                db.Open();
+
+                // Call the hash_password function using Dapper
+                string hashedPassword = db.QueryFirstOrDefault<string>("SELECT hash_password(:Password, :Salt) FROM dual",
+                    new { Password = password, Salt = salt });
+
+                return hashedPassword;
             }
         }
     }

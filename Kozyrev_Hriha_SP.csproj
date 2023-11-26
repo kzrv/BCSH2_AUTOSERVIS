@@ -163,8 +163,10 @@
     <Compile Include="Repository\Interfaces\IAdresaRepository.cs" />
     <Compile Include="Repository\Interfaces\IBinaryContentRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserDataRepository.cs" />
+    <Compile Include="Repository\Interfaces\IUserSettingsRepository.cs" />
     <Compile Include="Repository\Interfaces\IZakaznikRepository.cs" />
     <Compile Include="Repository\UserDataRepository.cs" />
+    <Compile Include="Repository\UserSettingsRepository.cs" />
     <Compile Include="Repository\ZakaznikRepository.cs" />
     <Compile Include="Utils\AddressData.xaml.cs">
       <DependentUpon>AddressData.xaml</DependentUpon>
@@ -186,6 +188,7 @@
     <Compile Include="ViewModels\RegistrationViewModel\RegistrationSecondVM.cs" />
     <Compile Include="ViewModels\RegistrationViewModel\RegistrationThirdVM.cs" />
     <Compile Include="ViewModels\RegistrationViewModel\RegistrationVM.cs" />
+    <Compile Include="ViewModels\UserSettingsVM.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelCommand.cs" />
     <Compile Include="Views\Customer.xaml.cs">
@@ -208,6 +211,9 @@
     </Compile>
     <Compile Include="Views\RegistrationThird.xaml.cs">
       <DependentUpon>RegistrationThird.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserSettings.xaml.cs">
+      <DependentUpon>UserSettings.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomControls\BindablePasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -276,6 +282,10 @@
     <Page Include="Views\RegistrationThird.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

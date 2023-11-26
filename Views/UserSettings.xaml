@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="Kozyrev_Hriha_SP.Views.UserSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Kozyrev_Hriha_SP.Views"
+              xmlns:util="clr-namespace:Kozyrev_Hriha_SP.Utils"
+             mc:Ignorable="d" 
+            d:DesignHeight="600"
+            d:DesignWidth="622"
+            Style="{StaticResource Page_Style}">
+
+    <UserControl.Resources>
+        <util:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter"/>
+        <util:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+
+        <!-- StackPanel in the first column -->
+        <StackPanel Grid.Column="0" Orientation="Vertical" Width="250">
+            <util:CustomerData Grid.Row="2" DataContext="{Binding CurrZakaznik}" Margin="5" x:Name="customerData"/>
+            <util:AddressData Grid.Row="2" DataContext="{Binding Adresa}" Margin="5" x:Name="addressData"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Email:" Margin="8,0,0,0"/>
+                <TextBox Width="155" Height="18" Margin="39,0,0,0" Text="{Binding CurrUser.Email}"/>
+            </StackPanel>
+
+            <Button Height="25" Width="155" Command="{Binding ChangePasswordCommand}" Content="Change Password" Margin="8" HorizontalAlignment="Right"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="New Pass:" Margin="8,0,10,0" Visibility="{Binding IsPasswordChanging, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <TextBox x:Name="NewPasswordTextBox" Width="155" Visibility="{Binding IsPasswordChanging, Converter={StaticResource BooleanToVisibilityConverter}}" Text="{Binding NewPassword}" Margin="5"/>
+            </StackPanel>
+
+            <Button Height="25" Width="155" Command="{Binding SaveCommand}" Content="Save" Margin="8" HorizontalAlignment="Right"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+            <Image x:Name="AvatarImage"  Width="150" Height="150" Source="{Binding UserAvatarImg, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
+
+            <!-- Button to select a new avatar -->
+            <Button Content="Select Image" Command="{Binding SelectImageCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" />
+
+        </StackPanel>
+    </Grid>
+</UserControl>
