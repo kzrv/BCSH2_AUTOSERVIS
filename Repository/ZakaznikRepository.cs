@@ -88,19 +88,21 @@ namespace Kozyrev_Hriha_SP.Repository
         {
             using (var db = new OracleConnection(this.connection))
             {
-                int idAdresa = adresaRepository.AddNewAdresa(adresa);
                 int idData = userData.RegisterNewUserData(cred);
+                var parameters = new DynamicParameters();
+                parameters.Add("p_jmeno", zakaznik.Jmeno, DbType.String);
+                parameters.Add("p_prijmeni", zakaznik.Prijmeni, DbType.String);
+                parameters.Add("p_tel_cislo", zakaznik.TelCislo, DbType.String);
+                
+                parameters.Add("p_id_user", idData, DbType.Int32);
+                parameters.Add("p_ulice", adresa.Ulice, DbType.String);
+                parameters.Add("p_psc", adresa.Psc, DbType.String);
+                parameters.Add("p_mesto", adresa.Mesto, DbType.String);
+                parameters.Add("p_cislo_popisne", adresa.CisloPopisne, DbType.String);
+                parameters.Add("p_cislo_bytu", adresa.CisloBytu, DbType.String);
 
-                var sqlQuery = @"INSERT INTO ZAKAZNICI (JMENO, PRIJMENI, TEL_CISLO, POZNAMKY, ID_ADRESA, ID_USER) 
-                         VALUES (:Jmeno, :Prijmeni, :TelCislo, :Poznamky, :IdAdresa, :IdUser) 
-                         RETURNING ID_ZAKAZNIK INTO :IdZakaznik";
 
-                var parameters = new DynamicParameters(zakaznik);
-                parameters.Add("IdAdresa", idAdresa, DbType.Int32);
-                parameters.Add("IdUser", idData, DbType.Int32);
-                parameters.Add("IdZakaznik", dbType: DbType.Int32, direction: ParameterDirection.Output);
-
-                await db.ExecuteAsync(sqlQuery, parameters);
+                await db.ExecuteAsync("register_new_zakaznik", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }

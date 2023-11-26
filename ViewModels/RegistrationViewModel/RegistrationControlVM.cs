@@ -72,8 +72,8 @@ namespace Kozyrev_Hriha_SP.ViewModels.RegistrationViewModel
         
         private async void Registering()
         {
-            try
-            {
+            //try
+            //{
                 Zakaznik zakaznik = new Zakaznik();
                 zakaznik.Jmeno = registration.Name;
                 zakaznik.Prijmeni = registration.Surname;
@@ -91,11 +91,11 @@ namespace Kozyrev_Hriha_SP.ViewModels.RegistrationViewModel
                 registration3.IsLoggingIn = false;
                 navigation.GoToLoginPage();
                 
-            }catch(Exception ex)
-            {
-                registration3.ErrorMessage = ex.Message;
-                registration3.IsLoggingIn = false;
-            }
+            //}catch(Exception ex)
+            //{
+            //    registration3.ErrorMessage = ex.Message;
+            //    registration3.IsLoggingIn = false;
+            //}
 
         }
         public object CurrentView
