@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Kozyrev_Hriha_SP.Views"
              xmlns:viewModel ="clr-namespace:Kozyrev_Hriha_SP.ViewModels"
              xmlns:customcontrols="clr-namespace:Kozyrev_Hriha_SP.CustomControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
               xmlns:conv ="clr-namespace:Kozyrev_Hriha_SP.Utils"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="622">
@@ -80,6 +81,7 @@
                           FontWeight="Medium"
                           FontFamily="Montserrat"                            
                           Foreground="White"
+                             materialDesign:HintAssist.Hint="Novak"
                           CaretBrush="LightGray"
                           BorderBrush="DarkGray"
                           BorderThickness="0,0,0,2"

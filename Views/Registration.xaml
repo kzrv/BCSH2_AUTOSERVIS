@@ -134,9 +134,10 @@
 
                     <TextBox x:Name="txtTelephone"
                           Text="{Binding TelNumber, UpdateSourceTrigger=PropertyChanged}"
+                          
                           FontSize="13"
                           FontWeight="Medium"
-                          materialDesign:HintAssist.Hint="+420 (607)-770-532"
+                          materialDesign:HintAssist.Hint="+420(607)-770-532"
                           FontFamily="Montserrat"                            
                           Foreground="White"
                           CaretBrush="LightGray"
@@ -153,6 +154,13 @@
                                      AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
+                    <TextBlock Text="{Binding Error}"
+                            Foreground="#D7596D"
+                            FontSize="12"
+                            FontWeight="Medium"
+                            FontFamily="Montserrat"                             
+                            Margin="0,10,0,0"
+                            TextWrapping="Wrap"/>
 
                   
                     
@@ -169,7 +177,7 @@
                                  FontSize="12"
                                  FontFamily="Montserrat"
                                  Cursor="Hand"                           
-                                 Margin="0,30,0,0" Width="105">
+                                 Margin="0,15,0,0" Width="105">
 
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
@@ -201,7 +209,7 @@
                              FontSize="12"
                              FontFamily="Montserrat"
                              Cursor="Hand"                           
-                             Margin="10,30,0,0" Width="105">
+                             Margin="10,15,0,0" Width="105">
 
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">

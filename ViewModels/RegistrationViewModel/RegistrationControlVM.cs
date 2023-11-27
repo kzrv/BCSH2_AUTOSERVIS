@@ -32,7 +32,7 @@ namespace Kozyrev_Hriha_SP.ViewModels.RegistrationViewModel
         {
             this.zakaznikRepository = zakaznikRepository;
             this.navigation = navigation;
-            this.registration = new RegistrationVM(_=>GoToStep2(),_=>Cancel());
+            this.registration = new RegistrationVM(_ => GoToStep2(), _ => Cancel());
             this.registration2 = new RegistrationSecondVM(_ => GoToStep3(), _ => GoToStep1());
             this.registration3 = new RegistrationThirdVM(_ => Registering(), _ => GoToStep2());
             currentView = registration;

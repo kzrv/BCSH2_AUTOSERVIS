@@ -445,3 +445,5 @@ C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\Registration.baml
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\RegistrationControl.baml
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\RegistrationSecond.baml
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\RegistrationThird.baml
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\UserSettings.g.cs
+C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\UserSettings.baml
