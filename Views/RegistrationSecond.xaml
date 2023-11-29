@@ -19,7 +19,6 @@
         </Border.Background>
 
         <Border CornerRadius="10"                    
-         BorderThickness="2"
          Opacity="0.95"
          Background="#212529"
          BorderBrush="#212529"       >

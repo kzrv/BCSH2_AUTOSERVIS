@@ -19,6 +19,8 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private bool isAuthorized;
         private UserData _userData;
         private readonly ILogger<LoginViewModel> _logger;
+        private bool isZamestananec;
+        private bool isAdmin;
 
         private readonly IUserDataRepository userDataRepository;
         public event Action<bool> AuthorizationChanged;

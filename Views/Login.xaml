@@ -22,7 +22,7 @@
         </Border.Background>
 
         <Border CornerRadius="10"                    
-         BorderThickness="2"
+         
          Opacity="0.95"
          Background="#212529"
          BorderBrush="#212529"       >
@@ -68,7 +68,7 @@
                                  Margin="20"/>
 
 
-                    <TextBlock Text="Username"
+                    <TextBlock Text="Email"
                             Foreground="DarkGray"
                             FontSize="12"
                             FontWeight="Medium"
@@ -122,26 +122,7 @@
                             TextWrapping="Wrap"/>
 
                     <Grid VerticalAlignment="Center"
-                          Margin="5">
-                        <TextBlock Text="Nemate ucet?"
-                               Foreground="White"
-                               FontSize="14"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"                             
-                               Margin="0,0,0,0"/>
-                        <Button x:Name="btnRegistrace"
-                                Content="Registrace"
-                                Width="80"
-                                Height="20"
-                                BorderThickness="0"
-                                Background="Transparent" 
-                                Foreground="ForestGreen"
-                                Opacity="0.9"
-                                Margin="105,-4,25,4"
-                                FontWeight="Bold"
-                                FontSize="14"
-                               />
-                    </Grid>
+                          Margin="5"/>
                     <Button x:Name="btnLogin" 
                          Command="{Binding LoginCommand}"
                          BorderThickness="0"
@@ -150,7 +131,7 @@
                          FontSize="12"
                          FontFamily="Montserrat"
                          Cursor="Hand"                           
-                         Margin="0,30,0,0">
+                         Margin="0,20,0,0">
 
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">

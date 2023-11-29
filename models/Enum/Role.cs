@@ -8,8 +8,9 @@ namespace Kozyrev_Hriha_SP.Models.Enum
 {
     public enum Role
     {
-        USER = 1,
-        ADMIN = 2
+        ZAKAZNIK = 1,
+        ZAMESTNANEC = 2,
+        ADMIN = 3
     }
     public static class RoleService
     {
