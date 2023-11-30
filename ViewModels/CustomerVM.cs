@@ -22,6 +22,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private Adresa _adresa;
 
         private readonly IZakaznikRepository zakaznikRepository;
+        private readonly IAdresaRepository adresaRepository;
 
         public ObservableCollection<Zakaznik> Zakaznici
         {
@@ -63,7 +64,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public ICommand ClearCommand { get; }
 
 
-        public CustomerVM(IZakaznikRepository zakaznikRep)
+        public CustomerVM(IZakaznikRepository zakaznikRep, IAdresaRepository adresaRepository)
         {
             this.zakaznikRepository = zakaznikRep;
             List<Zakaznik> z = zakaznikRepository.GetAllZakaznici();
@@ -72,6 +73,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             DeleteCommand = new ViewModelCommand(DeleteItem, CanDeleteItem);
             UpdateCommand = new ViewModelCommand(UpdateItem, CanUpdateItem);
             ClearCommand = new ViewModelCommand(ClearBoxes, CanClearBoxes);
+            this.adresaRepository = adresaRepository;
         }
 
         private void DeleteItem(object parameter)
@@ -119,7 +121,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         {
             if (SelectedZakaznik != null)
             {
-                Adresa = zakaznikRepository.GetZakaznikAddress(SelectedZakaznik.Id).FirstOrDefault();
+                Adresa = adresaRepository.GetUserAddress(SelectedZakaznik.IdAdresa).FirstOrDefault();
             }
             else
             {

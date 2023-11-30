@@ -36,5 +36,37 @@ namespace Kozyrev_Hriha_SP.Repository
                 return parameters.Get<int>("IdAdresa");
             }
         }
+
+        public void UpdateAdresa(int id, Adresa adresa)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                var p = new DynamicParameters();
+                p.Add("p_id_adresa", id, DbType.Int32);
+                p.Add("p_ulice", adresa.Ulice, DbType.String);
+                p.Add("p_psc", adresa.Psc, DbType.String);
+                p.Add("p_mesto", adresa.Mesto, DbType.String);
+                p.Add("p_cislo_popisne", adresa.CisloPopisne, DbType.String);
+                p.Add("p_cislo_bytu", adresa.CisloBytu, DbType.String);
+
+                db.Execute("UPDATE_ADRESA", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public List<Adresa> GetUserAddress(int id)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                return db.Query<Adresa>("SELECT id_adresa as IdAdresa, ulice, psc, mesto, cislo_popisne as CisloPopisne, cislo_bytu as CisloBytu FROM adresy where id_adresa = :Id", new { Id = id }).ToList();
+            }
+        }
+
+        public void DeleteAdresa(int id)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                db.Execute("DELETE FROM adresy where id_adresa = :Id", new { Id = id });
+            }
+        }
     }
 }

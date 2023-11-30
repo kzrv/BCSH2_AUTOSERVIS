@@ -27,6 +27,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private readonly IServiceProvider ServiceProvider;
 
         private readonly IZakaznikRepository zakaznikRepository;
+        private readonly IAdresaRepository adresaRepository;
 
         public UserData CurrUser
         {
@@ -110,8 +111,9 @@ namespace Kozyrev_Hriha_SP.ViewModels
             ChangePasswordCommand = new ViewModelCommand(ChangePassword);
             SaveCommand = new ViewModelCommand(SaveChanges, CanSaveChanges);
             zakaznikRepository = serviceProvider.GetService<IZakaznikRepository>();
+            adresaRepository = serviceProvider.GetService<IAdresaRepository>();
             CurrZakaznik = zakaznikRepository.GetZakaznikByUserId(CurrUser.UserId).First();
-            Adresa = zakaznikRepository.GetZakaznikAddress(CurrZakaznik.IdAdresa).First();
+            Adresa = adresaRepository.GetUserAddress(CurrZakaznik.IdAdresa).FirstOrDefault();
 
         }
 

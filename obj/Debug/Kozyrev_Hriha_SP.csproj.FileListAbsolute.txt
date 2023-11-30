@@ -447,3 +447,9 @@ C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\RegistrationSecond.
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\RegistrationThird.baml
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\UserSettings.g.cs
 C:\Users\kzrvv\Source\Repos\BCSH2_AUTOSERVIS\obj\Debug\Views\UserSettings.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\UserSettings.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\UserSettings.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Utils\EmployeeData.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\Employee.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Utils\EmployeeData.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\Employee.baml

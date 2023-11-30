@@ -26,5 +26,13 @@ namespace Kozyrev_Hriha_SP.Repository
                 return db.Query<Zakaznik>("SELECT jmeno, prijmeni, tel_cislo, poznamky FROM zakaznici where id_user = :Id", new { Id = userId }).ToList();
             }
         }
+
+        public List<Zamestnanec> GetZamestnanecByUserId(int userId)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                return db.Query<Zamestnanec>("SELECT jmeno, prijmeni, den_nastupu as DenNastupu, plat FROM zamestnanci where id_user = :Id", new { Id = userId }).ToList();
+            }
+        }
     }
 }

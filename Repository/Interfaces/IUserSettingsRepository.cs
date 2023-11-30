@@ -10,5 +10,6 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
     public interface IUserSettingsRepository
     {
         List<Zakaznik> GetZakaznikByUserId(int userId);
+        List<Zamestnanec> GetZamestnanecByUserId(int userId);
     }
 }

@@ -165,9 +165,11 @@
     <Compile Include="Repository\Interfaces\IUserDataRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserSettingsRepository.cs" />
     <Compile Include="Repository\Interfaces\IZakaznikRepository.cs" />
+    <Compile Include="Repository\Interfaces\IZamestnanecRepository.cs" />
     <Compile Include="Repository\UserDataRepository.cs" />
     <Compile Include="Repository\UserSettingsRepository.cs" />
     <Compile Include="Repository\ZakaznikRepository.cs" />
+    <Compile Include="Repository\ZamestnanecRepository.cs" />
     <Compile Include="Utils\AddressData.xaml.cs">
       <DependentUpon>AddressData.xaml</DependentUpon>
     </Compile>
@@ -177,10 +179,14 @@
     <Compile Include="Utils\CustomerData.xaml.cs">
       <DependentUpon>CustomerData.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\EmployeeData.xaml.cs">
+      <DependentUpon>EmployeeData.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Exceptions\UserIsAlreadyExistsException.cs" />
     <Compile Include="Utils\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\PasswordEncryptor.cs" />
     <Compile Include="ViewModels\CustomerVM.cs" />
+    <Compile Include="ViewModels\EmployeeVM.cs" />
     <Compile Include="ViewModels\HomeVM.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NavigationVM.cs" />
@@ -193,6 +199,9 @@
     <Compile Include="ViewModels\ViewModelCommand.cs" />
     <Compile Include="Views\Customer.xaml.cs">
       <DependentUpon>Customer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee.xaml.cs">
+      <DependentUpon>Employee.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -255,7 +264,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Utils\EmployeeData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Customer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Employee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

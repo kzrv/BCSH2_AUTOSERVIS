@@ -79,6 +79,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             ServiceProvider = serviceProvider;
             HomeCommand = new ViewModelCommand(Home);
             CustomerCommand = new ViewModelCommand(Customer);
+            EmployeeCommand = new ViewModelCommand(Employee);
             LoginCommand = new ViewModelCommand(Login);
             RegCommand = new ViewModelCommand(Reg);
             UserSettingsCommand = new ViewModelCommand(UserSettings);
@@ -134,6 +135,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public ICommand LogoutCommand => _loginViewModel.LogoutCommand;
         public ICommand HomeCommand { get; set; }
         public ICommand CustomerCommand { get; set; }
+        public ICommand EmployeeCommand { get; set; }
 
         public ICommand LoginCommand { get; set; }
 
@@ -143,6 +145,8 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private void Home(object obj) => CurrentView = ServiceProvider.GetRequiredService<HomeVM>();
 
         private void Customer(object obj) => CurrentView = ServiceProvider.GetRequiredService<Customer>();
+
+        private void Employee(object obj) => CurrentView = ServiceProvider.GetRequiredService<Employee>();
 
         private void UserSettings(object obj) => CurrentView = ServiceProvider.GetRequiredService<UserSettings>();
 

@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace Kozyrev_Hriha_SP.Repository.Interfaces
 {
-    public interface IAdresaRepository
+    public interface IZamestnanecRepository
     {
-        int AddNewAdresa(Adresa adresa);
-        void UpdateAdresa(int id, Adresa adresa);
-        void DeleteAdresa(int id);
-        List<Adresa> GetUserAddress(int id);
+        List<Zamestnanec> GetAllZamestnanci();
+        void DeleteZamestnanec(int id);
+        void UpdateZamestnanec(Zamestnanec zamestnanec, Adresa adresa);
     }
 }

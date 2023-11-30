@@ -139,6 +139,24 @@
 
                     </Menu:Btn>
 
+                    <!--// Employees // -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding EmployeeCommand}"
+                              IsChecked="True"
+                              Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/users-alt.png"
+                                   Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Employee"
+                                       Style="{StaticResource Text_Style}"/>
+
+                        </Grid>
+                    </Menu:Btn>
+
 
 
                 </StackPanel>
