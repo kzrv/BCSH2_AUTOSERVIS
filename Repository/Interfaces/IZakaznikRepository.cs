@@ -13,11 +13,10 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
         List<Zakaznik> GetAllZakaznici();
         void DeleteZakaznik(int id);
         void UpdateZakaznik(Zakaznik zakaznik, Adresa adresa);
-        void UpdateUserData(Zakaznik zakaznik, Adresa adresa, UserData user, BinaryContent binaryContent, string newPass);
-        void UpdateBinaryContent(BinaryContent binaryContent);
-        List<Zakaznik> GetZakaznikByUserId(int userId);
+        Zakaznik GetZakaznikByUserId(int userId);
         void AddZakaznik(Zakaznik zakaznik, Adresa adresa);
         Task AddNewZakaznik(Zakaznik zakaznik, Adresa adresa, NetworkCredential cred);
+       
 
     }
 }

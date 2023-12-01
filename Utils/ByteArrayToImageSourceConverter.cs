@@ -22,17 +22,25 @@ namespace Kozyrev_Hriha_SP.Utils
                     {
                         BitmapImage image = new BitmapImage();
                         image.BeginInit();
-                        image.StreamSource = stream;
+                        image.CreateOptions =
+                            BitmapCreateOptions.PreservePixelFormat;
                         image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.StreamSource = stream;
                         image.EndInit();
+
+                        if (image.CanFreeze) 
+                        {
+                            image.Freeze();
+                        }
+
                         return image;
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Handle exception (log or show a default image)
-                Console.WriteLine($"Error converting byte array to image: {ex.Message}");
+                
+                Console.WriteLine($"Error converting byte array to image: {ex.Message}\n{ex.StackTrace}");
             }
 
             return null;

@@ -114,7 +114,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         {
             if (SelectedZamestnanec != null)
             {
-                Adresa = _adresaRepository.GetUserAddress(SelectedZamestnanec.IdZamestnanec).FirstOrDefault();
+                Adresa = _adresaRepository.GetAdresaById(SelectedZamestnanec.IdZamestnanec);
             }
             else
             {

@@ -170,6 +170,8 @@
     <Compile Include="Repository\UserSettingsRepository.cs" />
     <Compile Include="Repository\ZakaznikRepository.cs" />
     <Compile Include="Repository\ZamestnanecRepository.cs" />
+    <Compile Include="Service\Interfaces\IUpdateUserProfileService.cs" />
+    <Compile Include="Service\UpdateUserProfileService.cs" />
     <Compile Include="Utils\AddressData.xaml.cs">
       <DependentUpon>AddressData.xaml</DependentUpon>
     </Compile>

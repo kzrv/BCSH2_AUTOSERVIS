@@ -12,5 +12,7 @@ namespace Kozyrev_Hriha_SP.Repository
     {
         Task<UserData> CheckCredentials(NetworkCredential cred);
         int RegisterNewUserData(NetworkCredential cred);
+        void UpdateUserEmail(UserData user);
+        void UpdateUserPassword(UserData user, NetworkCredential pass);
     }
 }

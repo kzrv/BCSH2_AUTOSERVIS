@@ -163,6 +163,7 @@
                 <!--// Current User // -->
 
                 <Menu:Btn Style="{StaticResource BtnStyle}"
+                          Cursor="Hand"
                           Command="{Binding UserSettingsCommand}"
                           IsChecked="True"
                           Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}"

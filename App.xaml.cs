@@ -10,6 +10,8 @@ using Serilog;
 using System;
 using System.Configuration;
 using System.Windows;
+using Kozyrev_Hriha_SP.Service;
+using Kozyrev_Hriha_SP.Service.Interfaces;
 
 namespace Kozyrev_Hriha_SP
 {
@@ -31,15 +33,16 @@ namespace Kozyrev_Hriha_SP
             new ZakaznikRepository(connectionString, provider.GetRequiredService<IUserDataRepository>(), provider.GetRequiredService<IAdresaRepository>()));
             services.AddSingleton<IZamestnanecRepository, ZamestnanecRepository>(provider =>
             new ZamestnanecRepository(connectionString, provider.GetRequiredService<IUserDataRepository>(), provider.GetRequiredService<IAdresaRepository>()));
+            services.AddSingleton<IUpdateUserProfileService, UpdateUserProfileService>();
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<CustomerVM>();
             services.AddSingleton<EmployeeVM>();
             services.AddSingleton<Login>();
             services.AddSingleton<Customer>();
             services.AddSingleton<Employee>();
-            services.AddSingleton<UserSettings>();
-            services.AddSingleton<UserSettingsVM>(provider =>
-                new UserSettingsVM(provider.GetRequiredService<IServiceProvider>()));
+            services.AddTransient<UserSettings>();
+            services.AddTransient<UserSettingsVM>();
+            
             services.AddSingleton<HomeVM>();
             services.AddTransient<RegistrationControlVM>();
             services.AddLogging(loggingBuilder =>

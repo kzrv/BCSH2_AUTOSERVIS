@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Kozyrev_Hriha_SP.Repository.Interfaces;
 
 namespace Kozyrev_Hriha_SP.Repository
 {
@@ -19,6 +20,7 @@ namespace Kozyrev_Hriha_SP.Repository
         public UserDataRepository(string connection)
         {
             this.connection = connection;
+
         }
 
         public async Task<UserData> CheckCredentials(NetworkCredential cred)
@@ -66,6 +68,26 @@ namespace Kozyrev_Hriha_SP.Repository
                 }
 
                 throw new UserIsAlreadyExistsException($"User with email: {cred.UserName} is already exists");
+            }
+        }
+        public void UpdateUserEmail(UserData user)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                var p = new DynamicParameters();
+                p.Add("p_id_user", user.UserId, DbType.Int32);
+                p.Add("p_email", user.Email, DbType.String);
+                db.Execute("UPDATE_USER_DATA", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+        public void UpdateUserPassword(UserData user,NetworkCredential pass)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                var p = new DynamicParameters();
+                p.Add("p_id", user.UserId, DbType.Int32);
+                p.Add("p_password", pass.Password, DbType.String);
+                db.Execute("UPDATE_USER_PASS", p, commandType: CommandType.StoredProcedure);
             }
         }
     }

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Kozyrev_Hriha_SP.Service.Interfaces;
 
 namespace Kozyrev_Hriha_SP.ViewModels
 {
@@ -24,10 +25,10 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private NavigationVM _navigationVM;
         private bool _isPasswordChanging;
         private string _newPassword;
-        private readonly IServiceProvider ServiceProvider;
+        private string _errorMessage;
+        private string _errorMessagePass;
 
-        private readonly IZakaznikRepository zakaznikRepository;
-        private readonly IAdresaRepository adresaRepository;
+        private readonly IUpdateUserProfileService _profileService;
 
         public UserData CurrUser
         {
@@ -96,44 +97,85 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 OnPropertyChanged(nameof(NewPassword));
             }
         }
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+            }
+        }
+        public string ErrorMessagePass
+        {
+            get { return _errorMessagePass; }
+            set
+            {
+                _errorMessagePass = value;
+                OnPropertyChanged(nameof(ErrorMessagePass));
+            }
+        }
 
 
         public ICommand SelectImageCommand { get; }
         public ICommand ChangePasswordCommand { get; }
+        public ICommand SavePassCommand { get; }
         public ICommand SaveCommand { get; }
-        public UserSettingsVM(IServiceProvider serviceProvider)
+        public UserSettingsVM(IUpdateUserProfileService profileService,NavigationVM navigationVm)
         {
-            ServiceProvider = serviceProvider;
-            _navigationVM = serviceProvider.GetService<NavigationVM>();
+            _profileService = profileService;
+            _navigationVM = navigationVm;
             CurrUser = _navigationVM.AuthorizedUser;
             UserAvatarImg = _navigationVM.BinaryImageData;
             SelectImageCommand = new ViewModelCommand(SelectImage);
             ChangePasswordCommand = new ViewModelCommand(ChangePassword);
             SaveCommand = new ViewModelCommand(SaveChanges, CanSaveChanges);
-            zakaznikRepository = serviceProvider.GetService<IZakaznikRepository>();
-            adresaRepository = serviceProvider.GetService<IAdresaRepository>();
-            CurrZakaznik = zakaznikRepository.GetZakaznikByUserId(CurrUser.UserId).First();
-            Adresa = adresaRepository.GetUserAddress(CurrZakaznik.IdAdresa).FirstOrDefault();
+            CurrZakaznik = _profileService.GetZakaznikById(CurrUser.UserId);
+            Adresa = _profileService.GetUserAdresa(CurrZakaznik.IdAdresa);
+            SavePassCommand = new ViewModelCommand(SaveChangesPass, CanSaveChangesPass);
 
+        }
+
+        private bool CanSaveChangesPass(object obj)
+        {
+            if (!string.IsNullOrEmpty(NewPassword) && NewPassword.Length > 3)
+            {
+                ErrorMessagePass = "";
+                return true;
+            }
+
+            ErrorMessagePass = "* The password field must not be empty and must contain more than 3 characters";
+            return false;
+        }
+
+        private void SaveChangesPass(object obj)
+        {
+            throw new NotImplementedException();
         }
 
         private bool CanSaveChanges(object obj)
         {
-            return !string.IsNullOrEmpty(CurrZakaznik.Jmeno) &&
-                   !string.IsNullOrEmpty(CurrZakaznik.Prijmeni) &&
-                   !string.IsNullOrEmpty(CurrZakaznik.TelCislo) &&
-                   !string.IsNullOrEmpty(Adresa.Ulice) &&
-                   !string.IsNullOrEmpty(Adresa.Mesto) &&
-                   !string.IsNullOrEmpty(Adresa.CisloPopisne) &&
-                   !string.IsNullOrEmpty(Adresa.Psc) &&
-                   !string.IsNullOrEmpty(CurrUser.Email);
-            //TODO: Add password
+            if (!string.IsNullOrEmpty(CurrZakaznik.Jmeno) &&
+                !string.IsNullOrEmpty(CurrZakaznik.Prijmeni) &&
+                !string.IsNullOrEmpty(CurrZakaznik.TelCislo) &&
+                !string.IsNullOrEmpty(Adresa.Ulice) &&
+                !string.IsNullOrEmpty(Adresa.Mesto) &&
+                !string.IsNullOrEmpty(Adresa.CisloPopisne) &&
+                !string.IsNullOrEmpty(Adresa.Psc) &&
+                !string.IsNullOrEmpty(CurrUser.Email))
+            {
+                ErrorMessage = "";
+                return true;
+            }
+
+            ErrorMessage = "* Fill in all the fields";
+            return false;
 
         }
 
         private void SaveChanges(object obj)
         {
-            zakaznikRepository.UpdateUserData(CurrZakaznik, Adresa, CurrUser, BinaryContent, NewPassword);
+            _profileService.UpdateZakaznikProfile(CurrUser,CurrZakaznik,BinaryContent,Adresa);
         }
 
         private void ChangePassword(object obj)
@@ -152,7 +194,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
                 byte[] fileBytes = File.ReadAllBytes(selectedFilePath);
 
-                // Set the UserAvatar property to the selected image
+                
                 UserAvatarImg = File.ReadAllBytes(selectedFilePath);
 
                 BinaryContent = new BinaryContent

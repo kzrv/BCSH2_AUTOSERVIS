@@ -53,11 +53,13 @@ namespace Kozyrev_Hriha_SP.Repository
             }
         }
 
-        public List<Adresa> GetUserAddress(int id)
+        public Adresa GetAdresaById(int id)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                return db.Query<Adresa>("SELECT id_adresa as IdAdresa, ulice, psc, mesto, cislo_popisne as CisloPopisne, cislo_bytu as CisloBytu FROM adresy where id_adresa = :Id", new { Id = id }).ToList();
+                return db.QueryFirstOrDefault<Adresa>(
+                    "SELECT id_adresa as IdAdresa, ulice, psc, mesto, cislo_popisne as CisloPopisne, cislo_bytu as CisloBytu FROM adresy where id_adresa = :Id",
+                    new { Id = id });
             }
         }
 
