@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Kozyrev_Hriha_SP.Utils"
              mc:Ignorable="d" 
-             d:DesignHeight="170" d:DesignWidth="200" x:Name="addressData">
+             d:DesignHeight="200" d:DesignWidth="250" x:Name="addressData">
     <Grid DataContext="{Binding ElementName=addressData, Path=DataContext}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -25,16 +25,111 @@
             </Grid.RowDefinitions>
 
 
-            <Label Content="Ulice:" Grid.Column="0" Grid.Row="3"  Margin="3" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Grid.Row="3"   Margin="3" Name="uliceTitleTextBox" Text="{Binding Path=Ulice, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center"  />
-            <Label Content="Psc:" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Grid.Row="4" Margin="3" Name="pscTextBox" Text="{Binding Path=Psc, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center" />
-            <Label Content="Mesto:" Grid.Column="0" Grid.Row="5"  Margin="3" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Grid.Row="5"   Margin="3" Name="mestoTextBox" Text="{Binding Path=Mesto, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center"  />
-            <Label Content="Cis popisne:" Grid.Column="0" Grid.Row="6"  Margin="3" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Grid.Row="6"   Margin="3" Name="popisneCodeTextBox" Text="{Binding Path=CisloPopisne, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center"  />
-            <Label Content="Cis bytu:" Grid.Column="0" Grid.Row="7"  Margin="3" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Grid.Row="7"   Margin="3" Name="bytTextBox" Text="{Binding Path=CisloBytu, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" VerticalAlignment="Center"  />
+            <Label Content="Ulice:" Grid.Column="0" Grid.Row="1"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+                            FontSize="12"
+                            FontWeight="Medium"
+                            FontFamily="Montserrat"  />
+            <TextBox Grid.Column="1" Grid.Row="1" Name="uliceTitleTextBox" Text="{Binding Path=Ulice, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" Margin="8,10,0,0"
+                     VerticalAlignment="Center"  FontSize="13"
+                     FontWeight="Medium"
+                     FontFamily="Montserrat"                            
+                     Foreground="White"     
+                     CaretBrush="LightGray"
+                     BorderBrush="DarkGray"
+                     BorderThickness="0,0,0,2"
+                     Height="28"
+                     VerticalContentAlignment="Center"
+                     Padding="20,0,0,0" >
+                <TextBox.Background>
+                <ImageBrush ImageSource="/Resources/Images/home-icon.png"
+                                Stretch="None"
+                                AlignmentX="Left"/>
+                </TextBox.Background>
+            </TextBox>
+            <Label Content="Psc:" Grid.Column="0" Grid.Row="2" Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+                   FontSize="12"
+                   FontWeight="Medium"
+                   FontFamily="Montserrat"  />
+            <TextBox Grid.Column="1" Grid.Row="2" Name="pscTextBox" Text="{Binding Path=Psc, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" Margin="8,10,0,0"
+                     VerticalAlignment="Center"  FontSize="13"
+                     FontWeight="Medium"
+                     FontFamily="Montserrat"                            
+                     Foreground="White"     
+                     CaretBrush="LightGray"
+                     BorderBrush="DarkGray"
+                     BorderThickness="0,0,0,2"
+                     Height="28"
+                     VerticalContentAlignment="Center"
+                     Padding="20,0,0,0" >
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/Resources/Images/home-icon.png"
+                                Stretch="None"
+                                AlignmentX="Left"/>
+                </TextBox.Background>
+            </TextBox>
+            <Label Content="Mesto:" Grid.Column="0" Grid.Row="3"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+                   FontSize="12"
+                   FontWeight="Medium"
+                   FontFamily="Montserrat" />
+            <TextBox Grid.Column="1" Grid.Row="3"  Name="mestoTextBox" Text="{Binding Path=Mesto, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" Margin="8,10,0,0"
+                     VerticalAlignment="Center"  FontSize="13"
+                     FontWeight="Medium"
+                     FontFamily="Montserrat"                            
+                     Foreground="White"     
+                     CaretBrush="LightGray"
+                     BorderBrush="DarkGray"
+                     BorderThickness="0,0,0,2"
+                     Height="28"
+                     VerticalContentAlignment="Center"
+                     Padding="20,0,0,0"  >
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/Resources/Images/home-icon.png"
+                                Stretch="None"
+                                AlignmentX="Left"/>
+                </TextBox.Background>
+            </TextBox>
+            <Label Content="Cis popisne:" Grid.Column="0" Grid.Row="4"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+                   FontSize="12"
+                   FontWeight="Medium"
+                   FontFamily="Montserrat"  />
+            <TextBox Grid.Column="1" Grid.Row="4"  Name="popisneCodeTextBox" Text="{Binding Path=CisloPopisne, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" Margin="8,10,0,0"
+                     VerticalAlignment="Center"  FontSize="13"
+                     FontWeight="Medium"
+                     FontFamily="Montserrat"                            
+                     Foreground="White"     
+                     CaretBrush="LightGray"
+                     BorderBrush="DarkGray"
+                     BorderThickness="0,0,0,2"
+                     Height="28"
+                     VerticalContentAlignment="Center"
+                     Padding="20,0,0,0"  >
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/Resources/Images/home-icon.png"
+                                Stretch="None"
+                                AlignmentX="Left"/>
+                </TextBox.Background>
+            </TextBox>
+            <Label Content="Cis bytu:" Grid.Column="0" Grid.Row="5"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+                   FontSize="12"
+                   FontWeight="Medium"
+                   FontFamily="Montserrat"  />
+            <TextBox Grid.Column="1" Grid.Row="5" Name="bytTextBox" Text="{Binding Path=CisloBytu, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" Margin="8,10,0,0"
+                     VerticalAlignment="Center"  FontSize="13"
+                     FontWeight="Medium"
+                     FontFamily="Montserrat"                            
+                     Foreground="White"     
+                     CaretBrush="LightGray"
+                     BorderBrush="DarkGray"
+                     BorderThickness="0,0,0,2"
+                     Height="28"
+                     VerticalContentAlignment="Center"
+                     Padding="20,0,0,0"  >
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/Resources/Images/home-icon.png"
+                                Stretch="None"
+                                AlignmentX="Left"/>
+                </TextBox.Background>
+            </TextBox>
 
         </Grid>
     </Grid>

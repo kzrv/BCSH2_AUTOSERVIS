@@ -8,43 +8,276 @@
              mc:Ignorable="d" 
             d:DesignHeight="600"
             d:DesignWidth="622"
-            Style="{StaticResource Page_Style}">
+             Style="{StaticResource Page_Style}"
+            >
 
     <UserControl.Resources>
         <util:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter"/>
         <util:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
     </UserControl.Resources>
+    
 
     <Grid>
+        
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
 
         </Grid.ColumnDefinitions>
+        <TextBlock Text="PROFILE"
+                   Foreground="DarkGray"
+                   FontSize="10"
+                   FontFamily="Montserrat"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   VerticalAlignment="Top"
+                   Margin="10,10,0,0"/>
+        
 
-        <!-- StackPanel in the first column -->
-        <StackPanel Grid.Column="0" Orientation="Vertical" Width="250">
-            <util:CustomerData Grid.Row="2" DataContext="{Binding CurrZakaznik}" Margin="5" x:Name="customerData"/>
-            <util:AddressData Grid.Row="2" DataContext="{Binding Adresa}" Margin="5" x:Name="addressData"/>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Email:" Margin="8,0,0,0"/>
-                <TextBox Width="155" Height="18" Margin="39,0,0,0" Text="{Binding CurrUser.Email}"/>
+        
+        <StackPanel Grid.Column="0" Orientation="Vertical" Width="300" Grid.ColumnSpan="2" Margin="30,60,0,0" HorizontalAlignment="Left">
+            <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
+                <Label Content="Email:" Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+                       FontSize="12"
+                       FontWeight="Medium"
+                       FontFamily="Montserrat"/>
+                <TextBox Width="204" Text="{Binding CurrUser.Email}"
+                         Margin="41,10,0,0"
+                         VerticalAlignment="Center"  FontSize="13"
+                         FontWeight="Medium"
+                         FontFamily="Montserrat"                            
+                         Foreground="White"     
+                         CaretBrush="LightGray"
+                         BorderBrush="DarkGray"
+                         BorderThickness="0,0,0,2"
+                         Height="28"
+                         VerticalContentAlignment="Center"
+                         Padding="20,0,0,0">
+                    <TextBox.Background>
+                        <ImageBrush ImageSource="/Resources/Images/user-icon.png"
+                                    Stretch="None"
+                                    AlignmentX="Left"/>
+                    </TextBox.Background>
+                </TextBox>
             </StackPanel>
+            <util:CustomerData Grid.Row="2" DataContext="{Binding CurrZakaznik}" Margin="5,0,5,5" x:Name="customerData"/>
+            <util:AddressData Grid.Row="2" DataContext="{Binding Adresa}" Margin="5,0,5,5" x:Name="addressData"/>
+            <StackPanel
+                        Width="300"
+                        Grid.Row="2"
+                        Margin="20,0,0,0"
+                        Orientation="Horizontal"
+                        
+                        >
+                            <Button x:Name="btnCancel" 
+                                 Command="{Binding CancelCommand}"
+                                 BorderThickness="0"
+                                 Content="CANCEL"
+                                 Foreground="White"
+                                 FontSize="12"
+                                 FontFamily="Montserrat"
+                                 Cursor="Hand"                           
+                                 Margin="0,15,0,0" Width="130">
 
-            <Button Height="25" Width="155" Command="{Binding ChangePasswordCommand}" Content="Change Password" Margin="8" HorizontalAlignment="Right"/>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="New Pass:" Margin="8,0,10,0" Visibility="{Binding IsPasswordChanging, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                <TextBox x:Name="NewPasswordTextBox" Width="155" Visibility="{Binding IsPasswordChanging, Converter={StaticResource BooleanToVisibilityConverter}}" Text="{Binding NewPassword}" Margin="5"/>
-            </StackPanel>
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Gray"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#28AEED"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
 
-            <Button Height="25" Width="155" Command="{Binding SaveCommand}" Content="Save" Margin="8" HorizontalAlignment="Right"/>
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Width="130" Height="45"
+                                     CornerRadius="20"
+                                     Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Button x:Name="btnSave" 
+                             Command="{Binding SaveCommand}"
+                             BorderThickness="0"
+                             Content="SAVE"
+                             Foreground="White"
+                             FontSize="12"
+                             FontFamily="Montserrat"
+                             Cursor="Hand"                           
+                             Margin="17,15,0,0" Width="130">
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#462AD8"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#28AEED"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Width="130" Height="45"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    </StackPanel>
+
+
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
-            <Image x:Name="AvatarImage"  Width="150" Height="150" Source="{Binding UserAvatarImg, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
+        <StackPanel Grid.Column="1" Orientation="Vertical"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,60" >
+            
+            <Image x:Name="AvatarImage"  
+                   Margin="30,25,30,30" 
+                   Width="300" Height="150" 
+                   Source="{Binding UserAvatarImg, Converter={StaticResource ByteArrayToImageSourceConverter}}"
+               
+            />
+            
+            
 
             <!-- Button to select a new avatar -->
-            <Button Content="Select Image" Command="{Binding SelectImageCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" />
+            <Button x:Name="btnSelectImage" 
+                    Content="SELECT IMAGE" Command="{Binding SelectImageCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20"
+                    BorderThickness="0"
+                    Foreground="White"
+                    FontSize="9"
+                    FontFamily="Montserrat"
+                    Cursor="Hand"                           
+                    >
+
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Gray"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#28AEED"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Width="70" Height="25"
+                                CornerRadius="13"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <!-- <Button Height="25" Width="155" Command="{Binding ChangePasswordCommand}" Content="Change Password" Margin="20" HorizontalAlignment="Center"/> -->
+            <Button x:Name="btnChangePass" 
+                    Command="{Binding ChangePasswordCommand}" Content="CHANGE PASSWORD"
+                    BorderThickness="0"
+                    Foreground="White"
+                    FontSize="12"
+                    FontFamily="Montserrat"
+                    Cursor="Hand"                           
+                    Margin="0,10,0,0">
+
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#462AD8"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#28AEED"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Width="150" Height="40"
+                                CornerRadius="20"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <StackPanel Orientation="Vertical">
+                <Label Content="New Pass:" Margin="72,20,10,0" Visibility="{Binding IsPasswordChanging, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       Foreground="DarkGray"
+                       FontSize="12"
+                       FontWeight="Medium"
+                       FontFamily="Montserrat"                             
+                       />
+                <TextBox x:Name="NewPasswordTextBox" 
+                         Width="155" Visibility="{Binding IsPasswordChanging, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                         Text="{Binding NewPassword}" 
+                         FontSize="13"
+                         FontWeight="Medium"
+                         FontFamily="Montserrat"                            
+                         Foreground="White"
+                         CaretBrush="LightGray"
+                         BorderBrush="DarkGray"
+                         BorderThickness="0,0,0,2"
+                         Height="28"
+                         VerticalContentAlignment="Center"
+                         Margin="0,5,0,0"
+                         Padding="20,0,0,0">
+                    <TextBox.Background>
+                        <ImageBrush ImageSource="\Resources\Images\key-icon.png"
+                                    Stretch="None"
+                                    AlignmentX="Left"/>
+                    </TextBox.Background>
+                </TextBox>
+                <Button x:Name="btnSavePass" 
+                        Visibility="{Binding IsPasswordChanging, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Command="{Binding SavePassCommand}" Content="SAVE PASSWORD"
+                        BorderThickness="0"
+                        Foreground="White"
+                        FontSize="12"
+                        FontFamily="Montserrat"
+                        Cursor="Hand"                           
+                        Margin="0,20,0,0">
+
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#462AD8"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#28AEED"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="150" Height="40"
+                                    CornerRadius="20"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+
+            
+            
 
         </StackPanel>
     </Grid>
