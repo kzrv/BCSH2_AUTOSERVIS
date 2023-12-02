@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Kozyrev_Hriha_SP.Service;
 
 namespace Kozyrev_Hriha_SP.ViewModels
 {
@@ -26,6 +27,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private UserData _authorizedUser;
         private string _userName;
         private byte[] _binaryImageData; // Property to hold binary image data
+        private readonly NotificationService _notificationService;
 
         private readonly IBinaryContentRepository binaryContentRepository;
 
@@ -74,8 +76,9 @@ namespace Kozyrev_Hriha_SP.ViewModels
             }
         }
 
-        public NavigationVM(IServiceProvider serviceProvider)
+        public NavigationVM(IServiceProvider serviceProvider,NotificationService notificationService)
         {
+            _notificationService = notificationService;
             ServiceProvider = serviceProvider;
             HomeCommand = new ViewModelCommand(Home);
             CustomerCommand = new ViewModelCommand(Customer);
@@ -96,10 +99,12 @@ namespace Kozyrev_Hriha_SP.ViewModels
             if (IsAuthorized)
             {
                 HandleAuthorizedUser();
+                _notificationService.ShowNotification("YOU HAVE SUCCESSFULLY LOGGED IN", NotificationType.Success);
             }
             else
             {
                 HandleUnauthorizedUser();
+                _notificationService.ShowNotification("YOU HAVE SUCCESSFULLY LOGGED OUT", NotificationType.Error);
             }
 
         }

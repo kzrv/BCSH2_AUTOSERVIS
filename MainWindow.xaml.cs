@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Kozyrev_Hriha_SP.Service;
 
 namespace Kozyrev_Hriha_SP
 {
@@ -23,10 +24,13 @@ namespace Kozyrev_Hriha_SP
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(NavigationVM navigation)
+        private NotificationService _notificationService;
+        public MainWindow(NavigationVM navigation,NotificationService notificationService)
         {
             InitializeComponent();
             DataContext = navigation;
+            _notificationService = notificationService;
+            _notificationService.OnNotificationRequested += NotificationService_OnNotificationRequested;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -40,6 +44,10 @@ namespace Kozyrev_Hriha_SP
         private void CloseApp_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+        private void NotificationService_OnNotificationRequested(string message, NotificationType type)
+        {
+            NotificationArea.ShowNotification(message, type);
         }
 
 

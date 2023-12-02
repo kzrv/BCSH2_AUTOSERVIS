@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Kozyrev_Hriha_SP.Service;
 using Kozyrev_Hriha_SP.Service.Interfaces;
 
 namespace Kozyrev_Hriha_SP.ViewModels
@@ -29,6 +31,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private string _errorMessagePass;
 
         private readonly IUpdateUserProfileService _profileService;
+        private readonly NotificationService _notificationService;
 
         public UserData CurrUser
         {
@@ -121,8 +124,9 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public ICommand ChangePasswordCommand { get; }
         public ICommand SavePassCommand { get; }
         public ICommand SaveCommand { get; }
-        public UserSettingsVM(IUpdateUserProfileService profileService,NavigationVM navigationVm)
+        public UserSettingsVM(IUpdateUserProfileService profileService,NavigationVM navigationVm, NotificationService notificationService)
         {
+            _notificationService = notificationService;
             _profileService = profileService;
             _navigationVM = navigationVm;
             CurrUser = _navigationVM.AuthorizedUser;
@@ -150,7 +154,10 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private void SaveChangesPass(object obj)
         {
-            throw new NotImplementedException();
+            NetworkCredential n = new NetworkCredential(CurrUser.Email,NewPassword);
+            _profileService.UpdateUserPassword(_currUser,n);
+            _notificationService.ShowNotification("PASSWORD WAS CHANGED",NotificationType.Success);
+            IsPasswordChanging = false;
         }
 
         private bool CanSaveChanges(object obj)
@@ -176,6 +183,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private void SaveChanges(object obj)
         {
             _profileService.UpdateZakaznikProfile(CurrUser,CurrZakaznik,BinaryContent,Adresa);
+            _notificationService.ShowNotification("CHANGES WAS SAVED",NotificationType.Success);
         }
 
         private void ChangePassword(object obj)

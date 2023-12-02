@@ -42,6 +42,7 @@ namespace Kozyrev_Hriha_SP
             services.AddSingleton<Employee>();
             services.AddTransient<UserSettings>();
             services.AddTransient<UserSettingsVM>();
+            services.AddSingleton<NotificationService>();
             
             services.AddSingleton<HomeVM>();
             services.AddTransient<RegistrationControlVM>();
@@ -51,8 +52,7 @@ namespace Kozyrev_Hriha_SP
 
 
             services.AddSingleton<MainWindow>();
-            services.AddSingleton<NavigationVM>(provider =>
-                new NavigationVM(provider.GetRequiredService<IServiceProvider>()));
+            services.AddSingleton<NavigationVM>();
 
 
         }
@@ -68,7 +68,8 @@ namespace Kozyrev_Hriha_SP
             .CreateLogger();
             Serilog.Debugging.SelfLog.Enable(Console.Error);
             var navigate = ServiceProvider.GetRequiredService<NavigationVM>();
-            var main = new MainWindow(navigate);
+            var notif = ServiceProvider.GetRequiredService<NotificationService>();
+            var main = new MainWindow(navigate,notif);
             main.Show();
 
         }

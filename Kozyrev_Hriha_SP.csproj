@@ -148,6 +148,7 @@
     <Compile Include="Models\Adresa.cs" />
     <Compile Include="Models\BinaryContent.cs" />
     <Compile Include="Models\Enum\Role.cs" />
+    <Compile Include="Models\NotificationItem.cs" />
     <Compile Include="Models\Prohlidka.cs" />
     <Compile Include="Models\ProhSluz.cs" />
     <Compile Include="Models\Sluzba.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Repository\ZakaznikRepository.cs" />
     <Compile Include="Repository\ZamestnanecRepository.cs" />
     <Compile Include="Service\Interfaces\IUpdateUserProfileService.cs" />
+    <Compile Include="Service\NotificationService.cs" />
     <Compile Include="Service\UpdateUserProfileService.cs" />
     <Compile Include="Utils\AddressData.xaml.cs">
       <DependentUpon>AddressData.xaml</DependentUpon>
@@ -210,6 +212,9 @@
     </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Notification.xaml.cs">
+      <DependentUpon>Notification.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
@@ -286,6 +291,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Notification.xaml" />
     <Page Include="Views\Registration.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

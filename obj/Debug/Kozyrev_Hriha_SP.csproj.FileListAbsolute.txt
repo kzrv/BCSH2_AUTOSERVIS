@@ -557,3 +557,5 @@ C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.csproj.
 C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.csproj.CopyComplete
 C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.exe
 C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.pdb
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\Notification.baml
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\Notification.g.cs
