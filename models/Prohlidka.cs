@@ -12,8 +12,8 @@ namespace Kozyrev_Hriha_SP.Models
         private decimal? cenaProhlidky;
         private int idObjednavky;
         private int idZakaznik;
-        private int idServis;
         private int idVozidlo;
+        private int idZamestnanec;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -100,15 +100,15 @@ namespace Kozyrev_Hriha_SP.Models
             }
         }
 
-        public int IdServis
+        public int IdZamestnanec
         {
-            get { return idServis; }
+            get { return idZamestnanec; }
             set
             {
-                if (idServis != value)
+                if (idZamestnanec != value)
                 {
-                    idServis = value;
-                    OnPropertyChanged(nameof(IdServis));
+                    idZamestnanec = value;
+                    OnPropertyChanged(nameof(IdZamestnanec));
                 }
             }
         }

@@ -43,17 +43,19 @@
 
                 <StackPanel Height="600"
                             Width="228">
-                    <!--// Autoservis // -->
+
+
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                     IsEnabled="False"
                     IsChecked="True"         
                     VerticalAlignment="Top"
-                    Margin="0,0,0,20"
+                    Margin="0,0,0,0"
                     >
 
                         <Border BorderBrush="#FF000000" BorderThickness="1" CornerRadius="5" Margin="2">
                             <TextBlock Text="AUTOSERVIS"
-                                  
+                             HorizontalAlignment="Left" 
+                             Margin="60,0,0,0"          
                              Style="{StaticResource Text_Style}"
                              />
                         </Border>
@@ -162,8 +164,7 @@
                     <!--// Orders // -->
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding OrderCommand}"
-                              IsChecked="True"
+                              Command="{Binding OrderCommand}"                              
                               Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                         <Grid>
@@ -176,14 +177,68 @@
 
                         </Grid>
                     </Menu:Btn>
+
+                    <!--// Visits // -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding VisitCommand}"                             
+                              Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/calendar-clock.png"
+                                   Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Visit"
+                                       Style="{StaticResource Text_Style}"/>
+
+                        </Grid>
+                    </Menu:Btn>
+
+                    <!--// Сars // -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding CarCommand}"                             
+                              Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/car-mechanic.png"
+                                   Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Car"
+                                       Style="{StaticResource Text_Style}"/>
+
+                        </Grid>
+                    </Menu:Btn>
+
+
+                    <!--// Services // -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding ServiceTaskCommand}"                             
+                              Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/service.png"
+                                   Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Service"
+                                       Style="{StaticResource Text_Style}"/>
+
+                        </Grid>
+                    </Menu:Btn>
+
                 </StackPanel>
-                
+
+
+
                 <!--// Current User // -->
 
                 <Menu:Btn Style="{StaticResource BtnStyle}"
                           Cursor="Hand"
                           Command="{Binding UserSettingsCommand}"
-                          IsChecked="True"
                           Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}"
                           VerticalAlignment="Bottom"
                           Margin="0,0,0,10"

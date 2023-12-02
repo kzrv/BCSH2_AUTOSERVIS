@@ -34,6 +34,10 @@ namespace Kozyrev_Hriha_SP
             services.AddSingleton<IZamestnanecRepository, ZamestnanecRepository>(provider =>
             new ZamestnanecRepository(connectionString, provider.GetRequiredService<IUserDataRepository>(), provider.GetRequiredService<IAdresaRepository>()));
             services.AddSingleton<IObjednavkaRepository, ObjednavkaRepository>(provider => new ObjednavkaRepository(connectionString));
+            services.AddSingleton<IProhlidkaRepository, ProhlidkaRepository>(provider => new ProhlidkaRepository(connectionString));
+            services.AddSingleton<IVozidloRepository, VozidloRepository>(provider => new VozidloRepository(connectionString));
+            services.AddSingleton<ISluzbaRepository, SluzbaRepository>(provider => new SluzbaRepository(connectionString));
+            services.AddSingleton<IUkolRepository, UkolRepository>(provider => new UkolRepository(connectionString));
             services.AddSingleton<IUpdateUserProfileService, UpdateUserProfileService>();
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<CustomerVM>();
@@ -45,8 +49,14 @@ namespace Kozyrev_Hriha_SP
             services.AddTransient<UserSettingsVM>();
             services.AddSingleton<Order>();
             services.AddSingleton<OrderVM>();
+            services.AddSingleton<Visit>();
+            services.AddSingleton<VisitVM>();
+            services.AddSingleton<Car>();
+            services.AddSingleton<CarVM>();
+            services.AddSingleton<ServiceTask>();
+            services.AddSingleton<ServiceTaskVM>();
             services.AddSingleton<NotificationService>();
-            
+
             services.AddSingleton<HomeVM>();
             services.AddTransient<RegistrationControlVM>();
             services.AddLogging(loggingBuilder =>
@@ -72,7 +82,7 @@ namespace Kozyrev_Hriha_SP
             Serilog.Debugging.SelfLog.Enable(Console.Error);
             var navigate = ServiceProvider.GetRequiredService<NavigationVM>();
             var notif = ServiceProvider.GetRequiredService<NotificationService>();
-            var main = new MainWindow(navigate,notif);
+            var main = new MainWindow(navigate, notif);
             main.Show();
 
         }

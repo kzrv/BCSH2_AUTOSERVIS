@@ -76,7 +76,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             }
         }
 
-        public NavigationVM(IServiceProvider serviceProvider,NotificationService notificationService)
+        public NavigationVM(IServiceProvider serviceProvider, NotificationService notificationService)
         {
             _notificationService = notificationService;
             ServiceProvider = serviceProvider;
@@ -90,7 +90,9 @@ namespace Kozyrev_Hriha_SP.ViewModels
             _loginViewModel = serviceProvider.GetService<LoginViewModel>();
             binaryContentRepository = serviceProvider.GetService<IBinaryContentRepository>();
             OrderCommand = new ViewModelCommand(Order);
-
+            VisitCommand = new ViewModelCommand(Visit);
+            CarCommand = new ViewModelCommand(Car);
+            ServiceTaskCommand = new ViewModelCommand(ServiceTask);
             _loginViewModel.AuthorizationChanged += OnAuthorizationChanged;
         }
         private void OnAuthorizationChanged(bool isAuthorized)
@@ -145,6 +147,9 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         public ICommand LoginCommand { get; set; }
         public ICommand OrderCommand { get; set; }
+        public ICommand VisitCommand { get; set; }
+        public ICommand CarCommand { get; set; }
+        public ICommand ServiceTaskCommand { get; set; }
 
         public ICommand UserSettingsCommand { get; set; }
         public ICommand RegCommand { get; set; }
@@ -157,6 +162,9 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private void UserSettings(object obj) => CurrentView = ServiceProvider.GetRequiredService<UserSettings>();
         private void Order(object obj) => CurrentView = ServiceProvider.GetRequiredService<Order>();
+        private void Visit(object obj) => CurrentView = ServiceProvider.GetRequiredService<Visit>();
+        private void Car(object obj) => CurrentView = ServiceProvider.GetRequiredService<Car>();
+        private void ServiceTask(object obj) => CurrentView = ServiceProvider.GetRequiredService<ServiceTask>();
 
         private void Login(object obj) => CurrentView = ServiceProvider.GetRequiredService<Login>();
         private void Reg(object obj) => CurrentView = ServiceProvider.GetRequiredService<RegistrationControl>();

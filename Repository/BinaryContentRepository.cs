@@ -33,19 +33,33 @@ namespace Kozyrev_Hriha_SP.Repository
         {
             using (var db = new OracleConnection(this.connection))
             {
-                var p = new DynamicParameters();
-                p.Add("p_id_content", binaryContent.IdContent, DbType.Int32);
-                p.Add("p_binarni_obsah", binaryContent.BinarniObsah, DbType.Binary);
-                p.Add("p_nazev_souboru", binaryContent.NazevSouboru, DbType.String);
-                p.Add("p_typ_souboru", binaryContent.TypSouboru, DbType.String);
-                p.Add("p_pripona_souboru", binaryContent.Pripona, DbType.String);
-                p.Add("p_datum_nahrani", binaryContent.DatumNahrani, DbType.Date);
-                p.Add("p_datum_zmeny", binaryContent.DatumZmeny, DbType.Date);
-                p.Add("p_zmenil", binaryContent.Zmenil, DbType.String);
-                p.Add("p_operace", binaryContent.Operace, DbType.String);
+                string updateQuery = @"
+                    UPDATE BINARY_CONTENT
+                    SET
+                        binarni_obsah = :binarni_obsah,
+                        nazev_souboru = :nazev_souboru,
+                        typ_souboru = :typ_souboru,
+                        pripona_souboru = :pripona_souboru,
+                        datum_nahrani = :datum_nahrani,
+                        datum_zmeny = :datum_zmeny,
+                        zmenil = :zmenil,
+                        operace = :operace
+                    WHERE id_content = :id_content";
 
-                db.Execute("UPDATE_BINARY_CONTENT", p, commandType: CommandType.StoredProcedure);
+                int rowsAffected = db.Execute(updateQuery, new
+                {
+                    binarni_obsah = binaryContent.BinarniObsah,
+                    nazev_souboru = binaryContent.NazevSouboru,
+                    typ_souboru = binaryContent.TypSouboru,
+                    pripona_souboru = binaryContent.Pripona,
+                    datum_nahrani = binaryContent.DatumNahrani,
+                    datum_zmeny = binaryContent.DatumZmeny,
+                    zmenil = binaryContent.Zmenil,
+                    operace = binaryContent.Operace,
+                    id_content = binaryContent.IdContent
+                });
             }
         }
     }
 }
+

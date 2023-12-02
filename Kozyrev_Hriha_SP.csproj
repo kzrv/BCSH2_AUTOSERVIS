@@ -164,13 +164,21 @@
     <Compile Include="Repository\Interfaces\IAdresaRepository.cs" />
     <Compile Include="Repository\Interfaces\IBinaryContentRepository.cs" />
     <Compile Include="Repository\Interfaces\IObjednavkaRepository.cs" />
+    <Compile Include="Repository\Interfaces\IProhlidkaRepository.cs" />
+    <Compile Include="Repository\Interfaces\ISluzbaRepository.cs" />
+    <Compile Include="Repository\Interfaces\IUkolRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserDataRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserSettingsRepository.cs" />
+    <Compile Include="Repository\Interfaces\IVozidloRepository.cs" />
     <Compile Include="Repository\Interfaces\IZakaznikRepository.cs" />
     <Compile Include="Repository\Interfaces\IZamestnanecRepository.cs" />
+    <Compile Include="Repository\UkolRepository.cs" />
     <Compile Include="Repository\ObjednavkaRepository.cs" />
+    <Compile Include="Repository\ProhlidkaRepository.cs" />
+    <Compile Include="Repository\SluzbaRepository.cs" />
     <Compile Include="Repository\UserDataRepository.cs" />
     <Compile Include="Repository\UserSettingsRepository.cs" />
+    <Compile Include="Repository\VozidloRepository.cs" />
     <Compile Include="Repository\ZakaznikRepository.cs" />
     <Compile Include="Repository\ZamestnanecRepository.cs" />
     <Compile Include="Service\Interfaces\IUpdateUserProfileService.cs" />
@@ -191,6 +199,7 @@
     <Compile Include="Utils\Exceptions\UserIsAlreadyExistsException.cs" />
     <Compile Include="Utils\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\PasswordEncryptor.cs" />
+    <Compile Include="ViewModels\CarVM.cs" />
     <Compile Include="ViewModels\CustomerVM.cs" />
     <Compile Include="ViewModels\EmployeeVM.cs" />
     <Compile Include="ViewModels\HomeVM.cs" />
@@ -201,9 +210,14 @@
     <Compile Include="ViewModels\RegistrationViewModel\RegistrationSecondVM.cs" />
     <Compile Include="ViewModels\RegistrationViewModel\RegistrationThirdVM.cs" />
     <Compile Include="ViewModels\RegistrationViewModel\RegistrationVM.cs" />
+    <Compile Include="ViewModels\ServiceTaskVM.cs" />
     <Compile Include="ViewModels\UserSettingsVM.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelCommand.cs" />
+    <Compile Include="ViewModels\VisitVM.cs" />
+    <Compile Include="Views\Car.xaml.cs">
+      <DependentUpon>Car.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Customer.xaml.cs">
       <DependentUpon>Customer.xaml</DependentUpon>
     </Compile>
@@ -219,7 +233,9 @@
     <Compile Include="Views\Notification.xaml.cs">
       <DependentUpon>Notification.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Order.xaml.cs" />
+    <Compile Include="Views\Order.xaml.cs">
+      <DependentUpon>Order.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
@@ -232,8 +248,14 @@
     <Compile Include="Views\RegistrationThird.xaml.cs">
       <DependentUpon>RegistrationThird.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ServiceTask.xaml.cs">
+      <DependentUpon>ServiceTask.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserSettings.xaml.cs">
       <DependentUpon>UserSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Visit.xaml.cs">
+      <DependentUpon>Visit.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomControls\BindablePasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -279,6 +301,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Car.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Customer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -296,7 +322,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Notification.xaml" />
-    <Page Include="Views\Order.xaml" />
+    <Page Include="Views\Order.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Registration.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -313,7 +342,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\ServiceTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Visit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -389,6 +426,15 @@
     <Resource Include="Resources\Images\calendar.png" />
     <Resource Include="Resources\Images\clipboard.png" />
     <Resource Include="Resources\Images\coins.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\calendar-clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\car-mechanic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\service.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.Text.Json.6.0.1\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.1\build\System.Text.Json.targets')" />

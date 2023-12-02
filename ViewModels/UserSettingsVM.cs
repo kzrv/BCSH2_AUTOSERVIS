@@ -124,7 +124,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public ICommand ChangePasswordCommand { get; }
         public ICommand SavePassCommand { get; }
         public ICommand SaveCommand { get; }
-        public UserSettingsVM(IUpdateUserProfileService profileService,NavigationVM navigationVm, NotificationService notificationService)
+        public UserSettingsVM(IUpdateUserProfileService profileService, NavigationVM navigationVm, NotificationService notificationService)
         {
             _notificationService = notificationService;
             _profileService = profileService;
@@ -154,9 +154,9 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private void SaveChangesPass(object obj)
         {
-            NetworkCredential n = new NetworkCredential(CurrUser.Email,NewPassword);
-            _profileService.UpdateUserPassword(_currUser,n);
-            _notificationService.ShowNotification("PASSWORD WAS CHANGED",NotificationType.Success);
+            NetworkCredential n = new NetworkCredential(CurrUser.Email, NewPassword);
+            _profileService.UpdateUserPassword(_currUser, n);
+            _notificationService.ShowNotification("PASSWORD WAS CHANGED", NotificationType.Success);
             IsPasswordChanging = false;
         }
 
@@ -182,8 +182,9 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private void SaveChanges(object obj)
         {
-            _profileService.UpdateZakaznikProfile(CurrUser,CurrZakaznik,BinaryContent,Adresa);
-            _notificationService.ShowNotification("CHANGES WAS SAVED",NotificationType.Success);
+            _profileService.UpdateZakaznikProfile(CurrUser, CurrZakaznik, BinaryContent, Adresa);
+            _navigationVM.BinaryImageData = UserAvatarImg;
+            _notificationService.ShowNotification("CHANGES WAS SAVED", NotificationType.Success);
         }
 
         private void ChangePassword(object obj)
@@ -202,11 +203,12 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
                 byte[] fileBytes = File.ReadAllBytes(selectedFilePath);
 
-                
+
                 UserAvatarImg = File.ReadAllBytes(selectedFilePath);
 
                 BinaryContent = new BinaryContent
                 {
+                    IdContent = CurrUser.IdContent,
                     BinarniObsah = fileBytes,
                     NazevSouboru = Path.GetFileName(selectedFilePath),
                     TypSouboru = Path.GetExtension(selectedFilePath),

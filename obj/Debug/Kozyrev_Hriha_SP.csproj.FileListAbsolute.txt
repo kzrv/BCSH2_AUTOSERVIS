@@ -561,3 +561,13 @@ C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.csproj.
 C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.csproj.CopyComplete
 C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.exe
 C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Kozyrev_Hriha_SP.pdb
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\Notification.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\Notification.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\Order.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\Order.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\Visit.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\Visit.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\Car.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\Car.baml
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\ServiceTask.g.cs
+C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\ServiceTask.baml
