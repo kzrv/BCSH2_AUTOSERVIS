@@ -231,7 +231,7 @@
                        />
                 <TextBox x:Name="NewPasswordTextBox" 
                          Width="155" Visibility="{Binding IsPasswordChanging, Converter={StaticResource BooleanToVisibilityConverter}}" 
-                         Text="{Binding NewPassword}" 
+                         Text="{Binding NewPassword , UpdateSourceTrigger=PropertyChanged}" 
                          FontSize="13"
                          FontWeight="Medium"
                          FontFamily="Montserrat"                            

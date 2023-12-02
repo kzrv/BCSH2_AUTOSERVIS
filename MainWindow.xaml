@@ -7,6 +7,7 @@
         xmlns:vm="clr-namespace:Kozyrev_Hriha_SP.ViewModels"
         xmlns:Menu="clr-namespace:Kozyrev_Hriha_SP.Utils"
         xmlns:conv ="clr-namespace:Kozyrev_Hriha_SP.Utils"
+        xmlns:views="clr-namespace:Kozyrev_Hriha_SP.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="850"
         AllowsTransparency="True"
@@ -158,8 +159,25 @@
                     </Menu:Btn>
 
 
+                    <!--// Orders // -->
 
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding OrderCommand}"
+                              IsChecked="True"
+                              Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/clipboard.png"
+                                   Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Order"
+                                       Style="{StaticResource Text_Style}"/>
+
+                        </Grid>
+                    </Menu:Btn>
                 </StackPanel>
+                
                 <!--// Current User // -->
 
                 <Menu:Btn Style="{StaticResource BtnStyle}"
@@ -208,6 +226,9 @@
 
         <Button x:Name="CloseApp"
                 Style="{StaticResource ExitApp}" Click="CloseApp_Click"/>
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10">
+            <views:Notification x:Name="NotificationArea"/>
+        </Grid>
 
     </Grid>
 </Window>

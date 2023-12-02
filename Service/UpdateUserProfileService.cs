@@ -28,7 +28,7 @@ namespace Kozyrev_Hriha_SP.Service
         {
             _userDataRepository.UpdateUserEmail(userData);
             _zakaznikRepository.UpdateZakaznik(zakaznik,adresa);
-            _binaryContentRepository.UpdateBinaryContent(binary);
+            if(binary!=null) _binaryContentRepository.UpdateBinaryContent(binary);
         }
 
         public void UpdateUserPassword(UserData userData,NetworkCredential cred)
