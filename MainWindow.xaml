@@ -159,8 +159,25 @@
                     </Menu:Btn>
 
 
+                    <!--// Orders // -->
 
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding OrderCommand}"
+                              IsChecked="True"
+                              Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/clipboard.png"
+                                   Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Order"
+                                       Style="{StaticResource Text_Style}"/>
+
+                        </Grid>
+                    </Menu:Btn>
                 </StackPanel>
+                
                 <!--// Current User // -->
 
                 <Menu:Btn Style="{StaticResource BtnStyle}"

@@ -33,6 +33,7 @@ namespace Kozyrev_Hriha_SP
             new ZakaznikRepository(connectionString, provider.GetRequiredService<IUserDataRepository>(), provider.GetRequiredService<IAdresaRepository>()));
             services.AddSingleton<IZamestnanecRepository, ZamestnanecRepository>(provider =>
             new ZamestnanecRepository(connectionString, provider.GetRequiredService<IUserDataRepository>(), provider.GetRequiredService<IAdresaRepository>()));
+            services.AddSingleton<IObjednavkaRepository, ObjednavkaRepository>(provider => new ObjednavkaRepository(connectionString));
             services.AddSingleton<IUpdateUserProfileService, UpdateUserProfileService>();
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<CustomerVM>();
@@ -42,6 +43,8 @@ namespace Kozyrev_Hriha_SP
             services.AddSingleton<Employee>();
             services.AddTransient<UserSettings>();
             services.AddTransient<UserSettingsVM>();
+            services.AddSingleton<Order>();
+            services.AddSingleton<OrderVM>();
             services.AddSingleton<NotificationService>();
             
             services.AddSingleton<HomeVM>();

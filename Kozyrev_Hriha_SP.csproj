@@ -163,10 +163,12 @@
     <Compile Include="Repository\BinaryContentRepository.cs" />
     <Compile Include="Repository\Interfaces\IAdresaRepository.cs" />
     <Compile Include="Repository\Interfaces\IBinaryContentRepository.cs" />
+    <Compile Include="Repository\Interfaces\IObjednavkaRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserDataRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserSettingsRepository.cs" />
     <Compile Include="Repository\Interfaces\IZakaznikRepository.cs" />
     <Compile Include="Repository\Interfaces\IZamestnanecRepository.cs" />
+    <Compile Include="Repository\ObjednavkaRepository.cs" />
     <Compile Include="Repository\UserDataRepository.cs" />
     <Compile Include="Repository\UserSettingsRepository.cs" />
     <Compile Include="Repository\ZakaznikRepository.cs" />
@@ -194,6 +196,7 @@
     <Compile Include="ViewModels\HomeVM.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NavigationVM.cs" />
+    <Compile Include="ViewModels\OrderVM.cs" />
     <Compile Include="ViewModels\RegistrationViewModel\RegistrationControlVM.cs" />
     <Compile Include="ViewModels\RegistrationViewModel\RegistrationSecondVM.cs" />
     <Compile Include="ViewModels\RegistrationViewModel\RegistrationThirdVM.cs" />
@@ -216,6 +219,7 @@
     <Compile Include="Views\Notification.xaml.cs">
       <DependentUpon>Notification.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Order.xaml.cs" />
     <Compile Include="Views\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
@@ -292,6 +296,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Notification.xaml" />
+    <Page Include="Views\Order.xaml" />
     <Page Include="Views\Registration.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -379,6 +384,11 @@
     <Resource Include="Resources\Images\home-icon.png" />
     <Resource Include="Resources\Images\reg-icon.png" />
     <Resource Include="Resources\Images\tel-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\calendar.png" />
+    <Resource Include="Resources\Images\clipboard.png" />
+    <Resource Include="Resources\Images\coins.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.Text.Json.6.0.1\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.1\build\System.Text.Json.targets')" />

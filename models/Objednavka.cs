@@ -11,7 +11,6 @@ namespace Kozyrev_Hriha_SP
     {
         private int idObjednavky;
         private string popisObjednavky;
-        private decimal cenaObjednavky;
         private int idZakaznik;
         private int idSluzba;
         private DateTime casObjednani;
@@ -45,19 +44,6 @@ namespace Kozyrev_Hriha_SP
                 {
                     popisObjednavky = value;
                     OnPropertyChanged(nameof(PopisObjednavky));
-                }
-            }
-        }
-
-        public decimal CenaObjednavky
-        {
-            get { return cenaObjednavky; }
-            set
-            {
-                if (cenaObjednavky != value)
-                {
-                    cenaObjednavky = value;
-                    OnPropertyChanged(nameof(CenaObjednavky));
                 }
             }
         }

@@ -89,6 +89,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             CurrentView = HomePage;
             _loginViewModel = serviceProvider.GetService<LoginViewModel>();
             binaryContentRepository = serviceProvider.GetService<IBinaryContentRepository>();
+            OrderCommand = new ViewModelCommand(Order);
 
             _loginViewModel.AuthorizationChanged += OnAuthorizationChanged;
         }
@@ -143,6 +144,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public ICommand EmployeeCommand { get; set; }
 
         public ICommand LoginCommand { get; set; }
+        public ICommand OrderCommand { get; set; }
 
         public ICommand UserSettingsCommand { get; set; }
         public ICommand RegCommand { get; set; }
@@ -154,6 +156,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private void Employee(object obj) => CurrentView = ServiceProvider.GetRequiredService<Employee>();
 
         private void UserSettings(object obj) => CurrentView = ServiceProvider.GetRequiredService<UserSettings>();
+        private void Order(object obj) => CurrentView = ServiceProvider.GetRequiredService<Order>();
 
         private void Login(object obj) => CurrentView = ServiceProvider.GetRequiredService<Login>();
         private void Reg(object obj) => CurrentView = ServiceProvider.GetRequiredService<RegistrationControl>();
