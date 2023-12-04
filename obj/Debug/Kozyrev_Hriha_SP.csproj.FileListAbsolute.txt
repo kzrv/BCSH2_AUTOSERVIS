@@ -571,3 +571,9 @@ C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\Car.g.cs
 C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\Car.baml
 C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\ServiceTask.g.cs
 C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\ServiceTask.baml
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\Car.g.cs
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\ServiceTask.g.cs
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\Visit.g.cs
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\Car.baml
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\ServiceTask.baml
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\Visit.baml

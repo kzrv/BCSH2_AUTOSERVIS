@@ -50,7 +50,7 @@ namespace Kozyrev_Hriha_SP.Repository
             }
         }
 
-        public int RegisterNewUserData(NetworkCredential cred)
+        public async Task<int> RegisterNewUserData(NetworkCredential cred)
         {
             using (var db = new OracleConnection(this.connection))
             {
@@ -60,13 +60,12 @@ namespace Kozyrev_Hriha_SP.Repository
                 p.Add("p_success", dbType: DbType.Boolean, direction: ParameterDirection.Output);
                 p.Add("p_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                db.Execute("register_new_user", p, commandType: CommandType.StoredProcedure);
+                await db.ExecuteAsync("register_new_user", p, commandType: CommandType.StoredProcedure);
                 UserData user = new UserData();
                 if (p.Get<bool>("p_success"))
                 {
                     return p.Get<int>("p_id");
                 }
-
                 throw new UserIsAlreadyExistsException($"User with email: {cred.UserName} is already exists");
             }
         }
@@ -74,10 +73,18 @@ namespace Kozyrev_Hriha_SP.Repository
         {
             using (var db = new OracleConnection(this.connection))
             {
-                var p = new DynamicParameters();
-                p.Add("p_id_user", user.UserId, DbType.Int32);
-                p.Add("p_email", user.Email, DbType.String);
-                db.Execute("UPDATE_USER_DATA", p, commandType: CommandType.StoredProcedure);
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("p_id_user", user.UserId, DbType.Int32);
+                    p.Add("p_email", user.Email, DbType.String);
+                    db.Execute("UPDATE_USER_DATA", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception e)
+                {
+                    throw new UserIsAlreadyExistsException("USER WITH THIS EMAIL IS ALREADY EXISTS");
+                }
+                
             }
         }
         public void UpdateUserPassword(UserData user,NetworkCredential pass)
@@ -90,5 +97,15 @@ namespace Kozyrev_Hriha_SP.Repository
                 db.Execute("UPDATE_USER_PASS", p, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public async Task<UserData> GetZakaznikEmailByUserId(int id)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                return await db.QueryFirstOrDefaultAsync<UserData>("SELECT ID_USER as UserId, Email from USER_DATA where ID_USER = :id1",new{id1 = id});
+            }
+        }
+
+        
     }
 }

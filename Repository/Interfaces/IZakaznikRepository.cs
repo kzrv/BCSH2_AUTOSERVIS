@@ -10,11 +10,10 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
 {
     public interface IZakaznikRepository
     {
-        List<Zakaznik> GetAllZakaznici();
-        void DeleteZakaznik(int id);
-        void UpdateZakaznik(Zakaznik zakaznik, Adresa adresa);
+        Task<List<Zakaznik>> GetAllZakaznici();
+        void DeleteZakaznik(Zakaznik zakaznik);
+        void UpdateZakaznik(Zakaznik zakaznik, Adresa adresa,UserData userData);
         Zakaznik GetZakaznikByUserId(int userId);
-        void AddZakaznik(Zakaznik zakaznik, Adresa adresa);
         Task AddNewZakaznik(Zakaznik zakaznik, Adresa adresa, NetworkCredential cred);
        
 

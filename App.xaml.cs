@@ -40,10 +40,10 @@ namespace Kozyrev_Hriha_SP
             services.AddSingleton<IUkolRepository, UkolRepository>(provider => new UkolRepository(connectionString));
             services.AddSingleton<IUpdateUserProfileService, UpdateUserProfileService>();
             services.AddSingleton<LoginViewModel>();
-            services.AddSingleton<CustomerVM>();
+            services.AddTransient<CustomerVM>();
             services.AddSingleton<EmployeeVM>();
             services.AddSingleton<Login>();
-            services.AddSingleton<Customer>();
+            services.AddTransient<Customer>();
             services.AddSingleton<Employee>();
             services.AddTransient<UserSettings>();
             services.AddTransient<UserSettingsVM>();

@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Threading.Tasks;
 using Kozyrev_Hriha_SP.Models;
 using Kozyrev_Hriha_SP.Repository;
 using Kozyrev_Hriha_SP.Repository.Interfaces;
@@ -26,8 +27,8 @@ namespace Kozyrev_Hriha_SP.Service
 
         public void UpdateZakaznikProfile(UserData userData, Zakaznik zakaznik, BinaryContent binary,Adresa adresa)
         {
-            _userDataRepository.UpdateUserEmail(userData);
-            _zakaznikRepository.UpdateZakaznik(zakaznik,adresa);
+            //_userDataRepository.UpdateUserEmail(userData);
+            _zakaznikRepository.UpdateZakaznik(zakaznik,adresa,userData);
             if(binary!=null) _binaryContentRepository.UpdateBinaryContent(binary);
         }
 
@@ -41,7 +42,7 @@ namespace Kozyrev_Hriha_SP.Service
             return _zakaznikRepository.GetZakaznikByUserId(id);
         }
 
-        public Adresa GetUserAdresa(int adresaId)
+        public Task<Adresa> GetUserAdresa(int adresaId)
         {
             return _adresaRepository.GetAdresaById(adresaId);
         }

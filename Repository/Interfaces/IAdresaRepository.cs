@@ -12,6 +12,6 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
         int AddNewAdresa(Adresa adresa);
         void UpdateAdresa(int id, Adresa adresa);
         void DeleteAdresa(int id);
-        Adresa GetAdresaById(int id);
+        Task<Adresa>GetAdresaById(int id);
     }
 }

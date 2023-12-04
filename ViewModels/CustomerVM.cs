@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows.Data;
+using System.Windows;
 using System.Windows.Input;
-using Kozyrev_Hriha_SP.CustomControls;
 using Kozyrev_Hriha_SP.Models;
 using Kozyrev_Hriha_SP.Repository;
 using Kozyrev_Hriha_SP.Repository.Interfaces;
-using Kozyrev_Hriha_SP.Views;
+using Kozyrev_Hriha_SP.Service;
 
 namespace Kozyrev_Hriha_SP.ViewModels
 {
@@ -20,9 +17,15 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private ObservableCollection<Zakaznik> _zakaznici;
         private Zakaznik _selectedZakaznik;
         private Adresa _adresa;
-
+        private UserData _user;
+        private Zakaznik _zakaz;
+        private bool _isLoading;
+        
+        
         private readonly IZakaznikRepository zakaznikRepository;
         private readonly IAdresaRepository adresaRepository;
+        private readonly IUserDataRepository _userDataRepository;
+        private readonly NotificationService _notificationService;
 
         public ObservableCollection<Zakaznik> Zakaznici
         {
@@ -44,6 +47,26 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 FetchAdresaForSelectedZakaznik();
             }
         }
+        public Zakaznik Zakaz
+        {
+            get { return _zakaz; }
+            set
+            {
+                _zakaz = value;
+                OnPropertyChanged(nameof(Zakaz));
+                
+            }
+        }
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+                
+            }
+        }
 
         public Adresa Adresa
         {
@@ -54,32 +77,56 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 OnPropertyChanged(nameof(Adresa));
             }
         }
-
-
-        // Other properties, commands, and methods
-
-        public ICommand AddCommand { get; }
-        public ICommand UpdateCommand { get; }
+        public UserData User
+        {
+            get { return _user; }
+            set
+            {
+                _user = value;
+                OnPropertyChanged(nameof(User));
+            }
+        }
+        public ICommand AddUpdateCommand { get; }
         public ICommand DeleteCommand { get; }
         public ICommand ClearCommand { get; }
 
 
-        public CustomerVM(IZakaznikRepository zakaznikRep, IAdresaRepository adresaRepository)
+        public CustomerVM(IZakaznikRepository zakaznikRep, IAdresaRepository adresaRepository,IUserDataRepository userDataRepository,NotificationService notificationService)
         {
-            this.zakaznikRepository = zakaznikRep;
-            List<Zakaznik> z = zakaznikRepository.GetAllZakaznici();
-            Zakaznici = new ObservableCollection<Zakaznik>(zakaznikRepository.GetAllZakaznici());
-            // AddCommand = new ViewModelCommand(AddItem, CanAddItem);
+            IsLoading = false;
+            _userDataRepository = userDataRepository;
+            _notificationService = notificationService;
+            zakaznikRepository = zakaznikRep;
+            Zakaznici = new ObservableCollection<Zakaznik>();
+            ReloadData();
             DeleteCommand = new ViewModelCommand(DeleteItem, CanDeleteItem);
-            UpdateCommand = new ViewModelCommand(UpdateItem, CanUpdateItem);
+            AddUpdateCommand = new ViewModelCommand(AddUpdateItem, CanAddUpdateItem);
             ClearCommand = new ViewModelCommand(ClearBoxes, CanClearBoxes);
             this.adresaRepository = adresaRepository;
+            Zakaz = new Zakaznik();
+            User = new UserData();
+            Adresa = new Adresa();
+            
         }
 
         private void DeleteItem(object parameter)
         {
-            zakaznikRepository.DeleteZakaznik(SelectedZakaznik.Id);
-            Zakaznici.Remove(SelectedZakaznik);
+            try
+            {
+                zakaznikRepository.DeleteZakaznik(SelectedZakaznik);
+                Zakaznici.Remove(SelectedZakaznik);
+                Zakaz = new Zakaznik();
+                Adresa = new Adresa();
+                User = new UserData();
+                SelectedZakaznik = null;
+                _notificationService.ShowNotification("CUSTOMER WAS DELETED",NotificationType.Success);
+            }
+            catch (Exception e)
+            {
+                _notificationService.ShowNotification("ERROR DURING DELETING CUSTOMER",NotificationType.Error);
+                throw;
+            }
+            
         }
 
         private bool CanDeleteItem(object parameter)
@@ -87,46 +134,115 @@ namespace Kozyrev_Hriha_SP.ViewModels
             return SelectedZakaznik != null;
         }
 
-        private void UpdateItem(object parameter)
+        private async void ReloadData()
         {
-            zakaznikRepository.UpdateZakaznik(SelectedZakaznik, Adresa);
-            Zakaznici = new ObservableCollection<Zakaznik>(zakaznikRepository.GetAllZakaznici());
+            IsLoading = true;
+
+            try
+            {
+                var zakazniciList = await Task.Run(() => zakaznikRepository.GetAllZakaznici());
+
+                
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    Zakaznici.Clear();
+                    foreach (var zakaznik in zakazniciList)
+                    {
+                        Zakaznici.Add(zakaznik);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                _notificationService.ShowNotification(ex.Message,NotificationType.Error);
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
 
-        private bool CanUpdateItem(object parameter)
+        private async void AddUpdateItem(object parameter)
         {
+            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            if (SelectedZakaznik != null)
+            {
+                try
+                {
+                    zakaznikRepository.UpdateZakaznik(SelectedZakaznik, Adresa, User);
+                    ReloadData();
+                    _notificationService.ShowNotification("CUSTOMER WAS UPDATED",NotificationType.Success);
+                }
+                catch (Exception e)
+                {
+                    _notificationService.ShowNotification(e.Message,NotificationType.Error);
+                }
+                
+            }
+            else
+            {
+                if (Regex.IsMatch(User.Email, pattern))
+                {
+                    try
+                    {
+                        await zakaznikRepository.AddNewZakaznik(Zakaz, Adresa, new NetworkCredential(User.Email, "abcde"));
+                        _notificationService.ShowNotification("NEW CUSTOMER WAS CREATED WITH DEFAULT PASSWORD: abcde",NotificationType.Success);
+                        Zakaz = new Zakaznik();
+                        User = new UserData();
+                        Adresa = new Adresa();
+                        ReloadData();
+                    }
+                    catch (Exception e)
+                    {
+                        _notificationService.ShowNotification(e.Message,NotificationType.Error);
+                    }
+                }
+                else _notificationService.ShowNotification("EMAIL IS NOT CORRECT, IT MUST LOOKS LIKE: EXAMPLE@EMAIL.COM",NotificationType.Error);
+            }
+        }
 
-            return SelectedZakaznik != null;
+        private bool CanAddUpdateItem(object parameter)
+        {
+            return SelectedZakaznik != null || 
+                   (!string.IsNullOrEmpty(Zakaz.TelCislo) 
+                     && !string.IsNullOrEmpty(Zakaz.Jmeno) 
+                     && !string.IsNullOrEmpty(Zakaz.Prijmeni)
+                     && !string.IsNullOrEmpty(Adresa.Ulice)
+                     && !string.IsNullOrEmpty(Adresa.Mesto) 
+                     && !string.IsNullOrEmpty(Adresa.Psc)
+                     && !string.IsNullOrEmpty(Adresa.CisloPopisne)
+                     && !string.IsNullOrEmpty(User.Email));
         }
 
         private void ClearBoxes(object parameter)
         {
             SelectedZakaznik = null;
-            Adresa = null;
+            Zakaz = new Zakaznik();
+            User = new UserData();
+            Adresa = new Adresa();
         }
         private bool CanClearBoxes(object parameter)
         {
             return SelectedZakaznik != null;
         }
 
-        private void AddItem(object parameter)
-        {
-
-        }
-        private bool CanAddItem(object parameter)
-        {
-            throw new NotImplementedException();
-        }
-        private void FetchAdresaForSelectedZakaznik()
+        
+        private async void FetchAdresaForSelectedZakaznik()
         {
             if (SelectedZakaznik != null)
             {
-                Adresa = adresaRepository.GetAdresaById(SelectedZakaznik.IdAdresa);
+                IsLoading = true;
+                Adresa = await Task.Run(() => adresaRepository.GetAdresaById(SelectedZakaznik.IdAdresa)); 
+                User = await Task.Run(() => _userDataRepository.GetZakaznikEmailByUserId(SelectedZakaznik.IdUser));
+                Zakaz = SelectedZakaznik;
+                IsLoading = false;
             }
-            else
-            {
-                Adresa = null;
-            }
+            // else
+            // {
+            //     Zakaz = new Zakaznik();
+            //     User = new UserData();
+            //     Adresa = new Adresa();
+            // }
         }
     }
 }

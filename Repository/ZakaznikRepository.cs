@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Kozyrev_Hriha_SP.Repository
@@ -23,11 +24,13 @@ namespace Kozyrev_Hriha_SP.Repository
             this.adresaRepository = adresaRepository;
             this.userData = userDataRepository;
         }
-        public List<Zakaznik> GetAllZakaznici()
+        public async Task<List<Zakaznik>> GetAllZakaznici()
         {
             using (var db = new OracleConnection(this.connection))
             {
-                return db.Query<Zakaznik>("SELECT ID_ZAKAZNIK AS Id, JMENO, PRIJMENI, POZNAMKY, TEL_CISLO AS TelCislo, ID_ADRESA AS IdAdresa, ID_USER AS IdUser FROM ZAKAZNICI").ToList();
+                
+                var res = await db.QueryAsync<Zakaznik>("SELECT ID_ZAKAZNIK AS Id, JMENO, PRIJMENI, POZNAMKY, TEL_CISLO AS TelCislo, ID_ADRESA AS IdAdresa, ID_USER AS IdUser FROM ZAKAZNICI");
+                return res.ToList();
             }
         }
 
@@ -41,19 +44,22 @@ namespace Kozyrev_Hriha_SP.Repository
                     new { Id = userId });
             }
         }
-        public void DeleteZakaznik(int id)
+        public void DeleteZakaznik(Zakaznik zakaznik)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                db.Execute("DELETE FROM ZAKAZNICI WHERE ID_ZAKAZNIK = :Id", new { Id = id });
+                db.Execute("DELETE FROM ZAKAZNICI WHERE ID_ZAKAZNIK = :Id", new { Id = zakaznik.Id });
+                //db.Execute("DELETE FROM ADRESY WHERE ID_ADRESA = :Id", new { Id = zakaznik.IdAdresa });
+                //userData.DeleteUserById(zakaznik.IdUser);
             }
         }
 
 
-        public void UpdateZakaznik(Zakaznik zakaznik, Adresa adresa)
+        public void UpdateZakaznik(Zakaznik zakaznik, Adresa adresa,UserData user)
         {
             using (var db = new OracleConnection(this.connection))
             {
+                userData.UpdateUserEmail(user);
                 adresaRepository.UpdateAdresa(zakaznik.IdAdresa, adresa);
                 var p = new DynamicParameters();
                 p.Add("p_jmeno", zakaznik.Jmeno, DbType.String);
@@ -67,31 +73,28 @@ namespace Kozyrev_Hriha_SP.Repository
         }
         
 
-        public void AddZakaznik(Zakaznik zakaznik, Adresa adresa)
-        {
-            using (var db = new OracleConnection(this.connection))
-            {
-
-            }
-        }
+        
 
         public async Task AddNewZakaznik(Zakaznik zakaznik, Adresa adresa, NetworkCredential cred)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                int idAdresa = adresaRepository.AddNewAdresa(adresa);
-                int idData = userData.RegisterNewUserData(cred);
+                int idData = await userData.RegisterNewUserData(cred);
 
-                var sqlQuery = @"INSERT INTO ZAKAZNICI (JMENO, PRIJMENI, TEL_CISLO, POZNAMKY, ID_ADRESA, ID_USER) 
-                         VALUES (:Jmeno, :Prijmeni, :TelCislo, :Poznamky, :IdAdresa, :IdUser) 
-                         RETURNING ID_ZAKAZNIK INTO :IdZakaznik";
+                var parameters = new DynamicParameters();
+                parameters.Add("p_jmeno", zakaznik.Jmeno, DbType.String, ParameterDirection.Input);
+                parameters.Add("p_prijmeni", zakaznik.Prijmeni, DbType.String, ParameterDirection.Input);
+                parameters.Add("p_tel_cislo", zakaznik.TelCislo, DbType.String, ParameterDirection.Input);
+                parameters.Add("p_id_user", idData, DbType.Int32, ParameterDirection.Input);
+                parameters.Add("p_ulice", adresa.Ulice, DbType.String, ParameterDirection.Input);
+                parameters.Add("p_psc", adresa.Psc, DbType.String, ParameterDirection.Input);
+                parameters.Add("p_mesto", adresa.Mesto, DbType.String, ParameterDirection.Input);
+                parameters.Add("p_cislo_popisne", adresa.CisloPopisne, DbType.String, ParameterDirection.Input);
+                parameters.Add("p_cislo_bytu", adresa.CisloBytu, DbType.String, ParameterDirection.Input);
 
-                var parameters = new DynamicParameters(zakaznik);
-                parameters.Add("IdAdresa", idAdresa, DbType.Int32);
-                parameters.Add("IdUser", idData, DbType.Int32);
-                parameters.Add("IdZakaznik", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                await db.ExecuteAsync("register_new_zakaznik", parameters, commandType: CommandType.StoredProcedure);
 
-                await db.ExecuteAsync(sqlQuery, parameters);
+
             }
         }
         

@@ -116,7 +116,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         {
             CurrentView = HomePage;
             AuthorizedUser = _loginViewModel.User;
-            UserName = AuthorizedUser?.Email;
+            UserName = AuthorizedUser?.Email.Split('@')[0];
 
             BinaryImageData = binaryContentRepository.GetBlobById(AuthorizedUser.IdContent);
         }

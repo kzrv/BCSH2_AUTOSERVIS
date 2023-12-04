@@ -135,7 +135,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             ChangePasswordCommand = new ViewModelCommand(ChangePassword);
             SaveCommand = new ViewModelCommand(SaveChanges, CanSaveChanges);
             CurrZakaznik = _profileService.GetZakaznikById(CurrUser.UserId);
-            Adresa = _profileService.GetUserAdresa(CurrZakaznik.IdAdresa);
+            Adresa = _profileService.GetUserAdresa(CurrZakaznik.IdAdresa).Result;
             SavePassCommand = new ViewModelCommand(SaveChangesPass, CanSaveChangesPass);
 
         }
