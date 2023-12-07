@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace Kozyrev_Hriha_SP.Models
 {
-    public class Sluzba : INotifyPropertyChanged 
+    public class Sluzba : INotifyPropertyChanged
     {
         private int idSluzba;
         private string nazevSluzba;

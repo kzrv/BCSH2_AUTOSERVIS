@@ -38,6 +38,7 @@ namespace Kozyrev_Hriha_SP
             services.AddSingleton<IVozidloRepository, VozidloRepository>(provider => new VozidloRepository(connectionString));
             services.AddSingleton<ISluzbaRepository, SluzbaRepository>(provider => new SluzbaRepository(connectionString));
             services.AddSingleton<IUkolRepository, UkolRepository>(provider => new UkolRepository(connectionString));
+            services.AddSingleton<ILogRepository, LogRepository>(provider => new LogRepository(connectionString));
             services.AddSingleton<IUpdateUserProfileService, UpdateUserProfileService>();
             services.AddSingleton<LoginViewModel>();
             services.AddTransient<CustomerVM>();
@@ -55,6 +56,8 @@ namespace Kozyrev_Hriha_SP
             services.AddSingleton<CarVM>();
             services.AddSingleton<ServiceTask>();
             services.AddSingleton<ServiceTaskVM>();
+            services.AddTransient<Logs>();
+            services.AddSingleton<LogsVM>();
             services.AddSingleton<NotificationService>();
 
             services.AddSingleton<HomeVM>();

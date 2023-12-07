@@ -230,6 +230,25 @@
                         </Grid>
                     </Menu:Btn>
 
+                    <!--// Logs // -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                                Command="{Binding LogsCommand}"                             
+                                Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/log.png"
+                                    Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Log"
+                                        Style="{StaticResource Text_Style}"/>
+
+                        </Grid>
+                    </Menu:Btn>
+
+
+
                 </StackPanel>
 
 

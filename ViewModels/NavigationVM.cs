@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Kozyrev_Hriha_SP.Service;
+using Serilog;
 
 namespace Kozyrev_Hriha_SP.ViewModels
 {
@@ -92,6 +93,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             OrderCommand = new ViewModelCommand(Order);
             VisitCommand = new ViewModelCommand(Visit);
             CarCommand = new ViewModelCommand(Car);
+            LogsCommand = new ViewModelCommand(Logs);
             ServiceTaskCommand = new ViewModelCommand(ServiceTask);
             _loginViewModel.AuthorizationChanged += OnAuthorizationChanged;
         }
@@ -153,6 +155,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         public ICommand UserSettingsCommand { get; set; }
         public ICommand RegCommand { get; set; }
+        public ICommand LogsCommand { get; set; }
 
         private void Home(object obj) => CurrentView = ServiceProvider.GetRequiredService<HomeVM>();
 
@@ -165,7 +168,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private void Visit(object obj) => CurrentView = ServiceProvider.GetRequiredService<Visit>();
         private void Car(object obj) => CurrentView = ServiceProvider.GetRequiredService<Car>();
         private void ServiceTask(object obj) => CurrentView = ServiceProvider.GetRequiredService<ServiceTask>();
-
+        private void Logs(object obj) => CurrentView = ServiceProvider.GetRequiredService<Logs>();
         private void Login(object obj) => CurrentView = ServiceProvider.GetRequiredService<Login>();
         private void Reg(object obj) => CurrentView = ServiceProvider.GetRequiredService<RegistrationControl>();
 

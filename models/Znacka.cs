@@ -8,23 +8,23 @@ namespace Kozyrev_Hriha_SP.Models
         private int idZnacka;
         private string nazevZnacky;
 
-        public int IdZnazka
+        public int IdZnacka
         {
             get { return idZnacka; }
             set
             {
                 idZnacka = value;
-                OnPropertyChanged(nameof(IdZnazka));
+                OnPropertyChanged(nameof(IdZnacka));
             }
         }
 
-        public string NazevZnazky
+        public string NazevZnacky
         {
             get { return nazevZnacky; }
             set
             {
                 nazevZnacky = value;
-                OnPropertyChanged(nameof(NazevZnazky));
+                OnPropertyChanged(nameof(NazevZnacky));
             }
         }
 

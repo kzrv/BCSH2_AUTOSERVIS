@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="Kozyrev_Hriha_SP.Utils.TaskData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Kozyrev_Hriha_SP.Utils"
+             mc:Ignorable="d" 
+            d:DesignHeight="200" d:DesignWidth="250" x:Name="taskData">
+
+    <Grid DataContext="{Binding ElementName=taskData, Path=DataContext}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+
+            <Label Content="Nazev:" Grid.Column="0" Grid.Row="1"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat" />
+            <TextBox Grid.Column="1" Grid.Row="1"   
+                 
+                 Text="{Binding Path=Nazev, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
+                 Margin="3,10,0,0"
+                 VerticalAlignment="Center"  FontSize="13"
+                 FontWeight="Medium"
+                 FontFamily="Montserrat"                            
+                 Foreground="White"     
+                 CaretBrush="LightGray"
+                 BorderBrush="DarkGray"
+                 BorderThickness="0,0,0,2"
+                 Height="28"
+                 VerticalContentAlignment="Center"
+                 Padding="20,0,0,0">
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/Resources/Images/info.png"
+                                 Stretch="None"
+                                 AlignmentX="Left"/>
+                </TextBox.Background>
+            </TextBox>
+            <Label Content="Popis:" Grid.Column="0" Grid.Row="2"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat"/>
+            <TextBox Grid.Column="1" Grid.Row="2" 
+                 Margin="3,10,0,0" 
+                 Name="pscTextBox" 
+                 Text="{Binding Path=Popis, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
+                 VerticalAlignment="Center"   
+                 FontSize="13"
+                 FontWeight="Medium"
+                 FontFamily="Montserrat"                            
+                 Foreground="White"     
+                 CaretBrush="LightGray"
+                 BorderBrush="DarkGray"
+                 BorderThickness="0,0,0,2"
+                 Height="110"
+                 TextWrapping="Wrap"  
+                 VerticalContentAlignment="Center"
+                 Padding="20,0,0,0">
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/Resources/Images/info.png"
+                            Stretch="None"
+                            AlignmentX="Left"/>
+                </TextBox.Background>
+            </TextBox>
+            <Label Content="Cena:" Grid.Column="0" Grid.Row="3"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        FontFamily="Montserrat"/>
+            <TextBox Grid.Column="1" 
+                 Grid.Row="3"   
+                 Margin="3,10,0,0" 
+                 Name="mestoTextBox" 
+                 Text="{Binding Path=Cena, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
+                 VerticalAlignment="Center" 
+                 FontSize="13"
+                 FontWeight="Medium"
+                 FontFamily="Montserrat"                            
+                 Foreground="White"     
+                 CaretBrush="LightGray"
+                 BorderBrush="DarkGray"
+                 BorderThickness="0,0,0,2"
+                 Height="28"
+                 VerticalContentAlignment="Center"
+                 Padding="20,0,0,0">
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/Resources/Images/coins.png"
+                            Stretch="None"
+                            AlignmentX="Left"/>
+                </TextBox.Background>
+            </TextBox>
+        </Grid>
+    </Grid>
+</UserControl>

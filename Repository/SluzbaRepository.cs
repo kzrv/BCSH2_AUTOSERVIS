@@ -4,6 +4,7 @@ using Kozyrev_Hriha_SP.Repository.Interfaces;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +20,51 @@ namespace Kozyrev_Hriha_SP.Repository
             this.connection = connection;
         }
 
-        public List<Sluzba> GetAllSluzby()
+        public void DeleteSluzba(Sluzba sluzba)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                return db.Query<Sluzba>("SELECT id_sluzba AS IdSluzba, nazev_sluzby AS NazevSluzby, popis FROM sluzby").ToList();
+                db.Execute("DELETE FROM SLUZBY WHERE id_sluzba = :Id", new { Id = sluzba.IdSluzba });
+            }
+        }
+
+        public async Task<List<Sluzba>> GetAllSluzby()
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                var res = await db.QueryAsync<Sluzba>("SELECT id_sluzba AS IdSluzba, nazev_sluzby AS NazevSluzby, popis FROM sluzby");
+                return res.ToList();
+            }
+        }
+
+        public void UpdateSluzba(Sluzba sluzba)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                var p = new DynamicParameters();
+                p.Add("p_nazev", sluzba.NazevSluzby, DbType.String);
+                p.Add("p_popis", sluzba.Popis, DbType.String);
+                p.Add("p_id_sluzba", sluzba.IdSluzba, DbType.Int32);
+
+
+                db.Execute("UPDATE_SLUZBA", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public async Task AddNewSluzba(Sluzba sluzba)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                var sqlQuery = @"INSERT INTO SLUZBY (nazev_sluzby, popis) 
+                         VALUES (:Nazev, :Popis);";
+
+                var parameters = new DynamicParameters();
+
+                parameters.Add(":Nazev", sluzba.NazevSluzby, DbType.String, ParameterDirection.Input);
+                parameters.Add(":Popis", sluzba.Popis, DbType.String, ParameterDirection.Input);
+
+                await db.ExecuteAsync(sqlQuery, parameters);
+
             }
         }
     }

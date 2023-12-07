@@ -17,8 +17,6 @@
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Margin" Value="2" />
             <Setter Property="Foreground" Value="White" />
-
-
         </Style>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#9fb2cc"/>
@@ -27,6 +25,7 @@
             <Setter Property="Margin" Value="0,0,15,0"/>
         </Style>
 
+
         <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
             <Setter Property="Padding" Value="10" />
             <Setter Property="BorderThickness" Value="0,0,0,1" />
@@ -34,69 +33,303 @@
             <Setter Property="Background" Value="#a6a9ad" />
             <Setter Property="Foreground" Value="Black"/>
         </Style>
+
+        <Style x:Key="ComboBoxItemStyle" TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="#212529" />
+            <Setter Property="BorderBrush" Value="#666666" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+
+        <util:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
     </UserControl.Resources>
 
     <DockPanel LastChildFill="True">
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,55,0,0" DockPanel.Dock="Top">
-            <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource ButtonStyle}">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="7"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Content="Update" Command="{Binding UpdateCommand}" Style="{StaticResource ButtonStyle}">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="7"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Content="Delete" Command="{Binding DeleteCommand}" Style="{StaticResource ButtonStyle}">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="7"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+        <TextBlock Text="CAR"
+               DockPanel.Dock="Top"
+               Foreground="DarkGray"
+               FontSize="10"
+               FontFamily="Montserrat"
+               Grid.Column="0"
+               VerticalAlignment="Center"
+               Margin="10,10,0,0"/>
 
-        </StackPanel>
 
-        <Border CornerRadius="10" BorderBrush="Black" BorderThickness="1" Width="250" Height="450" VerticalAlignment="Top" Margin="5">
+        <Border CornerRadius="10" BorderBrush="#00f0ff" BorderThickness="1" Width="270" Height="500" VerticalAlignment="Top" Margin="5,45,0,0">
             <StackPanel DockPanel.Dock="Left"
-         Orientation="Vertical" 
-         Width="240" 
-         Height="450"
-         VerticalAlignment="Top"
-         Background="Transparent" 
-         Margin="10">
+                Orientation="Vertical" 
+                Width="250" 
+                Height="500"
+                VerticalAlignment="Top"
+                Background="Transparent" 
+                Margin="5">
 
-                <Button Width="50" Content="Clear" Command="{Binding ClearCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="10,0,0,0">
-                    <Button.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="7"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
+
+                <util:CarData  Grid.Row="2" DataContext="{Binding CurrVozidlo}" Margin="5,0,5,0" x:Name="carData"/>
+                <Grid Margin="3,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+
+                    <Label Content="Model:" Grid.Column="0" Grid.Row="1"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+                 FontSize="12"
+                 FontWeight="Medium"
+                 FontFamily="Montserrat" 
+                 Height="28"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Name="uliceTitleTextBox" Text="{Binding Path=CurrModel.Nazev, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" Margin="27,10,0,0"
+          VerticalAlignment="Center"  FontSize="13"
+          FontWeight="Medium"
+          FontFamily="Montserrat"                            
+          Foreground="White"     
+          CaretBrush="LightGray"
+          BorderBrush="DarkGray"
+          BorderThickness="0,0,0,2"
+          Height="28"
+          TextWrapping="NoWrap"
+          VerticalContentAlignment="Center"
+          Padding="20,0,0,0" >
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="/Resources/Images/info.png"
+                     Stretch="None"
+                     AlignmentX="Left"/>
+                        </TextBox.Background>
+                    </TextBox>
+
+                    <Label Content="Znacka:" Grid.Column="0" Grid.Row="4"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+        FontSize="12"
+        FontWeight="Medium"
+        FontFamily="Montserrat"  />
+                    <ComboBox  Style="{StaticResource {x:Static ToolBar.ComboBoxStyleKey}}"  Grid.Column="1" Grid.Row="4" Name="comboBox" SelectedItem="{Binding Path=CurrZnacka.NazevZnacky, Mode=TwoWay}"
+   ItemsSource="{Binding Znacky}" Margin="27,10,0,0"
+   VerticalAlignment="Center" FontSize="13" FontWeight="Medium"
+   FontFamily="Montserrat" Width="165"
+   BorderThickness="0,0,0,2" Height="28"
+   VerticalContentAlignment="Center" Padding="20,0,0,0" Foreground="White" Background="#FF212529"
+   >
+                        <ComboBox.ItemContainerStyle>
+                            <Style BasedOn="{StaticResource ComboBoxItemStyle}" TargetType="{x:Type ComboBoxItem}" />
+                        </ComboBox.ItemContainerStyle>
+                    </ComboBox>
+                </Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,7,0,0">
+                    <Button Content="CLEAR" Command="{Binding ClearCommand}" HorizontalAlignment="Left" 
+                BorderThickness="0"
+                Foreground="White"
+                FontSize="12"
+                FontFamily="Montserrat"
+                Cursor="Hand"                           
+                Margin="0,5,0,0">
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#462AD8"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#28AEED"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Width="80" Height="36"
+                                CornerRadius="15,0,0,15"
+                                Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Content="ADD/UPDATE" Command="{Binding AddUpdateCommand}" HorizontalAlignment="Left" 
+                        BorderThickness="0"
+                        Foreground="White"
+                        FontSize="12"
+                        FontFamily="Montserrat"
+                        Cursor="Hand"    
+                        BorderBrush="Black"
+                        Margin="0,5,0,0">
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#462AD8"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#28AEED"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Width="80" Height="36"
+                                    CornerRadius="0"
+                                    Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Content="DELETE" Command="{Binding DeleteCommand}" HorizontalAlignment="Left" 
+                        BorderThickness="0"
+                        Foreground="White"
+                        FontSize="12"
+                        FontFamily="Montserrat"
+                        Cursor="Hand"                           
+                        Margin="0,5,0,0">
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#462AD8"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#28AEED"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Width="80" Height="36"
+                                    CornerRadius="0,15,15,0"
+                                    Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+
             </StackPanel>
         </Border>
-        <Grid Width="350" Height="350" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5">
+        <StackPanel Orientation="Vertical">
+            <Grid Width="340" Height="545" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,0">
+                <Border BorderBrush="#00f0ff" BorderThickness="1" CornerRadius="10" Background="#212529" Padding="2,0,3,3" Margin="0,45,0,0">
+                    <ListView x:Name="ServiceListView" 
+                      ItemsSource="{Binding Vozidla}" 
+                      Style="{StaticResource ListViewStyle}" 
+                      SelectedItem="{Binding SelectedVozidlo, Mode=TwoWay}"
+                      BorderThickness="0"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      Background="Transparent">
 
-            <Border BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="10" Background="#F0F0F0">
-                <ListView x:Name="CustListView" ItemsSource="{Binding Vozidla}" Style="{StaticResource ListViewStyle}" SelectedItem="{Binding SelectedVozidlo, Mode=TwoWay}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Vin" DisplayMemberBinding="{Binding Vin}" Width="130"/>
-                            <GridViewColumn Header="Spz" DisplayMemberBinding="{Binding Spz}" Width="120"/>
-                            <GridViewColumn Header="Rok Vyroby" DisplayMemberBinding="{Binding RokVyroby}" Width="90" />
-                        </GridView>
-                    </ListView.View>
-                    <!-- Apply the ListViewItem style to each ListViewItem -->
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemStyle}" />
-                    </ListView.ItemContainerStyle>
-                </ListView>
-            </Border>
-        </Grid>
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Foreground" Value="DarkGray"/>
+                                <Setter Property="FontFamily" Value="Montserrat"/>
+                                <Setter Property="FontWeight" Value="Medium"/>
+                                <Setter Property="IsHitTestVisible" Value="False"/>
+
+                            </Style>
+                            <Style x:Key="HeaderStyle1" TargetType="GridViewColumnHeader">
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontFamily" Value="Montserrat"/>
+                                <Setter Property="FontWeight" Value="Medium"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="GridViewColumnHeader">
+                                            <Border Background="#28AEED" CornerRadius="10,0,0,0" BorderBrush="White" BorderThickness="0.2">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <Style x:Key="HeaderStyle2" TargetType="GridViewColumnHeader">
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontFamily" Value="Montserrat"/>
+                                <Setter Property="FontWeight" Value="Medium"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="GridViewColumnHeader">
+                                            <Border Background="#28AEED" CornerRadius="0,0,0,0" BorderBrush="White" BorderThickness="0.2">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <Style x:Key="HeaderStyle3" TargetType="GridViewColumnHeader">
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontFamily" Value="Montserrat"/>
+                                <Setter Property="FontWeight" Value="Medium"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="GridViewColumnHeader">
+                                            <Border Background="#28AEED" CornerRadius="0,10,0,0" BorderBrush="White" BorderThickness="0.2">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Background" Value="#212529"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="White"/>
+                                        <Setter Property="Foreground" Value="Black"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#28AEED"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Trigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </ListView.Resources>
+
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="VIN" Width="185" HeaderContainerStyle="{StaticResource HeaderStyle1}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Vin}" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListViewItem}}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="SPZ" Width="100" HeaderContainerStyle="{StaticResource HeaderStyle2}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Spz}" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListViewItem}}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="ROK" Width="43" HeaderContainerStyle="{StaticResource HeaderStyle2}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding RokVyroby}" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListViewItem}}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
+            </Grid>
+        </StackPanel>
     </DockPanel>
 </UserControl>
