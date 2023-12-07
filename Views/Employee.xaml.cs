@@ -26,5 +26,6 @@ namespace Kozyrev_Hriha_SP.Views
             InitializeComponent();
             DataContext = employeeVM;
         }
+        
     }
 }

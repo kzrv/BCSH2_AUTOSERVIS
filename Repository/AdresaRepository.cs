@@ -37,7 +37,7 @@ namespace Kozyrev_Hriha_SP.Repository
             }
         }
 
-        public void UpdateAdresa(int id, Adresa adresa)
+        public async Task UpdateAdresa(int id, Adresa adresa)
         {
             using (var db = new OracleConnection(this.connection))
             {
@@ -49,7 +49,7 @@ namespace Kozyrev_Hriha_SP.Repository
                 p.Add("p_cislo_popisne", adresa.CisloPopisne, DbType.String);
                 p.Add("p_cislo_bytu", adresa.CisloBytu, DbType.String);
 
-                db.Execute("UPDATE_ADRESA", p, commandType: CommandType.StoredProcedure);
+                await db.ExecuteAsync("UPDATE_ADRESA", p, commandType: CommandType.StoredProcedure);
             }
         }
 

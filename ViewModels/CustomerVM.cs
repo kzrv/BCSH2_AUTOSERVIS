@@ -22,8 +22,8 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private bool _isLoading;
         
         
-        private readonly IZakaznikRepository zakaznikRepository;
-        private readonly IAdresaRepository adresaRepository;
+        private readonly IZakaznikRepository _zakaznikRepository;
+        private readonly IAdresaRepository _adresaRepository;
         private readonly IUserDataRepository _userDataRepository;
         private readonly NotificationService _notificationService;
 
@@ -96,13 +96,13 @@ namespace Kozyrev_Hriha_SP.ViewModels
             IsLoading = false;
             _userDataRepository = userDataRepository;
             _notificationService = notificationService;
-            zakaznikRepository = zakaznikRep;
+            _zakaznikRepository = zakaznikRep;
             Zakaznici = new ObservableCollection<Zakaznik>();
             ReloadData();
             DeleteCommand = new ViewModelCommand(DeleteItem, CanDeleteItem);
             AddUpdateCommand = new ViewModelCommand(AddUpdateItem, CanAddUpdateItem);
             ClearCommand = new ViewModelCommand(ClearBoxes, CanClearBoxes);
-            this.adresaRepository = adresaRepository;
+            _adresaRepository = adresaRepository;
             Zakaz = new Zakaznik();
             User = new UserData();
             Adresa = new Adresa();
@@ -113,7 +113,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         {
             try
             {
-                zakaznikRepository.DeleteZakaznik(SelectedZakaznik);
+                _zakaznikRepository.DeleteZakaznik(SelectedZakaznik);
                 Zakaznici.Remove(SelectedZakaznik);
                 Zakaz = new Zakaznik();
                 Adresa = new Adresa();
@@ -140,7 +140,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
             try
             {
-                var zakazniciList = await Task.Run(() => zakaznikRepository.GetAllZakaznici());
+                var zakazniciList = await Task.Run(() => _zakaznikRepository.GetAllZakaznici());
 
                 
                 Application.Current.Dispatcher.Invoke(() =>
@@ -169,7 +169,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 try
                 {
-                    zakaznikRepository.UpdateZakaznik(SelectedZakaznik, Adresa, User);
+                    await Task.Run(()=>_zakaznikRepository.UpdateZakaznik(SelectedZakaznik, Adresa, User));
                     ReloadData();
                     _notificationService.ShowNotification("CUSTOMER WAS UPDATED",NotificationType.Success);
                 }
@@ -185,7 +185,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 {
                     try
                     {
-                        await zakaznikRepository.AddNewZakaznik(Zakaz, Adresa, new NetworkCredential(User.Email, "abcde"));
+                        await _zakaznikRepository.AddNewZakaznik(Zakaz, Adresa, new NetworkCredential(User.Email, "abcde"));
                         _notificationService.ShowNotification("NEW CUSTOMER WAS CREATED WITH DEFAULT PASSWORD: abcde",NotificationType.Success);
                         Zakaz = new Zakaznik();
                         User = new UserData();
@@ -232,17 +232,11 @@ namespace Kozyrev_Hriha_SP.ViewModels
             if (SelectedZakaznik != null)
             {
                 IsLoading = true;
-                Adresa = await Task.Run(() => adresaRepository.GetAdresaById(SelectedZakaznik.IdAdresa)); 
+                Adresa = await Task.Run(() => _adresaRepository.GetAdresaById(SelectedZakaznik.IdAdresa)); 
                 User = await Task.Run(() => _userDataRepository.GetZakaznikEmailByUserId(SelectedZakaznik.IdUser));
                 Zakaz = SelectedZakaznik;
                 IsLoading = false;
             }
-            // else
-            // {
-            //     Zakaz = new Zakaznik();
-            //     User = new UserData();
-            //     Adresa = new Adresa();
-            // }
         }
     }
 }

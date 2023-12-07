@@ -69,7 +69,7 @@ namespace Kozyrev_Hriha_SP.Repository
                 throw new UserIsAlreadyExistsException($"User with email: {cred.UserName} is already exists");
             }
         }
-        public void UpdateUserEmail(UserData user)
+        public async Task UpdateUserEmail(UserData user)
         {
             using (var db = new OracleConnection(this.connection))
             {
@@ -78,7 +78,7 @@ namespace Kozyrev_Hriha_SP.Repository
                     var p = new DynamicParameters();
                     p.Add("p_id_user", user.UserId, DbType.Int32);
                     p.Add("p_email", user.Email, DbType.String);
-                    db.Execute("UPDATE_USER_DATA", p, commandType: CommandType.StoredProcedure);
+                    await db.ExecuteAsync("UPDATE_USER_DATA", p, commandType: CommandType.StoredProcedure);
                 }
                 catch (Exception e)
                 {

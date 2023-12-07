@@ -6,8 +6,19 @@
              xmlns:local="clr-namespace:Kozyrev_Hriha_SP.Utils"
              mc:Ignorable="d" 
              d:DesignHeight="170" d:DesignWidth="250" x:Name="employeeData">
+    <UserControl.Resources>
+        
+        
+
+        <!-- Определение нового стиля для DatePicker -->
+        <Style x:Key="CustomDatePickerStyle" TargetType="{x:Type DatePicker}">
+            <Setter Property="Template" Value="{StaticResource CustomDatePickerTemplate}"/>
+        </Style>
+        
+    </UserControl.Resources>
     <Grid DataContext="{Binding ElementName=employeeData, Path=DataContext}">
         <Grid>
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -19,7 +30,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-
+            
 
             <Label Content="Jmeno:" Grid.Column="0" Grid.Row="1"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
                         FontSize="12"
@@ -74,28 +85,37 @@
                         FontSize="12"
                         FontWeight="Medium"
                         FontFamily="Montserrat"/>
-            <TextBox Grid.Column="1" 
-                 Grid.Row="3"   
-                 Margin="3,10,0,0" 
-                 Name="mestoTextBox" 
-                 Text="{Binding Path=DenNastupu, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
-                 VerticalAlignment="Center" 
+            <DatePicker Grid.Column="1"
+                 Grid.Row="3"
+                 Margin="3,10,0,0"
+                 SelectedDate="{Binding Path=DenNastupu, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}"
+                 VerticalAlignment="Center"
                  FontSize="13"
                  FontWeight="Medium"
-                 FontFamily="Montserrat"                            
-                 Foreground="White"     
-                 CaretBrush="LightGray"
+                 FontFamily="Montserrat"
+                 Foreground="#212529"
+                 
+            
                  BorderBrush="DarkGray"
+            
                  BorderThickness="0,0,0,2"
                  Height="28"
                  VerticalContentAlignment="Center"
                  Padding="20,0,0,0">
-                <TextBox.Background>
-                    <ImageBrush ImageSource="/Resources/Images/calendar.png"
-                            Stretch="None"
-                            AlignmentX="Left"/>
-                </TextBox.Background>
-            </TextBox>
+                <DatePicker.Background>
+                    <ImageBrush ImageSource="/Resources/Images/calendar.png" 
+                                Stretch="None"
+                                AlignmentX="Left"/>
+                    
+                </DatePicker.Background>
+                
+                
+            </DatePicker>
+            <!-- <DatePicker Grid.Column="1"  -->
+            <!-- MouseLeftButtonDown="DatePicker_PreviewMouseLeftButtonDown" -->
+            <!-- Grid.Row="3"    -->
+            <!-- Margin="3,10,0,0"  -->
+            <!-- Text="{Binding Path=DenNastupu, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" /> -->
             <Label Content="Plat:" Grid.Column="0" Grid.Row="4"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
                         FontSize="12"
                         FontWeight="Medium"

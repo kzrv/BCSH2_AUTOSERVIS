@@ -24,5 +24,6 @@ namespace Kozyrev_Hriha_SP.Utils
         {
             InitializeComponent();
         }
+        
     }
 }

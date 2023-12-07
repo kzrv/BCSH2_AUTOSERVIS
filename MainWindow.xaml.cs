@@ -40,6 +40,7 @@ namespace Kozyrev_Hriha_SP
                 DragMove();
             }
         }
+        
 
         private void CloseApp_Click(object sender, RoutedEventArgs e)
         {

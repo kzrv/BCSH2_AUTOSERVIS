@@ -12,7 +12,7 @@ namespace Kozyrev_Hriha_SP.Repository
     {
         Task<UserData> CheckCredentials(NetworkCredential cred);
         Task<int> RegisterNewUserData(NetworkCredential cred);
-        void UpdateUserEmail(UserData user);
+        Task UpdateUserEmail(UserData user);
         void UpdateUserPassword(UserData user, NetworkCredential pass);
 
         Task<UserData> GetZakaznikEmailByUserId(int id);

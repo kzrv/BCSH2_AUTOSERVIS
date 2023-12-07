@@ -41,10 +41,10 @@ namespace Kozyrev_Hriha_SP
             services.AddSingleton<IUpdateUserProfileService, UpdateUserProfileService>();
             services.AddSingleton<LoginViewModel>();
             services.AddTransient<CustomerVM>();
-            services.AddSingleton<EmployeeVM>();
+            services.AddTransient<EmployeeVM>();
             services.AddSingleton<Login>();
             services.AddTransient<Customer>();
-            services.AddSingleton<Employee>();
+            services.AddTransient<Employee>();
             services.AddTransient<UserSettings>();
             services.AddTransient<UserSettingsVM>();
             services.AddSingleton<Order>();

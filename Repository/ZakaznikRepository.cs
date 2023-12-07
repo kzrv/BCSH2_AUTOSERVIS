@@ -44,23 +44,23 @@ namespace Kozyrev_Hriha_SP.Repository
                     new { Id = userId });
             }
         }
-        public void DeleteZakaznik(Zakaznik zakaznik)
+        public async Task DeleteZakaznik(Zakaznik zakaznik)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                db.Execute("DELETE FROM ZAKAZNICI WHERE ID_ZAKAZNIK = :Id", new { Id = zakaznik.Id });
+                await db.ExecuteAsync("DELETE FROM ZAKAZNICI WHERE ID_ZAKAZNIK = :Id", new { Id = zakaznik.Id });
                 //db.Execute("DELETE FROM ADRESY WHERE ID_ADRESA = :Id", new { Id = zakaznik.IdAdresa });
                 //userData.DeleteUserById(zakaznik.IdUser);
             }
         }
 
 
-        public void UpdateZakaznik(Zakaznik zakaznik, Adresa adresa,UserData user)
+        public async Task UpdateZakaznik(Zakaznik zakaznik, Adresa adresa,UserData user)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                userData.UpdateUserEmail(user);
-                adresaRepository.UpdateAdresa(zakaznik.IdAdresa, adresa);
+                await userData.UpdateUserEmail(user);
+                await adresaRepository.UpdateAdresa(zakaznik.IdAdresa, adresa);
                 var p = new DynamicParameters();
                 p.Add("p_jmeno", zakaznik.Jmeno, DbType.String);
                 p.Add("p_prijmeni", zakaznik.Prijmeni, DbType.String);
@@ -68,18 +68,15 @@ namespace Kozyrev_Hriha_SP.Repository
                 p.Add("p_poznamky", zakaznik.Poznamky, DbType.String);
                 p.Add("p_id", zakaznik.Id, DbType.Int32);
 
-                db.Execute("UPDATE_ZAKAZNIK", p, commandType: CommandType.StoredProcedure);
+                await db.ExecuteAsync("UPDATE_ZAKAZNIK", p, commandType: CommandType.StoredProcedure);
             }
         }
         
-
-        
-
         public async Task AddNewZakaznik(Zakaznik zakaznik, Adresa adresa, NetworkCredential cred)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                int idData = await userData.RegisterNewUserData(cred);
+                var idData = await userData.RegisterNewUserData(cred);
 
                 var parameters = new DynamicParameters();
                 parameters.Add("p_jmeno", zakaznik.Jmeno, DbType.String, ParameterDirection.Input);

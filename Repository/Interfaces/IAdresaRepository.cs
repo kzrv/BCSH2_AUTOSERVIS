@@ -10,7 +10,7 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
     public interface IAdresaRepository
     {
         int AddNewAdresa(Adresa adresa);
-        void UpdateAdresa(int id, Adresa adresa);
+        Task UpdateAdresa(int id, Adresa adresa);
         void DeleteAdresa(int id);
         Task<Adresa>GetAdresaById(int id);
     }
