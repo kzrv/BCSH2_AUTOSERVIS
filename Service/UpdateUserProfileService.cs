@@ -46,5 +46,22 @@ namespace Kozyrev_Hriha_SP.Service
         {
             return _adresaRepository.GetAdresaById(adresaId);
         }
+
+        public Task<Zamestnanec> GetZamestnanecByUserId(int id)
+        {
+            return _zamestnanecRepository.GetZamestnanecByUserId(id);
+        }
+
+        public Task UpdateZamestnanec(Zamestnanec zamestnanec, Adresa adresa, UserData user,BinaryContent binary)
+        {
+            if(binary!=null) _binaryContentRepository.UpdateBinaryContent(binary);
+            return _zamestnanecRepository.UpdateZamestnanec(zamestnanec, adresa, user);
+            
+        }
+
+        public Task<string> GetManager()
+        {
+            return _zamestnanecRepository.GetManager();
+        }
     }
 }

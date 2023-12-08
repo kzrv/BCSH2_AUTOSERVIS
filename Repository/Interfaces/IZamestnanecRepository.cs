@@ -14,5 +14,7 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
         Task DeleteZamestnanec(int id);
         Task UpdateZamestnanec(Zamestnanec zamestnanec, Adresa adresa,UserData userData);
         Task AddNewZamestnanec(Zamestnanec zamestnanec, Adresa adresa, NetworkCredential cred);
+        Task<Zamestnanec> GetZamestnanecByUserId(int id);
+        Task<string> GetManager();
     }
 }

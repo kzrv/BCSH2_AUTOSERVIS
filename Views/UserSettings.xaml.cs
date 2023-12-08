@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Kozyrev_Hriha_SP.Models.Enum;
 
 namespace Kozyrev_Hriha_SP.Views
 {
@@ -25,6 +26,28 @@ namespace Kozyrev_Hriha_SP.Views
         {
             InitializeComponent();
             DataContext = userSettingsVM;
+            var viewModel = DataContext as UserSettingsVM;
+            employeeData.picker.IsHitTestVisible = false;
+            DaysWorked.Visibility = Visibility.Hidden;
+            if (viewModel != null)
+            {
+
+                var rol = viewModel.UserRole;
+                if (rol == Role.ZAMESTNANEC)
+                {
+                    customerData.Visibility = Visibility.Collapsed;
+                    employeeData.Visibility = Visibility.Visible;
+                    ManazerVis.Visibility = Visibility.Visible;
+                    DaysVis.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    DaysVis.Visibility = Visibility.Collapsed;
+                    customerData.Visibility = Visibility.Visible;
+                    employeeData.Visibility = Visibility.Collapsed;
+                    ManazerVis.Visibility = Visibility.Collapsed;
+                }
+            }
         }
     }
 }

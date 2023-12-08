@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Kozyrev_Hriha_SP.Models.Enum;
 using Kozyrev_Hriha_SP.Service;
 using Kozyrev_Hriha_SP.Service.Interfaces;
 
@@ -24,7 +25,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private Adresa _adresa;
         private BinaryContent _binaryContent;
         private byte[] _userAvatarImg;
-        private NavigationVM _navigationVM;
+        private readonly NavigationVM _navigationVM;
         private bool _isPasswordChanging;
         private string _newPassword;
         private string _errorMessage;
@@ -32,6 +33,10 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private readonly IUpdateUserProfileService _profileService;
         private readonly NotificationService _notificationService;
+        private Role _userRole;
+        private Zamestnanec _currEmployee;
+        private string _manazer;
+        private string _days;
 
         public UserData CurrUser
         {
@@ -50,6 +55,15 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 _currZakaznik = value;
                 OnPropertyChanged(nameof(CurrZakaznik));
+            }
+        }
+        public Zamestnanec CurrEmployee
+        {
+            get { return _currEmployee; }
+            set
+            {
+                _currEmployee = value;
+                OnPropertyChanged(nameof(CurrEmployee));
             }
         }
 
@@ -109,6 +123,24 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 OnPropertyChanged(nameof(ErrorMessage));
             }
         }
+        public string Manazer
+        {
+            get { return _manazer; }
+            set
+            {
+                _manazer = value;
+                OnPropertyChanged(nameof(Manazer));
+            }
+        }
+        public string Days
+        {
+            get { return _days; }
+            set
+            {
+                _days = value;
+                OnPropertyChanged(nameof(Days));
+            }
+        }
         public string ErrorMessagePass
         {
             get { return _errorMessagePass; }
@@ -117,6 +149,11 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 _errorMessagePass = value;
                 OnPropertyChanged(nameof(ErrorMessagePass));
             }
+        }
+        public Role UserRole
+        {
+            get { return _userRole; }
+            set { _userRole = value; OnPropertyChanged(nameof(UserRole)); }
         }
 
 
@@ -134,10 +171,27 @@ namespace Kozyrev_Hriha_SP.ViewModels
             SelectImageCommand = new ViewModelCommand(SelectImage);
             ChangePasswordCommand = new ViewModelCommand(ChangePassword);
             SaveCommand = new ViewModelCommand(SaveChanges, CanSaveChanges);
-            CurrZakaznik = _profileService.GetZakaznikById(CurrUser.UserId);
-            Adresa = _profileService.GetUserAdresa(CurrZakaznik.IdAdresa).Result;
             SavePassCommand = new ViewModelCommand(SaveChangesPass, CanSaveChangesPass);
+            ChooseRole();
+        }
 
+        private void ChooseRole()
+        {
+            UserRole = CurrUser.RoleUser;
+            if (UserRole == Role.ZAKAZNIK || UserRole == Role.ADMIN) //TODO ADMIN TO ZAMESTNANEC
+            {
+                CurrZakaznik = _profileService.GetZakaznikById(CurrUser.UserId); //TODO ASYNC
+                Adresa = _profileService.GetUserAdresa(CurrZakaznik.IdAdresa).Result;
+            }
+            else
+            {
+                CurrEmployee = _profileService.GetZamestnanecByUserId(CurrUser.UserId).Result; //TODO ASYNC
+                Adresa = _profileService.GetUserAdresa(CurrEmployee.IdAdresa).Result;
+                Manazer = _profileService.GetManager().Result;
+                DateTime today = DateTime.Today; 
+                TimeSpan timeSpan = today - CurrEmployee.DenNastupu;
+                Days = timeSpan.Days.ToString();
+            }
         }
 
         private bool CanSaveChangesPass(object obj)
@@ -162,7 +216,8 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private bool CanSaveChanges(object obj)
         {
-            if (!string.IsNullOrEmpty(CurrZakaznik.Jmeno) &&
+            if (CurrZakaznik!=null && 
+                !string.IsNullOrEmpty(CurrZakaznik.Jmeno) &&
                 !string.IsNullOrEmpty(CurrZakaznik.Prijmeni) &&
                 !string.IsNullOrEmpty(CurrZakaznik.TelCislo) &&
                 !string.IsNullOrEmpty(Adresa.Ulice) &&
@@ -170,6 +225,19 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 !string.IsNullOrEmpty(Adresa.CisloPopisne) &&
                 !string.IsNullOrEmpty(Adresa.Psc) &&
                 !string.IsNullOrEmpty(CurrUser.Email))
+            {
+                ErrorMessage = "";
+                return true;
+            }
+            if(CurrEmployee!=null 
+                    && !string.IsNullOrEmpty(CurrEmployee.Jmeno)
+                    && !string.IsNullOrEmpty(CurrEmployee.Prijmeni)
+                    && CurrEmployee.Plat>=0 &&
+                    !string.IsNullOrEmpty(Adresa.Ulice) &&
+                    !string.IsNullOrEmpty(Adresa.Mesto) &&
+                    !string.IsNullOrEmpty(Adresa.CisloPopisne) &&
+                    !string.IsNullOrEmpty(Adresa.Psc) &&
+                    !string.IsNullOrEmpty(CurrUser.Email))
             {
                 ErrorMessage = "";
                 return true;
@@ -182,7 +250,9 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private void SaveChanges(object obj)
         {
-            _profileService.UpdateZakaznikProfile(CurrUser, CurrZakaznik, BinaryContent, Adresa);
+            if (UserRole == Role.ZAKAZNIK || UserRole == Role.ADMIN)
+                _profileService.UpdateZakaznikProfile(CurrUser, CurrZakaznik, BinaryContent, Adresa); //TODO ASYNC
+            else _profileService.UpdateZamestnanec(CurrEmployee, Adresa, CurrUser, BinaryContent);
             _navigationVM.BinaryImageData = UserAvatarImg;
             _notificationService.ShowNotification("CHANGES WAS SAVED", NotificationType.Success);
         }

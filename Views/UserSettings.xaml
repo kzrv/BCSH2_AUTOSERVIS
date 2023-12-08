@@ -14,6 +14,7 @@
     <UserControl.Resources>
         <util:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter"/>
         <util:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <util:RoleToVisibilityConverter x:Key="RoleToVisibilityConverter"/>
 
     </UserControl.Resources>
     
@@ -37,13 +38,40 @@
 
         
         <StackPanel Grid.Column="0" Orientation="Vertical" Width="300" Grid.ColumnSpan="2" Margin="30,60,0,0" HorizontalAlignment="Left">
+            <StackPanel Margin="5,0,0,0" Orientation="Horizontal" Name="ManazerVis">
+                <Label Content="Director:" Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+                       FontSize="12"
+                       FontWeight="Medium"
+                       FontFamily="Montserrat"/>
+                
+                <TextBox Width="204" Text="{Binding Manazer}"
+                         IsReadOnly="True"
+                         Margin="26,5,0,0"
+                         VerticalAlignment="Center"  FontSize="13"
+                         FontWeight="Medium"
+                         FontFamily="Montserrat"                            
+                         Foreground="White"     
+                         CaretBrush="LightGray"
+                         BorderBrush="DarkGray"
+                         BorderThickness="0,0,0,2"
+                         Height="28"
+                         VerticalContentAlignment="Center"
+                         Padding="20,0,0,0">
+                    <TextBox.Background>
+                        <ImageBrush ImageSource="/Resources/Images/user-icon.png"
+                                    Stretch="None"
+                                    AlignmentX="Left"/>
+                    </TextBox.Background>
+                </TextBox>
+            </StackPanel>
             <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
                 <Label Content="Email:" Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
                        FontSize="12"
                        FontWeight="Medium"
                        FontFamily="Montserrat"/>
+                
                 <TextBox Width="204" Text="{Binding CurrUser.Email}"
-                         Margin="41,10,0,0"
+                         Margin="41,5,0,0"
                          VerticalAlignment="Center"  FontSize="13"
                          FontWeight="Medium"
                          FontFamily="Montserrat"                            
@@ -62,6 +90,36 @@
                 </TextBox>
             </StackPanel>
             <util:CustomerData Grid.Row="2" DataContext="{Binding CurrZakaznik}" Margin="5,0,5,5" x:Name="customerData"/>
+            <util:EmployeeData Grid.Row="2" DataContext="{Binding CurrEmployee}" Margin="5,0,5,5" x:Name="employeeData"
+                               />
+            <StackPanel Margin="5,0,0,0" Orientation="Horizontal" Name="DaysVis">
+            <Label Content="Days worked:" Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+                   FontSize="12"
+                   FontWeight="Medium"
+                   FontFamily="Montserrat"/>
+                
+            <TextBox Width="204" Text="{Binding Days}"
+                     x:Name="DaysWorked"
+                     IsReadOnly="True"
+                     Margin="2,5,0,0"
+                     VerticalAlignment="Center"  FontSize="13"
+                     FontWeight="Medium"
+                     FontFamily="Montserrat"                            
+                     Foreground="White"     
+                     CaretBrush="LightGray"
+                     BorderBrush="DarkGray"
+                     BorderThickness="0,0,0,2"
+                     Height="28"
+                     VerticalContentAlignment="Center"
+                     Padding="20,0,0,0">
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/Resources/Images/info.png"
+                                Stretch="None"
+                                AlignmentX="Left"/>
+                </TextBox.Background>
+            </TextBox>
+        </StackPanel>
+            
             <util:AddressData Grid.Row="2" DataContext="{Binding Adresa}" Margin="5,0,5,5" x:Name="addressData"/>
             <TextBlock Text="{Binding ErrorMessage}"
                        Foreground="#D7596D"
@@ -290,6 +348,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
+                
             </StackPanel>
 
             

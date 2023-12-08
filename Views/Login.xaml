@@ -127,6 +127,7 @@
                          Command="{Binding LoginCommand}"
                          BorderThickness="0"
                          Content="LOG IN"
+                         IsDefault="True"
                          Foreground="White"
                          FontSize="12"
                          FontFamily="Montserrat"

@@ -81,5 +81,25 @@ namespace Kozyrev_Hriha_SP.Repository
             }
 
         }
+
+        public async Task<Zamestnanec> GetZamestnanecByUserId(int id)
+        {
+            using (var db = new OracleConnection(this._connection))
+            {
+                return await db.QueryFirstOrDefaultAsync<Zamestnanec>("SELECT id_zamestnanec AS IdZamestnanec, jmeno, prijmeni, den_nastupu as DenNastupu, plat, ID_ADRESA AS IdAdresa, id_manazer as IdManazer, ID_USER AS IdUser FROM zamestnanci where id_user= :Id",new {Id = id});
+            }
+        }
+
+        public async Task<string> GetManager()
+        {
+            using (var db = new OracleConnection(this._connection))
+            {
+                var res =  await db.QueryFirstOrDefaultAsync("select * from director_view");
+                var dictionary = (IDictionary<string, object>)res;
+                var stringResult = string.Join(" ", dictionary.Select(kv => $"{kv.Value}"));
+                return stringResult;
+                
+            }
+        }
     }
 }

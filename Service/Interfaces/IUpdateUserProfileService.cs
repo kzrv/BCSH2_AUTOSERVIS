@@ -11,5 +11,8 @@ namespace Kozyrev_Hriha_SP.Service.Interfaces
         void UpdateUserPassword(UserData userData,NetworkCredential cred);
         Zakaznik GetZakaznikById(int id);
         Task<Adresa> GetUserAdresa(int adresaId);
+        Task<Zamestnanec> GetZamestnanecByUserId(int id);
+        Task UpdateZamestnanec(Zamestnanec zamestnanec, Adresa adresa, UserData user,BinaryContent binary);
+        Task<string> GetManager();
     }
 }
