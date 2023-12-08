@@ -26,11 +26,12 @@
             </Grid.RowDefinitions>
 
 
-            <Label Content="Vin:" Grid.Column="0" Grid.Row="1"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+            <Label Content="Vin:" Grid.Column="0" Grid.Row="1"  VerticalAlignment="Center" Foreground="DarkGray"
+                        Margin="3,10,0,0"
                         FontSize="12"
                         FontWeight="Medium"
                         FontFamily="Montserrat" 
-                        Height="50"/>
+                        Height="28"/>
             <TextBox Grid.Column="1" Grid.Row="1" Name="uliceTitleTextBox" Text="{Binding Path=Vin, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" Margin="8,10,0,0"
                  VerticalAlignment="Center"  FontSize="13"
                  FontWeight="Medium"

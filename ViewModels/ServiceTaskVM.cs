@@ -18,7 +18,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
     {
         private ObservableCollection<Sluzba> _sluzby;
         private Sluzba _selectedSluzba;
-        private Sluzba currSluzba;
+        private Sluzba _currSluzba;
 
         private ObservableCollection<Ukol> _ukoly;
         private Ukol _selectedUkol;
@@ -53,10 +53,10 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         public Sluzba CurrSluzba
         {
-            get { return currSluzba; }
+            get { return _currSluzba; }
             set
             {
-                currSluzba = value;
+                _currSluzba = value;
                 OnPropertyChanged(nameof(CurrSluzba));
             }
         }
@@ -119,8 +119,8 @@ namespace Kozyrev_Hriha_SP.ViewModels
             Sluzby = new ObservableCollection<Sluzba>();
             Ukoly = new ObservableCollection<Ukol>();
             ReloadData();
-            ClearSluzbaCommand = new ViewModelCommand(ClearSluzba, CanClearSluzba);
-            ClearUkolCommand = new ViewModelCommand(ClearUkol, CanClearUkol);
+            ClearSluzbaCommand = new ViewModelCommand(ClearSluzba);
+            ClearUkolCommand = new ViewModelCommand(ClearUkol);
             DeleteUkolCommand = new ViewModelCommand(DeleteUkol, CanDeleteUkol);
             DeleteSluzbaCommand = new ViewModelCommand(DeleteSluzba, CanDeleteSluzba);
             AddUpdateUkolCommand = new ViewModelCommand(AddUpdateUkol, CanAddUpdateUkol);
@@ -198,20 +198,10 @@ namespace Kozyrev_Hriha_SP.ViewModels
             Ukoly.Clear();
         }
 
-        private bool CanClearSluzba(object obj)
-        {
-            return SelectedSluzba != null;
-        }
-
         private void ClearUkol(object obj)
         {
             SelectedUkol = null;
             CurrUkol = new Ukol();
-        }
-
-        private bool CanClearUkol(object obj)
-        {
-            return SelectedUkol != null;
         }
 
         private void DeleteUkol(object obj)
@@ -221,11 +211,11 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 _ukolRepository.DeleteUkol(SelectedUkol);
                 Ukoly.Remove(SelectedUkol);
                 SelectedUkol = null;
-                _notificationService.ShowNotification("UKOL WAS DELETED", NotificationType.Success);
+                _notificationService.ShowNotification("TASK WAS DELETED", NotificationType.Success);
             }
             catch (Exception e)
             {
-                _notificationService.ShowNotification("ERROR DURING DELETING UKOL", NotificationType.Error);
+                _notificationService.ShowNotification("ERROR DURING DELETING TASK", NotificationType.Error);
                 throw;
             }
         }
@@ -243,11 +233,11 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 Sluzby.Remove(SelectedSluzba);
                 SelectedSluzba = null;
                 SelectedUkol = null;
-                _notificationService.ShowNotification("SLUZBA WAS DELETED", NotificationType.Success);
+                _notificationService.ShowNotification("SERVICE WAS DELETED", NotificationType.Success);
             }
             catch (Exception e)
             {
-                _notificationService.ShowNotification("ERROR DURING DELETING SLUZBA", NotificationType.Error);
+                _notificationService.ShowNotification("ERROR DURING DELETING SERVICE", NotificationType.Error);
                 throw;
             }
         }
@@ -264,7 +254,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 try
                 {
                     _ukolRepository.UpdateUkol(SelectedUkol);
-                    _notificationService.ShowNotification("UKOL WAS UPDATED", NotificationType.Success);
+                    _notificationService.ShowNotification("TASK WAS UPDATED", NotificationType.Success);
                 }
                 catch (Exception e)
                 {
@@ -278,7 +268,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 {
 
                     await _ukolRepository.AddNewUkol(CurrUkol, SelectedSluzba.IdSluzba);
-                    _notificationService.ShowNotification("NEW UKOL WAS ADDED", NotificationType.Success);
+                    _notificationService.ShowNotification("NEW TASK WAS ADDED", NotificationType.Success);
                     CurrUkol = new Ukol();
 
 
@@ -306,7 +296,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 try
                 {
                     _sluzbaRepository.UpdateSluzba(SelectedSluzba);
-                    _notificationService.ShowNotification("SLUZBA WAS UPDATED", NotificationType.Success);
+                    _notificationService.ShowNotification("SERVICE WAS UPDATED", NotificationType.Success);
                 }
                 catch (Exception e)
                 {
@@ -319,7 +309,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 try
                 {
                     await _sluzbaRepository.AddNewSluzba(CurrSluzba);
-                    _notificationService.ShowNotification("NEW SLUZBA WAS ADDED", NotificationType.Success);
+                    _notificationService.ShowNotification("NEW TASK WAS ADDED", NotificationType.Success);
                     CurrSluzba = new Sluzba();
 
                 }
@@ -332,9 +322,9 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private bool CanAddUpdateSluzba(object obj)
         {
-            return SelectedSluzba != null ||
-                (!string.IsNullOrEmpty(CurrSluzba.NazevSluzby) &&
-                 !string.IsNullOrEmpty(CurrSluzba.Popis));
+            Console.WriteLine(CurrSluzba.NazevSluzby + " " + CurrSluzba.Popis);
+            return SelectedSluzba != null || (!string.IsNullOrEmpty(CurrSluzba.NazevSluzby) &&
+                                              !string.IsNullOrEmpty(CurrSluzba.Popis));
         }
     }
 }

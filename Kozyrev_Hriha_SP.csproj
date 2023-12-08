@@ -206,6 +206,7 @@
     <Compile Include="Utils\Exceptions\UserIsAlreadyExistsException.cs" />
     <Compile Include="Utils\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="Utils\PasswordEncryptor.cs" />
+    <Compile Include="Utils\RoleToVisibilityConverter.cs" />
     <Compile Include="Utils\ServiceData.xaml.cs">
       <DependentUpon>ServiceData.xaml</DependentUpon>
     </Compile>

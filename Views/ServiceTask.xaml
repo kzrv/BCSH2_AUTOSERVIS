@@ -67,7 +67,7 @@
                 Margin="5">
 
 
-                <util:ServiceData  Grid.Row="2" DataContext="{Binding CurrSluzba}" Margin="5,0,5,0" x:Name="serviceData"/>
+                <util:ServiceData  Grid.Row="2" DataContext="{Binding CurrSluzba,UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0" x:Name="serviceData"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,7,0,0">
                     <Button Content="CLEAR" Command="{Binding ClearSluzbaCommand}" HorizontalAlignment="Left" 
                 BorderThickness="0"
@@ -162,7 +162,7 @@
                     </Button>
                 </StackPanel>
 
-                <util:TaskData  Grid.Row="2" DataContext="{Binding CurrUkol}" Margin="5,0,5,0" x:Name="taskData"/>
+                <util:TaskData  Grid.Row="2" DataContext="{Binding CurrUkol, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0" x:Name="taskData"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,7,0,0">
                     <Button Content="CLEAR" Command="{Binding ClearUkolCommand}" HorizontalAlignment="Left" 
 BorderThickness="0"

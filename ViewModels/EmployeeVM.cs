@@ -103,7 +103,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             _adresaRepository = adresaRepository;
             DeleteCommand = new ViewModelCommand(DeleteItem, CanDeleteItem);
             AddUpdateCommand = new ViewModelCommand(AddUpdateItem, CanAddUpdateItem);
-            ClearCommand = new ViewModelCommand(ClearBoxes, CanClearBoxes);
+            ClearCommand = new ViewModelCommand(ClearBoxes);
             _adresaRepository = adresaRepository;
             Zamestnanci = new ObservableCollection<Zamestnanec>();
             ReloadData();
@@ -223,11 +223,6 @@ namespace Kozyrev_Hriha_SP.ViewModels
             User = new UserData();
             Zamest = new Zamestnanec();
             Zamest.DenNastupu = DateTime.Now;
-        }
-
-        private bool CanClearBoxes(object parameter)
-        {
-            return SelectedZamestnanec != null;
         }
         
         private async Task FetchAdresaForSelectedZamestnanec()

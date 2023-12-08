@@ -67,7 +67,7 @@ namespace Kozyrev_Hriha_SP.ViewModels.RegistrationViewModel
         }
         private void Cancel()
         {
-            CurrentView = login;
+            CurrentView = navigation.HomePage;
         }
         
         private async void Registering()

@@ -16,24 +16,20 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private string _userName;
         private SecureString _password;
         private string _errorMessage;
-        private bool isAuthorized;
         private UserData _userData;
-        private readonly ILogger<LoginViewModel> _logger;
-        private bool isZamestananec;
-        private bool isAdmin;
+        
+        private readonly NavigationVM _navigation;
+        private readonly IUserDataRepository _userDataRepository;
 
-        private readonly IUserDataRepository userDataRepository;
-        public event Action<bool> AuthorizationChanged;
-
-        private bool isLoggingIn;
+        private bool _isLoggingIn;
         public bool IsLoggingIn
         {
-            get { return isLoggingIn; }
+            get { return _isLoggingIn; }
             set
             {
-                if (isLoggingIn != value)
+                if (_isLoggingIn != value)
                 {
-                    isLoggingIn = value;
+                    _isLoggingIn = value;
                     OnPropertyChanged(nameof(IsLoggingIn));
                 }
             }
@@ -91,31 +87,14 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 OnPropertyChanged(nameof(ErrorMessage));
             }
         }
-
-        public bool IsAuthorized
-        {
-            get { return isAuthorized; }
-            set
-            {
-                if (isAuthorized != value)
-                {
-                    isAuthorized = value;
-                    OnPropertyChanged(nameof(IsAuthorized));
-                    AuthorizationChanged?.Invoke(value); // Notify about the change
-                }
-            }
-        }
-
         public ICommand LoginCommand { get; }
-        public ICommand LogoutCommand { get; }
-        public ICommand ShowPasswordCommand { get; }
 
-        public LoginViewModel(IUserDataRepository userData, ILogger<LoginViewModel> logger)
+
+        public LoginViewModel(IUserDataRepository userData, NavigationVM navigation)
         {
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
-            LogoutCommand = new ViewModelCommand(ExecuteLogoutCommand, CanExecuteLogoutCommand);
-            userDataRepository = userData;
-            _logger = logger;
+            _userDataRepository = userData;
+            _navigation = navigation;
         }
 
         private async void ExecuteLoginCommand(object obj)
@@ -125,28 +104,26 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 IsLoggingIn = true;
 
 
-                UserData user = await Task.Run(() => userDataRepository.CheckCredentials(new NetworkCredential(UserName, Password)));
+                UserData user = await Task.Run(() => _userDataRepository.CheckCredentials(new NetworkCredential(UserName, Password)));
                 if (user == null)
                 {
                     ErrorMessage = "* Invalid username or password";
                 }
                 else
                 {
-                    User = user;
-                    IsAuthorized = true;
-                    ErrorMessage = "";
+                    _navigation.Authorized(user);
                 }
 
             }
             catch (OracleException e)
             {
                 ErrorMessage = "* Error connecting to server";
-                _logger.LogError(e.Message);
+                
             }
             catch (Exception ex)
             {
                 ErrorMessage = "* An error occurred during login";
-                _logger.LogError(ex.Message);
+                
             }
             finally
             {
@@ -170,19 +147,6 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
             return validData;
         }
-
-        private void ExecuteLogoutCommand(object obj)
-        {
-            IsAuthorized = false;
-            User = null;
-            UserName = null;
-            Password.Clear(); //cant do it
-            //TODO: Clear Password box after logout
-        }
-
-        private bool CanExecuteLogoutCommand(object obj)
-        {
-            return IsAuthorized;
-        }
+        
     }
 }

@@ -49,8 +49,6 @@ namespace Kozyrev_Hriha_SP.Repository
             using (var db = new OracleConnection(this.connection))
             {
                 await db.ExecuteAsync("DELETE FROM ZAKAZNICI WHERE ID_ZAKAZNIK = :Id", new { Id = zakaznik.Id });
-                //db.Execute("DELETE FROM ADRESY WHERE ID_ADRESA = :Id", new { Id = zakaznik.IdAdresa });
-                //userData.DeleteUserById(zakaznik.IdUser);
             }
         }
 

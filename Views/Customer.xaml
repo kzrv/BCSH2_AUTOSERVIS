@@ -72,7 +72,7 @@
                            FontSize="12"
                            FontWeight="Medium"
                            FontFamily="Montserrat"/>
-                    <TextBox Width="153" Text="{Binding User.Email}"
+                    <TextBox Width="153" Text="{Binding User.Email,UpdateSourceTrigger=PropertyChanged}"
                              Margin="41,10,0,0"
                              VerticalAlignment="Center"  FontSize="13"
                              FontWeight="Medium"
@@ -91,8 +91,8 @@
                         </TextBox.Background>
                     </TextBox>
                 </StackPanel>
-                <util:CustomerData  Grid.Row="2" DataContext="{Binding Zakaz}" Margin="5,0,5,0" x:Name="customerData"/>
-                <util:AddressData Grid.Row="2" DataContext="{Binding Adresa}" Margin="5" x:Name="addressData"/>
+                <util:CustomerData  Grid.Row="2" DataContext="{Binding Zakaz ,UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0" x:Name="customerData" />
+                <util:AddressData Grid.Row="2" DataContext="{Binding Adresa, UpdateSourceTrigger=PropertyChanged}" Margin="5" x:Name="addressData"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,7,0,0">
                     <Button Content="CLEAR" Command="{Binding ClearCommand}" HorizontalAlignment="Left" 
                     BorderThickness="0"

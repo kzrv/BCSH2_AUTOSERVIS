@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Kozyrev_Hriha_SP.Models.Enum;
 using Kozyrev_Hriha_SP.Service;
 using Serilog;
 
@@ -23,11 +24,11 @@ namespace Kozyrev_Hriha_SP.ViewModels
     {
         private object _currentView;
         private readonly IServiceProvider ServiceProvider;
-        private bool isAuthorized;
-        private LoginViewModel _loginViewModel;
+       // private LoginViewModel _loginViewModel;
         private UserData _authorizedUser;
+        private Role _userRole;
         private string _userName;
-        private byte[] _binaryImageData; // Property to hold binary image data
+        private byte[] _binaryImageData;
         private readonly NotificationService _notificationService;
 
         private readonly IBinaryContentRepository binaryContentRepository;
@@ -41,12 +42,19 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 OnPropertyChanged(nameof(BinaryImageData));
             }
         }
+        
 
 
         public string UserName
         {
             get { return _userName; }
             set { _userName = value; OnPropertyChanged(nameof(UserName)); }
+        }
+        
+        public Role UserRole
+        {
+            get { return _userRole; }
+            set { _userRole = value; OnPropertyChanged(nameof(UserRole)); }
         }
 
         public UserData AuthorizedUser
@@ -61,26 +69,11 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 OnPropertyChanged(nameof(AuthorizedUser));
             }
         }
-
-
-
-        public bool IsAuthorized
-        {
-            get { return isAuthorized; }
-            set
-            {
-                if (isAuthorized != value)
-                {
-                    isAuthorized = value;
-                    OnPropertyChanged(nameof(IsAuthorized));
-                }
-            }
-        }
-
         public NavigationVM(IServiceProvider serviceProvider, NotificationService notificationService)
         {
             _notificationService = notificationService;
             ServiceProvider = serviceProvider;
+            _userRole = Role.UNLOGIN;
             HomeCommand = new ViewModelCommand(Home);
             CustomerCommand = new ViewModelCommand(Customer);
             EmployeeCommand = new ViewModelCommand(Employee);
@@ -88,47 +81,35 @@ namespace Kozyrev_Hriha_SP.ViewModels
             RegCommand = new ViewModelCommand(Reg);
             UserSettingsCommand = new ViewModelCommand(UserSettings);
             CurrentView = HomePage;
-            _loginViewModel = serviceProvider.GetService<LoginViewModel>();
             binaryContentRepository = serviceProvider.GetService<IBinaryContentRepository>();
             OrderCommand = new ViewModelCommand(Order);
             VisitCommand = new ViewModelCommand(Visit);
             CarCommand = new ViewModelCommand(Car);
             LogsCommand = new ViewModelCommand(Logs);
             ServiceTaskCommand = new ViewModelCommand(ServiceTask);
-            _loginViewModel.AuthorizationChanged += OnAuthorizationChanged;
-        }
-        private void OnAuthorizationChanged(bool isAuthorized)
-        {
-            IsAuthorized = _loginViewModel.IsAuthorized;
+            LogoutCommand = new ViewModelCommand(UnAuthorized);
 
-            if (IsAuthorized)
-            {
-                HandleAuthorizedUser();
-                _notificationService.ShowNotification("YOU HAVE SUCCESSFULLY LOGGED IN", NotificationType.Success);
-            }
-            else
-            {
-                HandleUnauthorizedUser();
-                _notificationService.ShowNotification("YOU HAVE SUCCESSFULLY LOGGED OUT", NotificationType.Error);
-            }
 
         }
-
-        private void HandleAuthorizedUser()
+        public void Authorized(UserData usr)
         {
+            AuthorizedUser = usr;
+            UserRole = AuthorizedUser.RoleUser;
+            _notificationService.ShowNotification("YOU HAVE SUCCESSFULLY LOGGED IN", NotificationType.Success);
             CurrentView = HomePage;
-            AuthorizedUser = _loginViewModel.User;
             UserName = AuthorizedUser?.Email.Split('@')[0];
-
             BinaryImageData = binaryContentRepository.GetBlobById(AuthorizedUser.IdContent);
         }
 
-        private void HandleUnauthorizedUser()
+        private void UnAuthorized(object obj)
         {
             CurrentView = HomePage;
+            UserRole = Role.UNLOGIN;
             AuthorizedUser = null;
             UserName = null;
-            BinaryImageData = null;
+            BinaryImageData = null; 
+            _notificationService.ShowNotification("YOU HAVE SUCCESSFULLY LOGGED OUT", NotificationType.Success);
+
         }
 
         public object CurrentView
@@ -142,7 +123,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         }
         public HomeVM HomePage { get { return ServiceProvider.GetRequiredService<HomeVM>(); } }
 
-        public ICommand LogoutCommand => _loginViewModel.LogoutCommand;
+        public ICommand LogoutCommand { get; }
         public ICommand HomeCommand { get; set; }
         public ICommand CustomerCommand { get; set; }
         public ICommand EmployeeCommand { get; set; }

@@ -101,7 +101,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             ReloadData();
             DeleteCommand = new ViewModelCommand(DeleteItem, CanDeleteItem);
             AddUpdateCommand = new ViewModelCommand(AddUpdateItem, CanAddUpdateItem);
-            ClearCommand = new ViewModelCommand(ClearBoxes, CanClearBoxes);
+            ClearCommand = new ViewModelCommand(ClearBoxes);
             _adresaRepository = adresaRepository;
             Zakaz = new Zakaznik();
             User = new UserData();
@@ -109,11 +109,11 @@ namespace Kozyrev_Hriha_SP.ViewModels
             
         }
 
-        private void DeleteItem(object parameter)
+        private async void DeleteItem(object parameter)
         {
             try
             {
-                _zakaznikRepository.DeleteZakaznik(SelectedZakaznik);
+                await Task.Run(()=>_zakaznikRepository.DeleteZakaznik(SelectedZakaznik));
                 Zakaznici.Remove(SelectedZakaznik);
                 Zakaz = new Zakaznik();
                 Adresa = new Adresa();
@@ -221,10 +221,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             User = new UserData();
             Adresa = new Adresa();
         }
-        private bool CanClearBoxes(object parameter)
-        {
-            return SelectedZakaznik != null;
-        }
+        
 
         
         private async void FetchAdresaForSelectedZakaznik()

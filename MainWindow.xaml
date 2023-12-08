@@ -16,8 +16,7 @@
         Background="Transparent" MouseDown="Window_MouseDown">
 
     <Window.Resources>
-        <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <conv:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
+        <Menu:RoleToVisibilityConverter x:Key="RoleToVisibilityConverter"/>
         <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
     </Window.Resources>
 
@@ -85,7 +84,7 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                     Command="{Binding LoginCommand}"
                     IsChecked="True"
-                    Visibility="{Binding IsAuthorized, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                    Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='UNLOGIN'}">
 
                         <Grid>
 
@@ -105,7 +104,7 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                     Command="{Binding RegCommand}"
                     IsChecked="True"
-                    Visibility="{Binding IsAuthorized, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                    Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='UNLOGIN'}">
 
                         <Grid>
 
@@ -126,7 +125,7 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding CustomerCommand}"
                               IsChecked="True"
-                              Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+                              Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
 
                         <Grid>
 
@@ -147,7 +146,7 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding EmployeeCommand}"
                               IsChecked="True"
-                              Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+                              Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
 
                         <Grid>
 
@@ -165,7 +164,7 @@
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding OrderCommand}"                              
-                              Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+                              Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
 
                         <Grid>
 
@@ -182,7 +181,7 @@
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding VisitCommand}"                             
-                              Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+                              Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
 
                         <Grid>
 
@@ -199,7 +198,7 @@
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding CarCommand}"                             
-                              Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+                              Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
 
                         <Grid>
 
@@ -217,7 +216,7 @@
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding ServiceTaskCommand}"                             
-                              Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+                              Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
 
                         <Grid>
 
@@ -234,7 +233,7 @@
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                                 Command="{Binding LogsCommand}"                             
-                                Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
 
                         <Grid>
 
@@ -258,7 +257,7 @@
                 <Menu:Btn Style="{StaticResource BtnStyle}"
                           Cursor="Hand"
                           Command="{Binding UserSettingsCommand}"
-                          Visibility="{Binding IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ZAKAZNIK,ZAMESTNANEC,ADMIN'}"
                           VerticalAlignment="Bottom"
                           Margin="0,0,0,10"
                           >

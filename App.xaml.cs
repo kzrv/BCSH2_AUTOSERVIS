@@ -40,10 +40,10 @@ namespace Kozyrev_Hriha_SP
             services.AddSingleton<IUkolRepository, UkolRepository>(provider => new UkolRepository(connectionString));
             services.AddSingleton<ILogRepository, LogRepository>(provider => new LogRepository(connectionString));
             services.AddSingleton<IUpdateUserProfileService, UpdateUserProfileService>();
-            services.AddSingleton<LoginViewModel>();
+            services.AddTransient<LoginViewModel>();
             services.AddTransient<CustomerVM>();
             services.AddTransient<EmployeeVM>();
-            services.AddSingleton<Login>();
+            services.AddTransient<Login>();
             services.AddTransient<Customer>();
             services.AddTransient<Employee>();
             services.AddTransient<UserSettings>();
@@ -52,8 +52,8 @@ namespace Kozyrev_Hriha_SP
             services.AddSingleton<OrderVM>();
             services.AddSingleton<Visit>();
             services.AddSingleton<VisitVM>();
-            services.AddSingleton<Car>();
-            services.AddSingleton<CarVM>();
+            services.AddTransient<Car>();
+            services.AddTransient<CarVM>();
             services.AddSingleton<ServiceTask>();
             services.AddSingleton<ServiceTaskVM>();
             services.AddTransient<Logs>();
@@ -62,10 +62,7 @@ namespace Kozyrev_Hriha_SP
 
             services.AddSingleton<HomeVM>();
             services.AddTransient<RegistrationControlVM>();
-            services.AddLogging(loggingBuilder =>
-                loggingBuilder.AddSerilog(dispose: true));
             services.AddTransient<RegistrationControl>();
-
 
             services.AddSingleton<MainWindow>();
             services.AddSingleton<NavigationVM>();
@@ -77,11 +74,7 @@ namespace Kozyrev_Hriha_SP
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             ServiceProvider = serviceCollection.BuildServiceProvider();
-            Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .WriteTo.File("logs/autoService_log.txt", rollingInterval: RollingInterval.Day)
-            .WriteTo.Console()
-            .CreateLogger();
+           
             Serilog.Debugging.SelfLog.Enable(Console.Error);
             var navigate = ServiceProvider.GetRequiredService<NavigationVM>();
             var notif = ServiceProvider.GetRequiredService<NotificationService>();
