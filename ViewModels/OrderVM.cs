@@ -45,7 +45,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public OrderVM(IObjednavkaRepository objednavkaRepository)
         {
             _objednavkaRepository = objednavkaRepository;
-            Objednavky = new ObservableCollection<Objednavka>(objednavkaRepository.GetAllObjednavky());
+            Objednavky = new ObservableCollection<Objednavka>(objednavkaRepository.GetAllObjednavky().Result);
         }
     }
 }

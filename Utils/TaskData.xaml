@@ -22,13 +22,13 @@
             </Grid.RowDefinitions>
 
 
-            <Label Content="Nazev:" Grid.Column="0" Grid.Row="1"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+            <Label Content="Name:" Grid.Column="0" Grid.Row="1"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
                         FontSize="12"
                         FontWeight="Medium"
                         FontFamily="Montserrat" />
             <TextBox Grid.Column="1" Grid.Row="1"   
                  
-                 Text="{Binding Path=Nazev, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
+                 Text="{Binding Path=Nazev, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged}" 
                  Margin="3,10,0,0"
                  VerticalAlignment="Center"  FontSize="13"
                  FontWeight="Medium"
@@ -46,14 +46,14 @@
                                  AlignmentX="Left"/>
                 </TextBox.Background>
             </TextBox>
-            <Label Content="Popis:" Grid.Column="0" Grid.Row="2"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+            <Label Content="Description:" Grid.Column="0" Grid.Row="2"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
                         FontSize="12"
                         FontWeight="Medium"
                         FontFamily="Montserrat"/>
             <TextBox Grid.Column="1" Grid.Row="2" 
                  Margin="3,10,0,0" 
                  Name="pscTextBox" 
-                 Text="{Binding Path=Popis, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
+                 Text="{Binding Path=Popis, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged}" 
                  VerticalAlignment="Center"   
                  FontSize="13"
                  FontWeight="Medium"
@@ -80,7 +80,7 @@
                  Grid.Row="3"   
                  Margin="3,10,0,0" 
                  Name="mestoTextBox" 
-                 Text="{Binding Path=Cena, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
+                 Text="{Binding Path=Coast, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged}" 
                  VerticalAlignment="Center" 
                  FontSize="13"
                  FontWeight="Medium"

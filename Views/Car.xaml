@@ -317,7 +317,7 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="ROK" Width="43" HeaderContainerStyle="{StaticResource HeaderStyle2}">
+                                <GridViewColumn Header="ROK" Width="42" HeaderContainerStyle="{StaticResource HeaderStyle3}">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding RokVyroby}" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListViewItem}}"/>

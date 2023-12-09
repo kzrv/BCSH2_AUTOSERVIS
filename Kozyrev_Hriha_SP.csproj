@@ -214,6 +214,7 @@
       <DependentUpon>TaskData.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CarVM.cs" />
+    <Compile Include="ViewModels\CustomerOrderVM.cs" />
     <Compile Include="ViewModels\CustomerVM.cs" />
     <Compile Include="ViewModels\EmployeeVM.cs" />
     <Compile Include="ViewModels\HomeVM.cs" />
@@ -235,6 +236,9 @@
     </Compile>
     <Compile Include="Views\Customer.xaml.cs">
       <DependentUpon>Customer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerOrder.xaml.cs">
+      <DependentUpon>CustomerOrder.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee.xaml.cs">
       <DependentUpon>Employee.xaml</DependentUpon>
@@ -339,6 +343,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CustomerOrder.xaml" />
     <Page Include="Views\Employee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -50,14 +50,16 @@ namespace Kozyrev_Hriha_SP
             services.AddTransient<UserSettingsVM>();
             services.AddSingleton<Order>();
             services.AddSingleton<OrderVM>();
-            services.AddSingleton<Visit>();
-            services.AddSingleton<VisitVM>();
+            services.AddTransient<Visit>();
+            services.AddTransient<VisitVM>();
             services.AddTransient<Car>();
             services.AddTransient<CarVM>();
-            services.AddSingleton<ServiceTask>();
-            services.AddSingleton<ServiceTaskVM>();
+            services.AddTransient<ServiceTask>();
+            services.AddTransient<ServiceTaskVM>();
             services.AddTransient<Logs>();
-            services.AddSingleton<LogsVM>();
+            services.AddTransient<LogsVM>();
+            services.AddTransient<CustomerOrder>();
+            services.AddTransient<CustomerOrderVM>();
             services.AddSingleton<NotificationService>();
 
             services.AddSingleton<HomeVM>();

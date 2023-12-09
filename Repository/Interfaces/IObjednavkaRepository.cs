@@ -8,6 +8,9 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
 {
     public interface IObjednavkaRepository
     {
-        List<Objednavka> GetAllObjednavky();
+        Task<List<Objednavka>> GetAllObjednavky();
+        Task<List<Objednavka>> GetAllObjednavkyByIdZakaznik(int id);
+        Task AddNewObjednavka(Objednavka objednavka);
+        Task DeleteObjednavka(int id);
     }
 }

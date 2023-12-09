@@ -29,7 +29,7 @@
                         FontFamily="Montserrat" />
             <TextBox Grid.Column="1" Grid.Row="1"   
                  
-                 Text="{Binding Path=NazevSluzby, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
+                 Text="{Binding Path=NazevSluzby,  Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged}" 
                  Margin="3,10,0,0"
                  VerticalAlignment="Top"  FontSize="13"
                  FontWeight="Medium"
@@ -55,7 +55,7 @@
             <TextBox Grid.Column="1" Grid.Row="2" 
                  Margin="3,10,0,0" 
                  Name="pscTextBox" 
-                 Text="{Binding Path=Popis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=true, NotifyOnValidationError=true}" 
+                 Text="{Binding Path=Popis, Mode=TwoWay,  ValidatesOnExceptions=true, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged}" 
                  VerticalAlignment="Top"   
                  FontSize="13"
                  FontWeight="Medium"

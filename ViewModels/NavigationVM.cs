@@ -88,6 +88,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             LogsCommand = new ViewModelCommand(Logs);
             ServiceTaskCommand = new ViewModelCommand(ServiceTask);
             LogoutCommand = new ViewModelCommand(UnAuthorized);
+            CustomerOrderCommand = new ViewModelCommand(CustomerOrder);
 
 
         }
@@ -123,6 +124,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         }
         public HomeVM HomePage { get { return ServiceProvider.GetRequiredService<HomeVM>(); } }
 
+        public ICommand CustomerOrderCommand { get; }
         public ICommand LogoutCommand { get; }
         public ICommand HomeCommand { get; set; }
         public ICommand CustomerCommand { get; set; }
@@ -146,6 +148,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private void UserSettings(object obj) => CurrentView = ServiceProvider.GetRequiredService<UserSettings>();
         private void Order(object obj) => CurrentView = ServiceProvider.GetRequiredService<Order>();
+        private void CustomerOrder(object obj) => CurrentView = ServiceProvider.GetRequiredService<CustomerOrder>();
         private void Visit(object obj) => CurrentView = ServiceProvider.GetRequiredService<Visit>();
         private void Car(object obj) => CurrentView = ServiceProvider.GetRequiredService<Car>();
         private void ServiceTask(object obj) => CurrentView = ServiceProvider.GetRequiredService<ServiceTask>();

@@ -322,7 +322,6 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private bool CanAddUpdateSluzba(object obj)
         {
-            Console.WriteLine(CurrSluzba.NazevSluzby + " " + CurrSluzba.Popis);
             return SelectedSluzba != null || (!string.IsNullOrEmpty(CurrSluzba.NazevSluzby) &&
                                               !string.IsNullOrEmpty(CurrSluzba.Popis));
         }

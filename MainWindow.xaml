@@ -138,6 +138,24 @@
 
                         </Grid>
 
+                        <!--// CustomerOrder // -->
+                    </Menu:Btn>
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding CustomerOrderCommand}"
+                              IsChecked="True"
+                              Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ZAKAZNIK'}">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/clipboard.png"
+                                   Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Order"
+                                       Style="{StaticResource Text_Style}"/>
+
+
+                        </Grid>
+
 
                     </Menu:Btn>
 

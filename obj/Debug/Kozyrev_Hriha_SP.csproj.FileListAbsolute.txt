@@ -593,3 +593,5 @@ C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Utils\CarData.baml
 C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Utils\ServiceData.baml
 C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Utils\TaskData.baml
 C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\Logs.baml
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\CustomerOrder.g.cs
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\CustomerOrder.baml
