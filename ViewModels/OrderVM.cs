@@ -28,6 +28,8 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private ObservableCollection<Zakaznik> _zakaznici;
         private Zakaznik _selectedZakaznik;
 
+        private bool _isLoading;
+
         private readonly IObjednavkaRepository _objednavkaRepository;
         private readonly ISluzbaRepository _sluzbaRepository;
         private readonly IZakaznikRepository _zakaznikRepository;
@@ -104,6 +106,17 @@ namespace Kozyrev_Hriha_SP.ViewModels
             }
         }
 
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+
+            }
+        }
+
 
         public ICommand AddUpdateCommand { get; }
         public ICommand DeleteCommand { get; }
@@ -127,6 +140,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private async void LoadData()
         {
+            IsLoading = true;
             try
             {
                 var objednavkyList = await Task.Run(() => _objednavkaRepository.GetAllObjednavky());
@@ -155,6 +169,10 @@ namespace Kozyrev_Hriha_SP.ViewModels
             catch (Exception ex)
             {
                 _notificationService.ShowNotification(ex.Message, NotificationType.Error);
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
 

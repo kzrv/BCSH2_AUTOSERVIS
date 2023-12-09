@@ -14,12 +14,12 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
         Task<List<Model>> GetAllModely();
         Task<List<Znacka>> GetAllZnacky();
 
-        Model GetModelById(int idModel);
-        Znacka GetZnackaById(int idZnacka);
-        Znacka GetZnackaIdByName(string name);
+        Task<Model> GetModelById(int idModel);
+        Task<Znacka> GetZnackaById(int idZnacka);
+        Task<int> GetZnackaIdByName(string name);
 
-        void DeleteVozidlo(Vozidlo vozidlo);
-        void UpdateVozidlo(Vozidlo vozidlo, Model model, Znacka znacka);
+        Task DeleteVozidlo(Vozidlo vozidlo);
+        Task UpdateVozidlo(Vozidlo vozidlo, Model model, Znacka znacka);
         Task AddNewVozidlo(Vozidlo vozidlo, Model model, Znacka znacka);
     }
 }

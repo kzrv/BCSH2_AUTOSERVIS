@@ -26,6 +26,8 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private Model _currModel;
 
+        private bool _isLoading;
+
         private readonly IVozidloRepository _vozidloRepository;
         private readonly NotificationService _notificationService;
 
@@ -80,7 +82,15 @@ namespace Kozyrev_Hriha_SP.ViewModels
             }
         }
 
-
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
 
 
         public Model CurrModel
@@ -115,6 +125,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private async void LoadVozidla()
         {
+            IsLoading = true;
             try
             {
                 var vozidlaList = await Task.Run(() => _vozidloRepository.GetAllVozidla());
@@ -138,23 +149,27 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 _notificationService.ShowNotification(ex.Message, NotificationType.Error);
             }
+            finally
+            {
+                IsLoading = false;
+            }
 
         }
 
-        private void GetCurrModel()
+        private async void GetCurrModel()
         {
             if (SelectedVozidlo != null)
             {
-                CurrModel = _vozidloRepository.GetModelById(SelectedVozidlo.IdModel);
+                CurrModel = await _vozidloRepository.GetModelById(SelectedVozidlo.IdModel);
                 CurrVozidlo = SelectedVozidlo;
             }
         }
 
-        private void GetCurrZnacka()
+        private async void GetCurrZnacka()
         {
             if (SelectedVozidlo != null)
             {
-                CurrZnacka = _vozidloRepository.GetZnackaById(CurrModel.IdZnacka);
+                CurrZnacka = await _vozidloRepository.GetZnackaById(CurrModel.IdZnacka);
             }
         }
 
@@ -171,11 +186,11 @@ namespace Kozyrev_Hriha_SP.ViewModels
             return SelectedVozidlo != null;
         }
 
-        private void DeleteVozidlo(object obj)
+        private async void DeleteVozidlo(object obj)
         {
             try
             {
-                _vozidloRepository.DeleteVozidlo(SelectedVozidlo);
+                await _vozidloRepository.DeleteVozidlo(SelectedVozidlo);
                 Vozidla.Remove(SelectedVozidlo);
                 CurrVozidlo = new Vozidlo();
                 CurrModel = new Model();
@@ -202,7 +217,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 try
                 {
-                    _vozidloRepository.UpdateVozidlo(SelectedVozidlo, CurrModel, CurrZnacka);
+                    await _vozidloRepository.UpdateVozidlo(SelectedVozidlo, CurrModel, CurrZnacka);
                     LoadVozidla();
                     _notificationService.ShowNotification("VOZIDLO WAS UPDATED", NotificationType.Success);
                 }
@@ -217,7 +232,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
                 try
                 {
-                    CurrZnacka.IdZnacka = _vozidloRepository.GetZnackaIdByName(CurrZnacka.NazevZnacky).IdZnacka;
+                    CurrZnacka.IdZnacka = await _vozidloRepository.GetZnackaIdByName(CurrZnacka.NazevZnacky);
                     await _vozidloRepository.AddNewVozidlo(CurrVozidlo, CurrModel, CurrZnacka);
                     _notificationService.ShowNotification("NEW VOZIDLO WAS CREATED ", NotificationType.Success);
                     CurrVozidlo = new Vozidlo();

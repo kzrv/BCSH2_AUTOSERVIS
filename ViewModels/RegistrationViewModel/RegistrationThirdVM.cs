@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Security;
+using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -15,12 +17,12 @@ namespace Kozyrev_Hriha_SP.ViewModels.RegistrationViewModel
         private string _email;
         private SecureString _password;
         private bool isLoggingIn;
-        private string _errorMessage;
+        private string _error;
 
 
         public ICommand FinishCommand { get; }
         public ICommand BackCommand { get; }
-        
+
 
         public RegistrationThirdVM(Action<object> finish, Action<object> back)
         {
@@ -39,17 +41,17 @@ namespace Kozyrev_Hriha_SP.ViewModels.RegistrationViewModel
                 }
             }
         }
-        public string ErrorMessage
+        public string Error
         {
             get
             {
-                return _errorMessage;
+                return _error;
             }
 
             set
             {
-                _errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
+                _error = value;
+                OnPropertyChanged(nameof(Error));
             }
         }
         public string Email
@@ -80,8 +82,25 @@ namespace Kozyrev_Hriha_SP.ViewModels.RegistrationViewModel
         }
         private bool CanExecuteNextCommand(object obj)
         {
-            return !string.IsNullOrEmpty(Email) &&
-               Password!=null && Password.Length > 0;
+            var regex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            if (string.IsNullOrEmpty(Email))
+            {
+                Error = "* Fill in the email field";
+                return false;
+            }
+            else if (!regex.IsMatch(Email))
+            {
+                Error = "* Invalid email format";
+                return false;
+            }
+            else if (Password == null || Password.Length == 0)
+            {
+                Error = "* Fill in the password field";
+                return false;
+            }
+
+            Error = "";
+            return true;
         }
     }
 }

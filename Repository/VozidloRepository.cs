@@ -36,11 +36,11 @@ namespace Kozyrev_Hriha_SP.Repository
             }
         }
 
-        public void DeleteVozidlo(Vozidlo vozidlo)
+        public async Task DeleteVozidlo(Vozidlo vozidlo)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                db.Execute("DELETE FROM VOZIDLA WHERE id_vozidlo = :Id", new { Id = vozidlo.IdVozidlo });
+                await db.ExecuteAsync("DELETE FROM VOZIDLA WHERE id_vozidlo = :Id", new { Id = vozidlo.IdVozidlo });
             }
         }
 
@@ -71,37 +71,37 @@ namespace Kozyrev_Hriha_SP.Repository
             }
         }
 
-        public Model GetModelById(int idModel)
+        public async Task<Model> GetModelById(int idModel)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                return db.QueryFirstOrDefault<Model>(
+                return await db.QueryFirstOrDefaultAsync<Model>(
                     "SELECT id_model AS IdModel, nazev, id_znacka AS IdZnacka FROM modely where id_model = :Id",
                     new { Id = idModel });
             }
         }
 
-        public Znacka GetZnackaById(int idZnacka)
+        public async Task<Znacka> GetZnackaById(int idZnacka)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                return db.QueryFirstOrDefault<Znacka>(
+                return await db.QueryFirstOrDefaultAsync<Znacka>(
                     "SELECT id_znacka AS IdZnacka, nazev_znacky AS NazevZnacky FROM znacky where id_znacka = :Id",
                     new { Id = idZnacka });
             }
         }
 
-        public Znacka GetZnackaIdByName(string name)
+        public async Task<int> GetZnackaIdByName(string name)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                return db.QueryFirstOrDefault<Znacka>(
-                    "SELECT id_znacka AS IdZnacka, nazev_znacky AS NazevZnacky FROM znacky where nazev_znacky = :Name",
+                return await db.QueryFirstOrDefaultAsync<int>(
+                    "SELECT id_znacka AS IdZnacka FROM znacky where nazev_znacky = :Name",
                     new { Name = name });
             }
         }
 
-        public void UpdateVozidlo(Vozidlo vozidlo, Model model, Znacka znacka)
+        public async Task UpdateVozidlo(Vozidlo vozidlo, Model model, Znacka znacka)
         {
             using (var db = new OracleConnection(this.connection))
             {
@@ -116,7 +116,7 @@ namespace Kozyrev_Hriha_SP.Repository
                 parameters.Add("p_id_znacka", znacka.IdZnacka);
                 parameters.Add("p_nazev_znacky", znacka.NazevZnacky);
 
-                db.Execute("UPDATE_VOZIDLO", parameters, commandType: CommandType.StoredProcedure);
+                await db.ExecuteAsync("UPDATE_VOZIDLO", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }

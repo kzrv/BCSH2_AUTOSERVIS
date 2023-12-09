@@ -37,11 +37,11 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
             }
         }
 
-        public void DeleteUkol(Ukol ukol)
+        public async Task DeleteUkol(Ukol ukol)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                db.Execute("DELETE FROM UKOLY WHERE ID_UKOL = :Id", new { Id = ukol.IdUkol });
+                await db.ExecuteAsync("DELETE FROM UKOLY WHERE ID_UKOL = :Id", new { Id = ukol.IdUkol });
             }
         }
 
@@ -54,7 +54,7 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
             }
         }
 
-        public void UpdateUkol(Ukol ukol)
+        public async Task UpdateUkol(Ukol ukol)
         {
             using (var db = new OracleConnection(this.connection))
             {
@@ -65,7 +65,7 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
                 p.Add("p_popis", ukol.Popis, DbType.String);
                 p.Add("p_cena", ukol.Cena, DbType.Double);
 
-                db.Execute("UPDATE_UKOL", p, commandType: CommandType.StoredProcedure);
+                await db.ExecuteAsync("UPDATE_UKOL", p, commandType: CommandType.StoredProcedure);
             }
         }
 

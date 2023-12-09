@@ -11,6 +11,6 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
     public interface ILogRepository
     {
         Task<List<Logg>> GetAllLogy();
-        void DeleteAllLogs();
+        Task DeleteAllLogs();
     }
 }

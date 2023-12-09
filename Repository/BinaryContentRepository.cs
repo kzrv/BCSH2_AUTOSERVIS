@@ -20,16 +20,16 @@ namespace Kozyrev_Hriha_SP.Repository
             this.connection = connection;
         }
 
-        public byte[] GetBlobById(int id)
+        public async Task<byte[]> GetBlobById(int id)
         {
             byte[] data = null;
             using (var db = new OracleConnection(this.connection))
             {
-                data = db.Query<byte[]>("SELECT binarni_obsah As BinarniObsah FROM binary_content WHERE ID_CONTENT = :Id", new { Id = id }).FirstOrDefault();
+                data = await db.QueryFirstOrDefaultAsync<byte[]>("SELECT binarni_obsah As BinarniObsah FROM binary_content WHERE ID_CONTENT = :Id", new { Id = id });
             }
             return data;
         }
-        public void UpdateBinaryContent(BinaryContent binaryContent)
+        public async Task UpdateBinaryContent(BinaryContent binaryContent)
         {
             using (var db = new OracleConnection(this.connection))
             {
@@ -46,7 +46,7 @@ namespace Kozyrev_Hriha_SP.Repository
                         operace = :operace
                     WHERE id_content = :id_content";
 
-                int rowsAffected = db.Execute(updateQuery, new
+                int rowsAffected = await db.ExecuteAsync(updateQuery, new
                 {
                     binarni_obsah = binaryContent.BinarniObsah,
                     nazev_souboru = binaryContent.NazevSouboru,

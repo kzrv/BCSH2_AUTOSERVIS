@@ -57,6 +57,13 @@
                VerticalAlignment="Center"
                Margin="10,10,0,0"/>
 
+        <Canvas>
+            <ProgressBar Name="loadingIndicator"
+                 IsIndeterminate="True"
+                 Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                 Canvas.Left="200" Canvas.Top="20" 
+                 Width="222"/>
+        </Canvas>
 
         <Border CornerRadius="10" BorderBrush="#00f0ff" BorderThickness="1" Width="270" Height="500" VerticalAlignment="Top" Margin="5,45,0,0">
             <StackPanel DockPanel.Dock="Left"

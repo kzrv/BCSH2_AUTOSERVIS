@@ -93,14 +93,14 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
 
         }
-        public void Authorized(UserData usr)
+        public async void Authorized(UserData usr)
         {
             AuthorizedUser = usr;
             UserRole = AuthorizedUser.RoleUser;
             _notificationService.ShowNotification("YOU HAVE SUCCESSFULLY LOGGED IN", NotificationType.Success);
             CurrentView = HomePage;
             UserName = AuthorizedUser?.Email.Split('@')[0];
-            BinaryImageData = binaryContentRepository.GetBlobById(AuthorizedUser.IdContent);
+            BinaryImageData = await binaryContentRepository.GetBlobById(AuthorizedUser.IdContent);
         }
 
         private void UnAuthorized(object obj)

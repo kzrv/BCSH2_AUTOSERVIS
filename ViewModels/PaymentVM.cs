@@ -18,6 +18,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private ObservableCollection<PlatbaWrapper> _platby;
         private PlatbaWrapper _selectedPlatba;
 
+        private bool _isLoading;
 
         private readonly IPlatbaRepository _platbaRepository;
         private readonly NotificationService _notificationService;
@@ -48,6 +49,17 @@ namespace Kozyrev_Hriha_SP.ViewModels
             }
         }
 
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+
+            }
+        }
+
         public ICommand DeleteCommand { get; }
         public PaymentVM(IPlatbaRepository platbaRepository, NotificationService notificationService)
         {
@@ -61,6 +73,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private async void LoadPlatby()
         {
+            IsLoading = true;
             try
             {
                 var platbyList = await Task.Run(() => _platbaRepository.GetAllPlatby());
@@ -80,6 +93,10 @@ namespace Kozyrev_Hriha_SP.ViewModels
             catch (Exception ex)
             {
                 _notificationService.ShowNotification(ex.Message, NotificationType.Error);
+            }
+            finally
+            {
+                IsLoading = false;
             }
 
         }

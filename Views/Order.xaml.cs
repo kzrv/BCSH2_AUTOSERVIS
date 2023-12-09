@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kozyrev_Hriha_SP.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace Kozyrev_Hriha_SP.Views
     /// </summary>
     public partial class Order : UserControl
     {
-        public Order()
+        public Order(OrderVM orderVM)
         {
             InitializeComponent();
+            DataContext = orderVM;
         }
     }
 }

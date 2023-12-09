@@ -16,7 +16,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
     public class LogsVM : ViewModelBase
     {
         private ObservableCollection<Logg> _logy;
-
+        private bool _isLoading;
 
         private readonly ILogRepository _logRepository;
         private readonly NotificationService _notificationService;
@@ -30,6 +30,17 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 OnPropertyChanged(nameof(Logy));
             }
 
+        }
+
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+
+            }
         }
 
         public ICommand DeleteCommand { get; }
@@ -56,12 +67,11 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private async void LoadData()
         {
-
+            IsLoading = true;
 
             try
             {
                 var logyList = await Task.Run(() => _logRepository.GetAllLogy());
-
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
@@ -75,6 +85,10 @@ namespace Kozyrev_Hriha_SP.ViewModels
             catch (Exception ex)
             {
                 _notificationService.ShowNotification(ex.Message, NotificationType.Error);
+            }
+            finally
+            {
+                IsLoading = false;
             }
 
         }

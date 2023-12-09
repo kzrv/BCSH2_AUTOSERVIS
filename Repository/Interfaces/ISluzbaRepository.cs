@@ -10,8 +10,8 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
     public interface ISluzbaRepository
     {
         Task<List<Sluzba>> GetAllSluzby();
-        void DeleteSluzba(Sluzba sluzba);
-        void UpdateSluzba(Sluzba sluzba);
+        Task DeleteSluzba(Sluzba sluzba);
+        Task UpdateSluzba(Sluzba sluzba);
 
         Task AddNewSluzba(Sluzba sluzba);
     }

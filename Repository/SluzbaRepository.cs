@@ -20,11 +20,11 @@ namespace Kozyrev_Hriha_SP.Repository
             this.connection = connection;
         }
 
-        public void DeleteSluzba(Sluzba sluzba)
+        public async Task DeleteSluzba(Sluzba sluzba)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                db.Execute("DELETE FROM SLUZBY WHERE id_sluzba = :Id", new { Id = sluzba.IdSluzba });
+                await db.ExecuteAsync("DELETE FROM SLUZBY WHERE id_sluzba = :Id", new { Id = sluzba.IdSluzba });
             }
         }
 
@@ -37,7 +37,7 @@ namespace Kozyrev_Hriha_SP.Repository
             }
         }
 
-        public void UpdateSluzba(Sluzba sluzba)
+        public async Task UpdateSluzba(Sluzba sluzba)
         {
             using (var db = new OracleConnection(this.connection))
             {
@@ -47,7 +47,7 @@ namespace Kozyrev_Hriha_SP.Repository
                 p.Add("p_id_sluzba", sluzba.IdSluzba, DbType.Int32);
 
 
-                db.Execute("UPDATE_SLUZBA", p, commandType: CommandType.StoredProcedure);
+                await db.ExecuteAsync("UPDATE_SLUZBA", p, commandType: CommandType.StoredProcedure);
             }
         }
 

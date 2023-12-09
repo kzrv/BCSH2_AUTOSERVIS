@@ -28,6 +28,8 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private ObservableCollection<Zamestnanec> _zamestnanci;
         private Zamestnanec _selectedZamestnanec;
 
+        private bool _isLoading;
+
         private readonly IProhlidkaRepository _prohlidkaRepository;
         private readonly IObjednavkaRepository _objednavkaRepository;
         private readonly IVozidloRepository _vozidloRepository;
@@ -126,6 +128,17 @@ namespace Kozyrev_Hriha_SP.ViewModels
             }
         }
 
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+
+            }
+        }
+
         public ICommand AddUpdateCommand { get; }
         public ICommand DeleteCommand { get; }
         public ICommand ClearCommand { get; }
@@ -151,6 +164,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
 
         private async void LoadData()
         {
+            IsLoading = true;
             try
             {
                 var prohlidkyList = await Task.Run(() => _prohlidkaRepository.GetAllProhlidky());
@@ -184,6 +198,10 @@ namespace Kozyrev_Hriha_SP.ViewModels
             catch (Exception ex)
             {
                 _notificationService.ShowNotification(ex.Message, NotificationType.Error);
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
 

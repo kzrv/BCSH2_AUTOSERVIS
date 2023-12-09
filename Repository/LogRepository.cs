@@ -19,11 +19,11 @@ namespace Kozyrev_Hriha_SP.Repository
             this.connection = connection;
         }
 
-        public void DeleteAllLogs()
+        public async Task DeleteAllLogs()
         {
             using (var db = new OracleConnection(this.connection))
             {
-                db.Execute("DELETE FROM logy");
+                await db.ExecuteAsync("DELETE FROM logy");
 
             }
         }

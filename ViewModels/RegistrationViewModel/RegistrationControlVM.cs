@@ -18,17 +18,17 @@ namespace Kozyrev_Hriha_SP.ViewModels.RegistrationViewModel
     public class RegistrationControlVM : INotifyPropertyChanged
     {
         private object currentView;
-        private  RegistrationVM registration;
-        private  RegistrationSecondVM registration2;
-        private  RegistrationThirdVM registration3;
-        private  LoginViewModel login;
+        private RegistrationVM registration;
+        private RegistrationSecondVM registration2;
+        private RegistrationThirdVM registration3;
+        private LoginViewModel login;
         private bool isRegistered;
         private readonly IZakaznikRepository zakaznikRepository;
         public event Action<bool> AuthorizationChanged;
         private readonly NavigationVM navigation;
 
 
-        public RegistrationControlVM(IZakaznikRepository zakaznikRepository,NavigationVM navigation)
+        public RegistrationControlVM(IZakaznikRepository zakaznikRepository, NavigationVM navigation)
         {
             this.zakaznikRepository = zakaznikRepository;
             this.navigation = navigation;
@@ -52,7 +52,7 @@ namespace Kozyrev_Hriha_SP.ViewModels.RegistrationViewModel
         }
         private void GoToStep1()
         {
-            
+
             CurrentView = registration;
         }
 
@@ -69,7 +69,7 @@ namespace Kozyrev_Hriha_SP.ViewModels.RegistrationViewModel
         {
             CurrentView = navigation.HomePage;
         }
-        
+
         private async void Registering()
         {
             try
@@ -87,13 +87,14 @@ namespace Kozyrev_Hriha_SP.ViewModels.RegistrationViewModel
                 adresa.CisloBytu = registration2.Apart;
                 registration3.IsLoggingIn = true;
                 NetworkCredential cred = new NetworkCredential(registration3.Email, registration3.Password);
-                await Task.Run(()=> zakaznikRepository.AddNewZakaznik(zakaznik, adresa, cred));
+                await Task.Run(() => zakaznikRepository.AddNewZakaznik(zakaznik, adresa, cred));
                 registration3.IsLoggingIn = false;
                 navigation.GoToLoginPage();
-                
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
-                registration3.ErrorMessage = ex.Message;
+                registration3.Error = ex.Message;
                 registration3.IsLoggingIn = false;
             }
 

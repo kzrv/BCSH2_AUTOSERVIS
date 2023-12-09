@@ -20,7 +20,7 @@ namespace Kozyrev_Hriha_SP.Repository
         {
             this.connection = connection;
         }
-        public int AddNewAdresa(Adresa adresa)
+        public async Task<int> AddNewAdresa(Adresa adresa)
         {
             using (var db = new OracleConnection(this.connection))
             {
@@ -31,7 +31,7 @@ namespace Kozyrev_Hriha_SP.Repository
                 var parameters = new DynamicParameters(adresa);
                 parameters.Add("IdAdresa", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                db.Execute(sqlQuery, parameters);
+                await db.ExecuteAsync(sqlQuery, parameters);
 
                 return parameters.Get<int>("IdAdresa");
             }
@@ -63,11 +63,11 @@ namespace Kozyrev_Hriha_SP.Repository
             }
         }
 
-        public void DeleteAdresa(int id)
+        public async Task DeleteAdresa(int id)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                db.Execute("DELETE FROM adresy where id_adresa = :Id", new { Id = id });
+                await db.ExecuteAsync("DELETE FROM adresy where id_adresa = :Id", new { Id = id });
             }
         }
     }

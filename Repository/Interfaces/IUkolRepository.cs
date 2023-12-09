@@ -10,8 +10,8 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
     public interface IUkolRepository
     {
         Task<List<Ukol>> GetUkolyBySluzbaID(int id);
-        void DeleteUkol(Ukol ukol);
-        void UpdateUkol(Ukol ukol);
+        Task DeleteUkol(Ukol ukol);
+        Task UpdateUkol(Ukol ukol);
 
         Task AddNewUkol(Ukol ukol, int IdSluzba);
     }

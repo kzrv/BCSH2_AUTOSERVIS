@@ -204,11 +204,11 @@ namespace Kozyrev_Hriha_SP.ViewModels
             CurrUkol = new Ukol();
         }
 
-        private void DeleteUkol(object obj)
+        private async void DeleteUkol(object obj)
         {
             try
             {
-                _ukolRepository.DeleteUkol(SelectedUkol);
+                await _ukolRepository.DeleteUkol(SelectedUkol);
                 Ukoly.Remove(SelectedUkol);
                 SelectedUkol = null;
                 _notificationService.ShowNotification("TASK WAS DELETED", NotificationType.Success);
@@ -225,11 +225,11 @@ namespace Kozyrev_Hriha_SP.ViewModels
             return SelectedUkol != null;
         }
 
-        private void DeleteSluzba(object obj)
+        private async void DeleteSluzba(object obj)
         {
             try
             {
-                _sluzbaRepository.DeleteSluzba(SelectedSluzba);
+                await _sluzbaRepository.DeleteSluzba(SelectedSluzba);
                 Sluzby.Remove(SelectedSluzba);
                 SelectedSluzba = null;
                 SelectedUkol = null;
@@ -253,7 +253,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 try
                 {
-                    _ukolRepository.UpdateUkol(SelectedUkol);
+                    await _ukolRepository.UpdateUkol(SelectedUkol);
                     _notificationService.ShowNotification("TASK WAS UPDATED", NotificationType.Success);
                 }
                 catch (Exception e)
@@ -295,7 +295,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 try
                 {
-                    _sluzbaRepository.UpdateSluzba(SelectedSluzba);
+                    await _sluzbaRepository.UpdateSluzba(SelectedSluzba);
                     _notificationService.ShowNotification("SERVICE WAS UPDATED", NotificationType.Success);
                 }
                 catch (Exception e)

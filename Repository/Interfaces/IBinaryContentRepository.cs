@@ -9,7 +9,7 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
 {
     public interface IBinaryContentRepository
     {
-        byte[] GetBlobById(int id);
-        void UpdateBinaryContent(BinaryContent binaryContent);
+        Task<byte[]> GetBlobById(int id);
+        Task UpdateBinaryContent(BinaryContent binaryContent);
     }
 }

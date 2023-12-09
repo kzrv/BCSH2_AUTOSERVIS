@@ -49,8 +49,8 @@ namespace Kozyrev_Hriha_SP
             services.AddTransient<Employee>();
             services.AddTransient<UserSettings>();
             services.AddTransient<UserSettingsVM>();
-            services.AddSingleton<Order>();
-            services.AddSingleton<OrderVM>();
+            services.AddTransient<Order>();
+            services.AddTransient<OrderVM>();
             services.AddTransient<Visit>();
             services.AddTransient<VisitVM>();
             services.AddTransient<Car>();
