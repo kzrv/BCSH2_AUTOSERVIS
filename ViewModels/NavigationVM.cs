@@ -24,7 +24,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
     {
         private object _currentView;
         private readonly IServiceProvider ServiceProvider;
-       // private LoginViewModel _loginViewModel;
+        // private LoginViewModel _loginViewModel;
         private UserData _authorizedUser;
         private Role _userRole;
         private string _userName;
@@ -42,7 +42,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
                 OnPropertyChanged(nameof(BinaryImageData));
             }
         }
-        
+
 
 
         public string UserName
@@ -50,7 +50,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             get { return _userName; }
             set { _userName = value; OnPropertyChanged(nameof(UserName)); }
         }
-        
+
         public Role UserRole
         {
             get { return _userRole; }
@@ -87,6 +87,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             CarCommand = new ViewModelCommand(Car);
             LogsCommand = new ViewModelCommand(Logs);
             ServiceTaskCommand = new ViewModelCommand(ServiceTask);
+            PaymentCommand = new ViewModelCommand(Payment);
             LogoutCommand = new ViewModelCommand(UnAuthorized);
             CustomerOrderCommand = new ViewModelCommand(CustomerOrder);
 
@@ -108,7 +109,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             UserRole = Role.UNLOGIN;
             AuthorizedUser = null;
             UserName = null;
-            BinaryImageData = null; 
+            BinaryImageData = null;
             _notificationService.ShowNotification("YOU HAVE SUCCESSFULLY LOGGED OUT", NotificationType.Success);
 
         }
@@ -135,6 +136,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public ICommand VisitCommand { get; set; }
         public ICommand CarCommand { get; set; }
         public ICommand ServiceTaskCommand { get; set; }
+        public ICommand PaymentCommand { get; set; }
 
         public ICommand UserSettingsCommand { get; set; }
         public ICommand RegCommand { get; set; }
@@ -152,6 +154,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private void Visit(object obj) => CurrentView = ServiceProvider.GetRequiredService<Visit>();
         private void Car(object obj) => CurrentView = ServiceProvider.GetRequiredService<Car>();
         private void ServiceTask(object obj) => CurrentView = ServiceProvider.GetRequiredService<ServiceTask>();
+        private void Payment(object obj) => CurrentView = ServiceProvider.GetRequiredService<Payment>();
         private void Logs(object obj) => CurrentView = ServiceProvider.GetRequiredService<Logs>();
         private void Login(object obj) => CurrentView = ServiceProvider.GetRequiredService<Login>();
         private void Reg(object obj) => CurrentView = ServiceProvider.GetRequiredService<RegistrationControl>();

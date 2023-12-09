@@ -9,7 +9,7 @@ namespace Kozyrev_Hriha_SP.Models
         private int idProhlidka;
         private DateTime datumZacatek;
         private DateTime? datumKonec;
-        private decimal? cenaProhlidky;
+        private decimal cenaProhlidky;
         private int idObjednavky;
         private int idZakaznik;
         private int idVozidlo;
@@ -27,11 +27,8 @@ namespace Kozyrev_Hriha_SP.Models
             get { return idProhlidka; }
             set
             {
-                if (idProhlidka != value)
-                {
-                    idProhlidka = value;
-                    OnPropertyChanged(nameof(IdProhlidka));
-                }
+                idProhlidka = value;
+                OnPropertyChanged(nameof(IdProhlidka));
             }
         }
 
@@ -40,11 +37,8 @@ namespace Kozyrev_Hriha_SP.Models
             get { return datumZacatek; }
             set
             {
-                if (datumZacatek != value)
-                {
-                    datumZacatek = value;
-                    OnPropertyChanged(nameof(DatumZacatek));
-                }
+                datumZacatek = value;
+                OnPropertyChanged(nameof(DatumZacatek));
             }
         }
 
@@ -53,24 +47,18 @@ namespace Kozyrev_Hriha_SP.Models
             get { return datumKonec; }
             set
             {
-                if (datumKonec != value)
-                {
-                    datumKonec = value;
-                    OnPropertyChanged(nameof(DatumKonec));
-                }
+                datumKonec = value;
+                OnPropertyChanged(nameof(DatumKonec));
             }
         }
 
-        public decimal? CenaProhlidky
+        public decimal CenaProhlidky
         {
             get { return cenaProhlidky; }
             set
             {
-                if (cenaProhlidky != value)
-                {
-                    cenaProhlidky = value;
-                    OnPropertyChanged(nameof(CenaProhlidky));
-                }
+                cenaProhlidky = value;
+                OnPropertyChanged(nameof(CenaProhlidky));
             }
         }
 
@@ -79,11 +67,8 @@ namespace Kozyrev_Hriha_SP.Models
             get { return idObjednavky; }
             set
             {
-                if (idObjednavky != value)
-                {
-                    idObjednavky = value;
-                    OnPropertyChanged(nameof(IdObjednavky));
-                }
+                idObjednavky = value;
+                OnPropertyChanged(nameof(IdObjednavky));
             }
         }
 
@@ -92,11 +77,8 @@ namespace Kozyrev_Hriha_SP.Models
             get { return idZakaznik; }
             set
             {
-                if (idZakaznik != value)
-                {
-                    idZakaznik = value;
-                    OnPropertyChanged(nameof(IdZakaznik));
-                }
+                idZakaznik = value;
+                OnPropertyChanged(nameof(IdZakaznik));
             }
         }
 
@@ -105,11 +87,8 @@ namespace Kozyrev_Hriha_SP.Models
             get { return idZamestnanec; }
             set
             {
-                if (idZamestnanec != value)
-                {
-                    idZamestnanec = value;
-                    OnPropertyChanged(nameof(IdZamestnanec));
-                }
+                idZamestnanec = value;
+                OnPropertyChanged(nameof(IdZamestnanec));
             }
         }
 
@@ -118,11 +97,8 @@ namespace Kozyrev_Hriha_SP.Models
             get { return idVozidlo; }
             set
             {
-                if (idVozidlo != value)
-                {
-                    idVozidlo = value;
-                    OnPropertyChanged(nameof(IdVozidlo));
-                }
+                idVozidlo = value;
+                OnPropertyChanged(nameof(IdVozidlo));
             }
         }
     }

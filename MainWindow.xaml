@@ -247,6 +247,23 @@
                         </Grid>
                     </Menu:Btn>
 
+                    <!--// Payments // -->
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                                Command="{Binding PaymentCommand}"                             
+                                Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/wallet.png"
+                                    Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Payment"
+                                        Style="{StaticResource Text_Style}"/>
+
+                        </Grid>
+                    </Menu:Btn>
+
                     <!--// Logs // -->
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"

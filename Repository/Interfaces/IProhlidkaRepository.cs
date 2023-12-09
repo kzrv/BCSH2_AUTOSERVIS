@@ -9,6 +9,9 @@ namespace Kozyrev_Hriha_SP.Repository.Interfaces
 {
     public interface IProhlidkaRepository
     {
-        List<Prohlidka> GetAllProhlidky();
+        Task<List<Prohlidka>> GetAllProhlidky();
+        Task AddNewProhlidka(Prohlidka prohlidka, Objednavka objednavka, Zamestnanec zamestnanec, Vozidlo vozidlo);
+        Task UpdateProhlidka(Prohlidka prohlidka);
+        Task DeleteProhlidka(Prohlidka prohlidka);
     }
 }

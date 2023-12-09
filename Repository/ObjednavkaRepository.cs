@@ -33,7 +33,7 @@ namespace Kozyrev_Hriha_SP.Repository
         {
             using (var db = new OracleConnection(this.connection))
             {
-                var res = await db.QueryAsync<Objednavka>("SELECT id_objednavky AS IdObjednavky, popis_objednavky AS PopisObjednavky, id_zakaznik AS IdZakaznik, id_sluzba AS IdSluzba, cas_objednani AS CasObjednani FROM objednavky where id_zakaznik = :Id",new{Id = id});
+                var res = await db.QueryAsync<Objednavka>("SELECT id_objednavky AS IdObjednavky, popis_objednavky AS PopisObjednavky, id_zakaznik AS IdZakaznik, id_sluzba AS IdSluzba, cas_objednani AS CasObjednani FROM objednavky where id_zakaznik = :Id", new { Id = id });
                 return res.ToList();
             }
         }
@@ -56,11 +56,43 @@ namespace Kozyrev_Hriha_SP.Repository
             }
         }
 
+        public async Task AddNewObjednavka(Objednavka objednavka, Zakaznik zakaznik, Sluzba sluzba)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                var sqlQuery = @"INSERT INTO OBJEDNAVKY (popis_objednavky, id_zakaznik, id_sluzba, cas_objednani) 
+                     VALUES (:Popis, :IdZakaz, :IdSluz, :CasObj)";
+
+                var parameters = new DynamicParameters();
+
+                parameters.Add("Popis", objednavka.PopisObjednavky, DbType.String, ParameterDirection.Input);
+                parameters.Add("IdZakaz", zakaznik.Id, DbType.Int32, ParameterDirection.Input);
+                parameters.Add("IdSluz", sluzba.IdSluzba, DbType.Int32, ParameterDirection.Input);
+                parameters.Add("CasObj", objednavka.CasObjednani, DbType.DateTime, ParameterDirection.Input);
+
+                await db.ExecuteAsync(sqlQuery, parameters);
+            }
+        }
+
         public async Task DeleteObjednavka(int id)
         {
             using (var db = new OracleConnection(this.connection))
             {
-                await db.ExecuteAsync("DELETE FROM OBJEDNAVKY WHERE ID_OBJEDNAVKY = :Id",new{Id = id});
+                await db.ExecuteAsync("DELETE FROM OBJEDNAVKY WHERE ID_OBJEDNAVKY = :Id", new { Id = id });
+            }
+        }
+
+        public async Task UpdateObjednavka(Objednavka objednavka)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                var p = new DynamicParameters();
+
+                p.Add("p_id_objednavky", objednavka.IdObjednavky, DbType.Int32);
+                p.Add("p_popis_objednavky", objednavka.PopisObjednavky, DbType.String);
+                p.Add("p_cas_objednani", objednavka.CasObjednani, DbType.DateTime);
+
+                await db.ExecuteAsync("UPDATE_OBJEDNAVKA", p, commandType: CommandType.StoredProcedure);
             }
         }
     }

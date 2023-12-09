@@ -32,7 +32,7 @@ namespace Kozyrev_Hriha_SP.Repository
         {
             using (var db = new OracleConnection(this.connection))
             {
-                var res = await db.QueryAsync<Logg>("SELECT id_log as IdLog, time_date AS TimeDate, operace, table_name AS TableName, performed_by AS PerformedBy FROM logy");
+                var res = await db.QueryAsync<Logg>("SELECT * FROM LOGY_VIEW");
                 return res.ToList();
             }
         }

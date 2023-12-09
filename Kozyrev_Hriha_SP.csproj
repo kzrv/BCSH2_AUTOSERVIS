@@ -151,6 +151,7 @@
     <Compile Include="Models\Logg.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\NotificationItem.cs" />
+    <Compile Include="Models\Platba.cs" />
     <Compile Include="Models\Prohlidka.cs" />
     <Compile Include="Models\ProhSluz.cs" />
     <Compile Include="Models\Sluzba.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="Repository\Interfaces\IBinaryContentRepository.cs" />
     <Compile Include="Repository\Interfaces\ILogRepository.cs" />
     <Compile Include="Repository\Interfaces\IObjednavkaRepository.cs" />
+    <Compile Include="Repository\Interfaces\IPlatbaRepository.cs" />
     <Compile Include="Repository\Interfaces\IProhlidkaRepository.cs" />
     <Compile Include="Repository\Interfaces\ISluzbaRepository.cs" />
     <Compile Include="Repository\Interfaces\IUkolRepository.cs" />
@@ -176,6 +178,7 @@
     <Compile Include="Repository\Interfaces\IZakaznikRepository.cs" />
     <Compile Include="Repository\Interfaces\IZamestnanecRepository.cs" />
     <Compile Include="Repository\LogRepository.cs" />
+    <Compile Include="Repository\PlatbaRepository.cs" />
     <Compile Include="Repository\UkolRepository.cs" />
     <Compile Include="Repository\ObjednavkaRepository.cs" />
     <Compile Include="Repository\ProhlidkaRepository.cs" />
@@ -205,6 +208,9 @@
     </Compile>
     <Compile Include="Utils\Exceptions\UserIsAlreadyExistsException.cs" />
     <Compile Include="Utils\InvertedBooleanToVisibilityConverter.cs" />
+    <Compile Include="Utils\OrderData.xaml.cs">
+      <DependentUpon>OrderData.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\PasswordEncryptor.cs" />
     <Compile Include="Utils\RoleToVisibilityConverter.cs" />
     <Compile Include="Utils\ServiceData.xaml.cs">
@@ -212,6 +218,9 @@
     </Compile>
     <Compile Include="Utils\TaskData.xaml.cs">
       <DependentUpon>TaskData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\VisitData.xaml.cs">
+      <DependentUpon>VisitData.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CarVM.cs" />
     <Compile Include="ViewModels\CustomerOrderVM.cs" />
@@ -222,6 +231,7 @@
     <Compile Include="ViewModels\LogsVM.cs" />
     <Compile Include="ViewModels\NavigationVM.cs" />
     <Compile Include="ViewModels\OrderVM.cs" />
+    <Compile Include="ViewModels\PaymentVM.cs" />
     <Compile Include="ViewModels\RegistrationViewModel\RegistrationControlVM.cs" />
     <Compile Include="ViewModels\RegistrationViewModel\RegistrationSecondVM.cs" />
     <Compile Include="ViewModels\RegistrationViewModel\RegistrationThirdVM.cs" />
@@ -257,6 +267,9 @@
     </Compile>
     <Compile Include="Views\Order.xaml.cs">
       <DependentUpon>Order.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Payment.xaml.cs">
+      <DependentUpon>Payment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
@@ -327,11 +340,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Utils\OrderData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Utils\ServiceData.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Utils\TaskData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Utils\VisitData.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -364,6 +385,10 @@
     <Page Include="Views\Order.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Payment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Registration.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -480,6 +505,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\log.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\wallet.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.Text.Json.6.0.1\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.1\build\System.Text.Json.targets')" />

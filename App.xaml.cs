@@ -39,6 +39,7 @@ namespace Kozyrev_Hriha_SP
             services.AddSingleton<ISluzbaRepository, SluzbaRepository>(provider => new SluzbaRepository(connectionString));
             services.AddSingleton<IUkolRepository, UkolRepository>(provider => new UkolRepository(connectionString));
             services.AddSingleton<ILogRepository, LogRepository>(provider => new LogRepository(connectionString));
+            services.AddSingleton<IPlatbaRepository, PlatbaRepository>(provider => new PlatbaRepository(connectionString));
             services.AddSingleton<IUpdateUserProfileService, UpdateUserProfileService>();
             services.AddTransient<LoginViewModel>();
             services.AddTransient<CustomerVM>();
@@ -58,6 +59,8 @@ namespace Kozyrev_Hriha_SP
             services.AddTransient<ServiceTaskVM>();
             services.AddTransient<Logs>();
             services.AddTransient<LogsVM>();
+            services.AddTransient<Payment>();
+            services.AddTransient<PaymentVM>();
             services.AddTransient<CustomerOrder>();
             services.AddTransient<CustomerOrderVM>();
             services.AddSingleton<NotificationService>();
@@ -76,7 +79,7 @@ namespace Kozyrev_Hriha_SP
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             ServiceProvider = serviceCollection.BuildServiceProvider();
-           
+
             Serilog.Debugging.SelfLog.Enable(Console.Error);
             var navigate = ServiceProvider.GetRequiredService<NavigationVM>();
             var notif = ServiceProvider.GetRequiredService<NotificationService>();
