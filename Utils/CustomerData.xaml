@@ -25,13 +25,13 @@
             </Grid.RowDefinitions>
 
 
-            <Label Content="Jmeno:" Grid.Column="0" Grid.Row="1"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+            <Label Content="Name:" Grid.Column="0" Grid.Row="1"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
                             FontSize="12"
                             FontWeight="Medium"
                             FontFamily="Montserrat" />
             <TextBox Grid.Column="1" Grid.Row="1"   
                      Text="{Binding Path=Jmeno, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged}" 
-                     Margin="3,10,0,0"
+                     Margin="9,10,0,0"
                      VerticalAlignment="Center"  FontSize="13"
                      FontWeight="Medium"
                      FontFamily="Montserrat"                            
@@ -48,12 +48,12 @@
                                      AlignmentX="Left"/>
                 </TextBox.Background>
             </TextBox>
-            <Label Content="Prijmeni:" Grid.Column="0" Grid.Row="2"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+            <Label Content="Surname:" Grid.Column="0" Grid.Row="2"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
                             FontSize="12"
                             FontWeight="Medium"
                             FontFamily="Montserrat"/>
             <TextBox Grid.Column="1" Grid.Row="2" 
-                     Margin="3,10,0,0" 
+                     Margin="9,10,0,0" 
                      Name="pscTextBox" 
                      Text="{Binding Path=Prijmeni, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged}" 
                      VerticalAlignment="Center"   
@@ -73,13 +73,13 @@
                                 AlignmentX="Left"/>
                 </TextBox.Background>
             </TextBox>
-            <Label Content="Telefon cislo:" Grid.Column="0" Grid.Row="3"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+            <Label Content="Tel number:" Grid.Column="0" Grid.Row="3"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
                             FontSize="12"
                             FontWeight="Medium"
                             FontFamily="Montserrat"/>
             <TextBox Grid.Column="1" 
                      Grid.Row="3"   
-                     Margin="3,10,0,0" 
+                     Margin="9,10,0,0" 
                      Name="mestoTextBox" 
                      Text="{Binding Path=TelCislo, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged}" 
                      VerticalAlignment="Center" 
@@ -99,12 +99,12 @@
                                 AlignmentX="Left"/>
                 </TextBox.Background>
             </TextBox>
-            <Label Content="Poznamky:" Grid.Column="0" Grid.Row="4"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+            <Label Content="Comments:" Grid.Column="0" Grid.Row="4"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
                             FontSize="12"
                             FontWeight="Medium"
                             FontFamily="Montserrat"/>
             <TextBox Grid.Column="1" Grid.Row="4"   
-                     Margin="3,10,0,0"
+                     Margin="9,10,0,0"
                      Name="popisneCodeTextBox" 
                      Text="{Binding Path=Poznamky, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged}" 
                      VerticalAlignment="Center" 
@@ -120,7 +120,7 @@
                      VerticalContentAlignment="Center"
                      Padding="20,0,0,0">
                 <TextBox.Background>
-                    <ImageBrush
+                    <ImageBrush ImageSource="/Resources/Images/info.png"
                                 Stretch="None"
                                 AlignmentX="Left"/>
                 </TextBox.Background>

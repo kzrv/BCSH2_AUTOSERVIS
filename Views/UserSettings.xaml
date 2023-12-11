@@ -99,7 +99,6 @@
                    FontFamily="Montserrat"/>
                 
             <TextBox Width="204" Text="{Binding Days}"
-                     x:Name="DaysWorked"
                      IsReadOnly="True"
                      Margin="2,5,0,0"
                      VerticalAlignment="Center"  FontSize="13"

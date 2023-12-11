@@ -28,7 +28,6 @@ namespace Kozyrev_Hriha_SP.Views
             DataContext = userSettingsVM;
             var viewModel = DataContext as UserSettingsVM;
             employeeData.picker.IsHitTestVisible = false;
-            DaysWorked.Visibility = Visibility.Hidden;
             if (viewModel != null)
             {
 

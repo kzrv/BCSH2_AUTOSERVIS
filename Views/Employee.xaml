@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Kozyrev_Hriha_SP.Views"
              xmlns:util="clr-namespace:Kozyrev_Hriha_SP.Utils"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="600"
              d:DesignWidth="622"
@@ -197,7 +198,12 @@
                           BorderThickness="0"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           Background="Transparent">
-
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="MouseDoubleClick">
+                            <b:InvokeCommandAction Command="{Binding ItemDoubleClickCommand}" 
+                                                   CommandParameter="{Binding SelectedZamestnanec, ElementName=Zamestnanec}"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
     <ListView.Resources>
         <Style TargetType="GridViewColumnHeader">
             <Setter Property="Foreground" Value="DarkGray"/> 

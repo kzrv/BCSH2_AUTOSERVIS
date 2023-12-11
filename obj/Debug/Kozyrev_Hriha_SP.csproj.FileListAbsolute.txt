@@ -603,3 +603,11 @@ C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Utils\OrderData.baml
 C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Utils\VisitData.baml
 C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\CustomerOrder.baml
 C:\Users\PC-Max\Desktop\UPCE\С#2\Semestralka\obj\Debug\Views\Payment.baml
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Utils\OrderData.g.cs
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Utils\VisitData.g.cs
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\Payment.g.cs
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\VisitEmployee.g.cs
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Utils\OrderData.baml
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Utils\VisitData.baml
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\Payment.baml
+C:\Users\kzrvv\RiderProjects\BCSH2_AUTOSERVIS\obj\Debug\Views\VisitEmployee.baml

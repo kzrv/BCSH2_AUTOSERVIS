@@ -106,6 +106,12 @@ namespace Kozyrev_Hriha_SP.Repository
             }
         }
 
-        
+        public async Task<UserData> GetZakaznikByUserId(int id)
+        {
+            using (var db = new OracleConnection(this.connection))
+            {
+                return await db.QueryFirstOrDefaultAsync<UserData>("SELECT ID_USER as UserId, Email,ID_ROLE as RoleUser, ID_CONTENT as IdContent from USER_DATA where ID_USER = :id1",new{id1 = id});
+            }
+        }
     }
 }

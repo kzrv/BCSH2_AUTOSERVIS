@@ -90,8 +90,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             PaymentCommand = new ViewModelCommand(Payment);
             LogoutCommand = new ViewModelCommand(UnAuthorized);
             CustomerOrderCommand = new ViewModelCommand(CustomerOrder);
-
-
+            ZamestnanecVisitCommand = new ViewModelCommand(VisitEmployee);
         }
         public async void Authorized(UserData usr)
         {
@@ -103,7 +102,18 @@ namespace Kozyrev_Hriha_SP.ViewModels
             BinaryImageData = await binaryContentRepository.GetBlobById(AuthorizedUser.IdContent);
         }
 
-        private void UnAuthorized(object obj)
+        public async void Emulate(UserData userData)
+        {
+            AuthorizedUser = userData;
+            UserRole = AuthorizedUser.RoleUser;
+            UserName = AuthorizedUser?.Email.Split('@')[0];
+            BinaryImageData = await binaryContentRepository.GetBlobById(AuthorizedUser.IdContent);
+            CurrentView = HomePage;
+            _notificationService.ShowNotification("YOU ARE IN EMULATION", NotificationType.Success);
+            _notificationService.ShowNotification($"YOUR USER IS: {AuthorizedUser.Email}", NotificationType.Success);
+            
+        }
+        public void UnAuthorized(object obj)
         {
             CurrentView = HomePage;
             UserRole = Role.UNLOGIN;
@@ -141,10 +151,12 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public ICommand UserSettingsCommand { get; set; }
         public ICommand RegCommand { get; set; }
         public ICommand LogsCommand { get; set; }
+        public ICommand ZamestnanecVisitCommand { get; }
 
         private void Home(object obj) => CurrentView = ServiceProvider.GetRequiredService<HomeVM>();
 
         private void Customer(object obj) => CurrentView = ServiceProvider.GetRequiredService<Customer>();
+        private void VisitEmployee(object obj) => CurrentView = ServiceProvider.GetRequiredService<VisitEmployee>();
 
         private void Employee(object obj) => CurrentView = ServiceProvider.GetRequiredService<Employee>();
 

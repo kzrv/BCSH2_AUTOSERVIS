@@ -16,5 +16,6 @@ namespace Kozyrev_Hriha_SP.Repository
         void UpdateUserPassword(UserData user, NetworkCredential pass);
 
         Task<UserData> GetZakaznikEmailByUserId(int id);
+        Task<UserData> GetZakaznikByUserId(int id);
     }
 }

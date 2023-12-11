@@ -240,6 +240,7 @@
     <Compile Include="ViewModels\UserSettingsVM.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelCommand.cs" />
+    <Compile Include="ViewModels\VisitEmployeeVM.cs" />
     <Compile Include="ViewModels\VisitVM.cs" />
     <Compile Include="Views\Car.xaml.cs">
       <DependentUpon>Car.xaml</DependentUpon>
@@ -291,6 +292,9 @@
     </Compile>
     <Compile Include="Views\Visit.xaml.cs">
       <DependentUpon>Visit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VisitEmployee.xaml.cs">
+      <DependentUpon>VisitEmployee.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomControls\BindablePasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -418,6 +422,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\VisitEmployee.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

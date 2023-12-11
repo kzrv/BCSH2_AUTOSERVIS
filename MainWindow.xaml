@@ -20,10 +20,15 @@
         <conv:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
     </Window.Resources>
 
+
+
+
     <Grid>
         <Border Background="#212529"
                 CornerRadius="20"/>
+
         <Grid>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="228"/>
                 <ColumnDefinition Width="622"/>
@@ -31,10 +36,13 @@
 
             <Grid HorizontalAlignment="Left"
                   Width="228">
+
                 <Border Background="#272B2F"
                         CornerRadius="20,0,0,20"/>
+
                 <StackPanel Height="600"
                             Width="228">
+
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                     IsEnabled="False"
@@ -42,8 +50,9 @@
                     VerticalAlignment="Top"
                     Margin="0,0,0,0"
                     >
+
                         <Border BorderBrush="#FF000000" BorderThickness="1" CornerRadius="5" Margin="2">
-                            <TextBlock Text="AUTOSERVIS"
+                            <TextBlock Text="AUTOCHECK"
                              HorizontalAlignment="Left" 
                              Margin="60,0,0,0"          
                              Style="{StaticResource Text_Style}"
@@ -56,12 +65,19 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding HomeCommand}"
                               IsChecked="True">
+
                         <Grid>
+
                             <Image Source="Resources/Images/home.png"
                                    Style="{StaticResource Image_Style}"/>
+
                             <TextBlock Text="Home"
                                        Style="{StaticResource Text_Style}"/>
+
+
                         </Grid>
+
+
                     </Menu:Btn>
                     <!--// Login // -->
 
@@ -69,12 +85,19 @@
                     Command="{Binding LoginCommand}"
                     IsChecked="True"
                     Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='UNLOGIN'}">
+
                         <Grid>
+
                             <Image Source="Resources/Images/user.png"
                                    Style="{StaticResource Image_Style}"/>
+
                             <TextBlock Text="Login"
                                        Style="{StaticResource Text_Style}"/>
+
+
                         </Grid>
+
+
                     </Menu:Btn>
                     <!--// Registration // -->
 
@@ -82,13 +105,19 @@
                     Command="{Binding RegCommand}"
                     IsChecked="True"
                     Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='UNLOGIN'}">
+
                         <Grid>
+
                             <Image Source="Resources/Images/user.png"
                                    Style="{StaticResource Image_Style}"/>
 
                             <TextBlock Text="Registration"
                                        Style="{StaticResource Text_Style}"/>
+
+
                         </Grid>
+
+
                     </Menu:Btn>
 
                     <!--// Customers // -->
@@ -97,11 +126,16 @@
                               Command="{Binding CustomerCommand}"
                               IsChecked="True"
                               Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
+
                         <Grid>
+
                             <Image Source="Resources/Images/users-alt.png"
                                    Style="{StaticResource Image_Style}"/>
+
                             <TextBlock Text="Customer"
                                        Style="{StaticResource Text_Style}"/>
+
+
                         </Grid>
 
                         <!--// CustomerOrder // -->
@@ -110,13 +144,37 @@
                               Command="{Binding CustomerOrderCommand}"
                               IsChecked="True"
                               Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ZAKAZNIK'}">
+
                         <Grid>
+
                             <Image Source="Resources/Images/clipboard.png"
                                    Style="{StaticResource Image_Style}"/>
 
                             <TextBlock Text="Order"
                                        Style="{StaticResource Text_Style}"/>
+
+
                         </Grid>
+
+
+                    </Menu:Btn>
+                    <!--// VisitEmployee // -->
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding ZamestnanecVisitCommand}"
+                              IsChecked="True"
+                              Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ZAMESTNANEC'}">
+
+                        <Grid>
+
+                            <Image Source="Resources/Images/calendar-clock.png"
+                                   Style="{StaticResource Image_Style}"/>
+
+                            <TextBlock Text="Visit"
+                                       Style="{StaticResource Text_Style}"/>
+
+
+                        </Grid>
+
 
                     </Menu:Btn>
 
@@ -138,17 +196,21 @@
                         </Grid>
                     </Menu:Btn>
 
+
                     <!--// Orders // -->
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding OrderCommand}"                              
                               Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
+
                         <Grid>
+
                             <Image Source="Resources/Images/clipboard.png"
                                    Style="{StaticResource Image_Style}"/>
 
                             <TextBlock Text="Order"
                                        Style="{StaticResource Text_Style}"/>
+
                         </Grid>
                     </Menu:Btn>
 
@@ -157,11 +219,15 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding VisitCommand}"                             
                               Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
+
                         <Grid>
+
                             <Image Source="Resources/Images/calendar-clock.png"
                                    Style="{StaticResource Image_Style}"/>
+
                             <TextBlock Text="Visit"
                                        Style="{StaticResource Text_Style}"/>
+
                         </Grid>
                     </Menu:Btn>
 
@@ -169,25 +235,34 @@
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding CarCommand}"                             
-                              Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
+                              Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN,ZAMESTNANEC'}">
+
                         <Grid>
+
                             <Image Source="Resources/Images/car-mechanic.png"
                                    Style="{StaticResource Image_Style}"/>
+
                             <TextBlock Text="Car"
                                        Style="{StaticResource Text_Style}"/>
+
                         </Grid>
                     </Menu:Btn>
+
 
                     <!--// Services // -->
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding ServiceTaskCommand}"                             
                               Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
+
                         <Grid>
+
                             <Image Source="Resources/Images/service.png"
                                    Style="{StaticResource Image_Style}"/>
+
                             <TextBlock Text="Service"
                                        Style="{StaticResource Text_Style}"/>
+
                         </Grid>
                     </Menu:Btn>
 
@@ -196,11 +271,15 @@
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                                 Command="{Binding PaymentCommand}"                             
                                 Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
+
                         <Grid>
+
                             <Image Source="Resources/Images/wallet.png"
                                     Style="{StaticResource Image_Style}"/>
+
                             <TextBlock Text="Payment"
                                         Style="{StaticResource Text_Style}"/>
+
                         </Grid>
                     </Menu:Btn>
 
@@ -211,14 +290,21 @@
                                 Visibility="{Binding UserRole, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter='ADMIN'}">
 
                         <Grid>
+
                             <Image Source="Resources/Images/log.png"
                                     Style="{StaticResource Image_Style}"/>
+
                             <TextBlock Text="Log"
                                         Style="{StaticResource Text_Style}"/>
+
                         </Grid>
                     </Menu:Btn>
 
+
+
                 </StackPanel>
+
+
 
                 <!--// Current User // -->
 
@@ -231,11 +317,13 @@
                           >
 
                     <Grid>
+
                         <Image Source="{Binding BinaryImageData, Converter={StaticResource ByteArrayToImageSourceConverter}}"
                                Style="{StaticResource Image_Style}"/>
 
                         <TextBlock Text="{Binding UserName}"
                                Style="{StaticResource Text_Style}"/>
+
 
                         <Image Source="Resources\Images\logout.png"
                                Style="{StaticResource Image_Style_Click}"
@@ -245,14 +333,24 @@
                                 <MouseBinding Gesture="LeftClick" Command="{Binding LogoutCommand}" CommandParameter="{Binding ElementName=MainWindow}" />
                             </Image.InputBindings>
                         </Image>
+
+
                     </Grid>
+
+
                 </Menu:Btn>
+
             </Grid>
+
             <Grid Grid.Column="1">
+
                 <ContentControl x:Name="Pages"
                                 Content="{Binding CurrentView}"/>
+
             </Grid>
+
         </Grid>
+
         <Button x:Name="CloseApp"
                 Style="{StaticResource ExitApp}" Click="CloseApp_Click"/>
         <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10">

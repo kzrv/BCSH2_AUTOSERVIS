@@ -72,7 +72,7 @@
                 </TextBox.Background>
             </TextBox>
 
-            <Label Content="Rok:" Grid.Column="0" Grid.Row="3" Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+            <Label Content="Year:" Grid.Column="0" Grid.Row="3" Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
    FontSize="12"
    FontWeight="Medium"
    FontFamily="Montserrat"  />
@@ -93,7 +93,7 @@
                 AlignmentX="Left"/>
                 </TextBox.Background>
             </TextBox>
-            <Label Content="Poznamky:" Grid.Column="0" Grid.Row="4"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
+            <Label Content="Comments:" Grid.Column="0" Grid.Row="4"  Margin="3,10,0,0" VerticalAlignment="Center" Foreground="DarkGray"
                FontSize="12"
                FontWeight="Medium"
                FontFamily="Montserrat" />

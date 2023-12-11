@@ -29,6 +29,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
         private NotificationService _notificationService;
         private UserData _user;
         private readonly IUserDataRepository _userDataRepository;
+        private readonly NavigationVM _navigationVm;
 
         public ObservableCollection<Zamestnanec> Zamestnanci
         {
@@ -93,10 +94,13 @@ namespace Kozyrev_Hriha_SP.ViewModels
         public ICommand AddUpdateCommand { get; }
         public ICommand DeleteCommand { get; }
         public ICommand ClearCommand { get; }
+        public ICommand ItemDoubleClickCommand { get; }
         
 
-        public EmployeeVM(IZamestnanecRepository zamestnanecRepository, IAdresaRepository adresaRepository,NotificationService notificationService,IUserDataRepository userDataRepository)
+        public EmployeeVM(IZamestnanecRepository zamestnanecRepository, IAdresaRepository adresaRepository,
+            NotificationService notificationService,IUserDataRepository userDataRepository, NavigationVM navigationVm)
         {
+            _navigationVm = navigationVm;
             _userDataRepository = userDataRepository;
             _notificationService = notificationService;
             _zamestnanecRepository = zamestnanecRepository;
@@ -104,6 +108,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             DeleteCommand = new ViewModelCommand(DeleteItem, CanDeleteItem);
             AddUpdateCommand = new ViewModelCommand(AddUpdateItem, CanAddUpdateItem);
             ClearCommand = new ViewModelCommand(ClearBoxes);
+            ItemDoubleClickCommand = new ViewModelCommand(Emulate,CanEmulate);
             _adresaRepository = adresaRepository;
             Zamestnanci = new ObservableCollection<Zamestnanec>();
             ReloadData();
@@ -135,6 +140,15 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 IsLoading = false;
             }
+        }
+        private void Emulate(object obj)
+        {
+            _navigationVm.Emulate(User);
+        }
+
+        private bool CanEmulate(object obj)
+        {
+            return SelectedZamestnanec != null;
         }
 
         private void DeleteItem(object parameter)
@@ -231,7 +245,7 @@ namespace Kozyrev_Hriha_SP.ViewModels
             {
                 IsLoading = true;
                 Adresa = await Task.Run(() => _adresaRepository.GetAdresaById(SelectedZamestnanec.IdAdresa)); 
-                User = await Task.Run(() => _userDataRepository.GetZakaznikEmailByUserId(SelectedZamestnanec.IdUser));
+                User = await Task.Run(() => _userDataRepository.GetZakaznikByUserId(SelectedZamestnanec.IdUser));
                 Zamest = SelectedZamestnanec;
                 IsLoading = false;
             }
