@@ -1,0 +1,1 @@
+Developed an integrated app to enhance operations for auto repair shops, enabling client service requests and staff management. Features a C# WPF interface, Oracle SQL database, and utilizes Entity Framework for database interactions. Simplifies service scheduling and tracking.
